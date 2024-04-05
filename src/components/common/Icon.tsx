@@ -170,11 +170,11 @@ export const Close = memo((props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M6 6L18.7742 18.7742" stroke="#14142B" stroke-linejoin="round" />
+    <path d="M6 6L18.7742 18.7742" stroke="#14142B" strokeLinejoin="round" />
     <path
       d="M6 18.7744L18.7742 6.00022"
       stroke="#14142B"
-      stroke-linejoin="round"
+      strokeLinejoin ="round"
     />
   </svg>
 ));
@@ -224,12 +224,12 @@ export const Refresh = memo((props: SVGProps<SVGSVGElement>) => (
     <path
       d="M3.7562 9.38144C4.30918 7.45296 5.45849 5.74904 7.0394 4.5139C8.62031 3.27876 10.5517 2.5758 12.5566 2.50579C14.5616 2.43577 16.5373 3.00229 18.2005 4.12414C19.8637 5.246 21.1291 6.8656 21.8153 8.75081"
       stroke="#14142B"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21.6409 15.6931C20.9263 17.3868 19.7356 18.8368 18.2132 19.8673C16.6908 20.8977 14.9022 21.4643 13.0642 21.4984C11.2262 21.5324 9.41779 21.0325 7.85828 20.0592C6.29878 19.0858 5.05517 17.681 4.27826 16.0149"
       stroke="#14142B"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8.60114 15.0242L4.14699 15.3157L2.49292 19.5527"
@@ -303,14 +303,14 @@ export const DoNotTumbleDry = memo((props: SVGProps<SVGSVGElement>) => (
   >
     <rect x="4.38629" y="4.48975" width="15" height="15" stroke="black" />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M20.3549 16.3966L2.24756 7.38002L2.6933 6.48486L20.8006 15.5014L20.3549 16.3966Z"
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M14.845 14.751C14.1197 15.49 13.1095 15.9483 11.9922 15.9483C9.78469 15.9483 7.99512 14.1588 7.99512 11.9512C7.99512 11.7509 8.00985 11.554 8.0383 11.3616L7.1064 10.8976C7.0335 11.2373 6.99512 11.5898 6.99512 11.9512C6.99512 14.711 9.2324 16.9483 11.9922 16.9483C13.5047 16.9483 14.8601 16.2764 15.7765 15.2149L14.845 14.751ZM8.31483 10.3822C8.92473 8.95458 10.3416 7.9541 11.9922 7.9541C14.1998 7.9541 15.9893 9.74367 15.9893 11.9512C15.9893 12.6753 15.7968 13.3544 15.4601 13.9402L16.3567 14.3867C16.7597 13.6661 16.9893 12.8355 16.9893 11.9512C16.9893 9.19139 14.7521 6.9541 11.9922 6.9541C9.94954 6.9541 8.19312 8.17973 7.41823 9.93573L8.31483 10.3822Z"
       fill="black"
     />
@@ -371,8 +371,8 @@ export const Shipping = memo((props: SVGProps<SVGSVGElement>) => (
     <path d="M8.55664 18.0889H15.2872" stroke="black" />
     <circle cx="17.9482" cy="17.9843" r="2.4218" stroke="black" />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M6.05223 19.9061C7.11362 19.9061 7.97404 19.0457 7.97404 17.9843C7.97404 16.9229 7.11362 16.0625 6.05223 16.0625C4.99085 16.0625 4.13043 16.9229 4.13043 17.9843C4.13043 19.0457 4.99085 19.9061 6.05223 19.9061ZM6.05223 20.9061C7.6659 20.9061 8.97404 19.598 8.97404 17.9843C8.97404 16.3706 7.6659 15.0625 6.05223 15.0625C4.43857 15.0625 3.13043 16.3706 3.13043 17.9843C3.13043 19.598 4.43857 20.9061 6.05223 20.9061Z"
       fill="black"
     />
@@ -520,8 +520,8 @@ export const Filter = memo((props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M3 7.5V8.5H21V7.5H3ZM10 16.5H14V15.5H10V16.5ZM18 12.5H6V11.5H18V12.5Z"
       fill="black"
     />
@@ -560,7 +560,7 @@ export const Gallery = memo((props: SVGProps<SVGSVGElement>) => (
   </svg>
 ));
 
-export const Listview = memo((props: SVGProps<SVGSVGElement>) => (
+export const ListView = memo((props: SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"
