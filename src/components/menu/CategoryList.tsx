@@ -1,8 +1,8 @@
 import { Category } from "../data/Category";
 
-function CategoryList(children: React.ReactNode, category: Category) {
+function CategoryList(props:Category, children: React.ReactNode) {
   const handListClick = () => {};
-  alert(category);
+  alert(props);
   return <div onClick={handListClick}>{children}</div>;
 }
 
