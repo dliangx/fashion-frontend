@@ -1,14 +1,14 @@
 export interface Category {
   name: String;
-  level: String;
+  level: number;
   collapse: true;
   sub: Category[];
 }
 
 export interface CategoryResp {
-  id: BigInt;
+  id: number;
   name: String;
-  level: String;
-  parent_id: BigInt;
-  sort: BigInt;
+  level: number;
+  parent_id: number;
+  sort: number;
 }
