@@ -146,7 +146,7 @@ export const Search = memo((props: SVGProps<SVGSVGElement>) => (
   </svg>
 ));
 
-export const Menu = memo((props: SVGProps<SVGSVGElement>) => (
+export const MenuIcon = memo((props: SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"
@@ -174,7 +174,7 @@ export const Close = memo((props: SVGProps<SVGSVGElement>) => (
     <path
       d="M6 18.7744L18.7742 6.00022"
       stroke="#14142B"
-      strokeLinejoin ="round"
+      strokeLinejoin="round"
     />
   </svg>
 ));
