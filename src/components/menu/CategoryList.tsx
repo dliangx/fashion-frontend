@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
 
 function CategoryList(props: Category) {
-  const handListClick = () => {
+  const [category,setCategory] = useState<Category>();
+  setCategory(props);
+  const handListClick = (_: React.PointerEvent,props: Category) => {
     renderChildren(props.sub);
   };
   function renderChildren(params:Category[]) {
@@ -15,8 +18,12 @@ function CategoryList(props: Category) {
       })
     )
   }
-
-  return <div onClick={handListClick}></div>;
+  if(category){
+    return <div>renderChildren(category.sub)</div> ;
+  }else {
+    return <div></div>
+  }
+  
 }
 
 export default CategoryList;

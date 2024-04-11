@@ -1,16 +1,16 @@
 import { Category } from "../data/Category";
 import CategoryList from "./CategoryList";
 
-function CategoryRoot(category: Category) {
+function CategoryRoot({name,level,collapse,sub}: Category) {
   const handRootClick = () => {
-    if ((category.collapse = true)) {
+    if ((collapse = true)) {
     } else {
     }
   };
-  alert(category);
+
   return (
     <div onClick={handRootClick}>
-      <CategoryList {...category.sub[0]}></CategoryList>
+      <CategoryList name={name} level={level} collapse={collapse} sub={sub}  ></CategoryList>
     </div>
   );
 }

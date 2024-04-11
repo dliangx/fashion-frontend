@@ -12,3 +12,8 @@ export interface CategoryResp {
   parent_id: number;
   sort: number;
 }
+
+export type CategoryItemProps = {
+  props: Category;
+  onclick:(event: React.PointerEvent,props: Category)=>void 
+}

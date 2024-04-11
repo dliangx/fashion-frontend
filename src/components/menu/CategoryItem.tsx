@@ -1,10 +1,7 @@
-import { Category } from "../data/Category";
+import { Category ,CategoryItemProps} from "../data/Category";
 import {Down,Up} from "../common/Icon"
 
-type CategoryItemProps = {
-  props: Category;
-  onclick:(event: React.PointerEvent)=>void 
-}
+
 
 const CategoryItem = ({props,onclick}:CategoryItemProps) => {
 
@@ -18,7 +15,7 @@ const CategoryItem = ({props,onclick}:CategoryItemProps) => {
 
 type CollapseProps = {
   isCollapse: boolean;
-  onclick:(event: React.PointerEvent)=>void
+  onclick:(event: React.PointerEvent,props: Category)=>void
 }
 
 const Collapse = ({isCollapse}:CollapseProps)=>{
