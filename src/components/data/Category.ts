@@ -1,7 +1,7 @@
 export interface Category {
   name: String;
   level: number;
-  collapse: true;
+  collapse: boolean;
   sub: Category[];
 }
 
