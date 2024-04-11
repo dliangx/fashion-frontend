@@ -2,13 +2,13 @@ import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
 
 function CategoryList(props: Category) {
-  const handListClick = (props:Category) => {
+  const handListClick = () => {
     renderChildren(props.sub);
   };
   function renderChildren(params:Category[]) {
     return(
       params.map((param)=>{
-        <CategoryItem {...param}></CategoryItem>
+        <CategoryItem props={param} onclick={handListClick} ></CategoryItem>
         if(!param.collapse){
           renderChildren(param.sub)
         }
@@ -16,7 +16,7 @@ function CategoryList(props: Category) {
     )
   }
 
-  return <div onClick={handListClick(props)}></div>;
+  return <div onClick={handListClick}></div>;
 }
 
 export default CategoryList;

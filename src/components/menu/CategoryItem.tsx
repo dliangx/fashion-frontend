@@ -1,18 +1,28 @@
 import { Category } from "../data/Category";
 import {Down,Up} from "../common/Icon"
 
-const CategoryItem = (props: Category) => {
+type CategoryItemProps = {
+  props: Category;
+  onclick:(event: React.PointerEvent)=>void 
+}
+
+const CategoryItem = ({props,onclick}:CategoryItemProps) => {
 
   return (
     <div >
       {props.name}
-      <Collapse collapse = {props.collapse}></Collapse>
+      <Collapse isCollapse={props.collapse} onclick = {onclick}></Collapse>
     </div>
   )
 };
 
-const Collapse = (collapse:boolean)=>{
-  if(collapse) {
+type CollapseProps = {
+  isCollapse: boolean;
+  onclick:(event: React.PointerEvent)=>void
+}
+
+const Collapse = ({isCollapse}:CollapseProps)=>{
+  if(isCollapse) {
     return <Down/>
   }else{
     return <Up />
