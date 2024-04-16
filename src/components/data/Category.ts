@@ -1,4 +1,5 @@
 export interface Category {
+  id: number;
   name: String;
   level: number;
   collapse: boolean;
