@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 // import { CategoryResp } from "../data/Category";
-import { Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link, json } from "react-router-dom";
 import { Category } from "../data/Category";
 import CategoryRoot from "./CategoryRoot";
 import { MenuIcon } from "../common/Icon";
@@ -11,64 +11,47 @@ const Menu = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-     const fetchData = async ()=>{
-      try {
-        setIsLoading(true);
-        const response = await fetch('http://localhost:8000/get_categorys');
-        if (!response.ok){
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const jsonData = await response.json();
-        setCategory(jsonData);
+    fetch("http://localhost:8000/get_categorys", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const roots = data
+          .filter((ele: any) => {
+            return ele["level"] === 0;
+          })
+          .map((ele: any) => {
+            let cate: Category = {
+              id: ele["id"],
+              name: ele["name"],
+              level: ele["level"],
+              collapse: false,
+              sub: [],
+            };
 
-      } catch (err:any) {
-        setError(err.message);
-      }finally{
-        setIsLoading(false);
-      }
-     }
+            return cate;
+          });
 
-     fetchData();
+        setCategory(roots);
+        console.log(roots);
 
-     alert(category);
+      })
+      .catch((error) => console.error("Error:", error));
   }, []);
-
-  const handleMenuCloseClick = useCallback(() => {
-    category?.map((item, index) => {
-      alert(item);
-      alert(index);
-    });
-    setCategory(category);
-  }, []);
-
-  category?.map((item) => {
-    alert(item);
-  });
 
   return (
     <>
       <div>
-        <MenuIcon onClick={handleMenuCloseClick} />
-      </div>
-      <div>
-        <CategoryRoot
-          name={"WOMEN"}
-          level={0}
-          collapse={true}
-          sub={[]}
-        ></CategoryRoot>
-        <CategoryRoot
-          name={"MEN"}
-          level={0}
-          collapse={true}
-          sub={[]}
-        ></CategoryRoot>
-        <CategoryRoot
-          name={"KIDS"}
-          level={0}
-          collapse={true}
-          sub={[]}
-        ></CategoryRoot>
+        <MenuIcon />
+        <div className="flex space-x-4" >
+        {
+          category?.map((one)=>{
+            return <div className="w-full">{one.name}</div>
+          })
+        }
+        </div>
+  
       </div>
     </>
   );
