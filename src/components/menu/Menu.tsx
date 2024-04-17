@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Router, Route, Link, json } from "react-router-dom";
 import { Category } from "../data/Category";
 import CategoryRoot from "./CategoryRoot";
-import { MenuIcon } from "../common/Icon";
+import { Close } from "../common/Icon";
 
 const Menu = () => {
   const [category, setCategory] = useState<[Category]>();
@@ -26,7 +26,7 @@ const Menu = () => {
               id: ele["id"],
               name: ele["name"],
               level: ele["level"],
-              collapse: false,
+              collapse: true,
               sub: [],
             };
 
@@ -35,7 +35,6 @@ const Menu = () => {
 
         setCategory(roots);
         console.log(roots);
-
       })
       .catch((error) => console.error("Error:", error));
   }, []);
@@ -43,15 +42,24 @@ const Menu = () => {
   return (
     <>
       <div>
-        <MenuIcon />
-        <div className="flex space-x-4" >
-        {
-          category?.map((one)=>{
-            return <div className="w-full">{one.name}</div>
-          })
-        }
+        <Close className="m-2"/>
+        <div className="h-4"/>
+        <div className="flex  space-x-4">
+          {category?.map((one) => {
+            return (
+              <div className="w-2/3">
+                <div className="grid place-items-center">{one.name}</div>
+                <div className="grid place-items-center"> 
+                  {one.collapse && (
+                    <img
+                      src="/assets/underline_orange.svg"  
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
-  
       </div>
     </>
   );
