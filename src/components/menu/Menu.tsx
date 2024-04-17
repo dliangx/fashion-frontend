@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-// import { CategoryResp } from "../data/Category";
 import { Router, Route, Link, json } from "react-router-dom";
 import { Category } from "../data/Category";
-import CategoryRoot from "./CategoryRoot";
 import { Close } from "../common/Icon";
 
 const Menu = () => {
@@ -11,6 +9,7 @@ const Menu = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8000/get_categorys", {
       method: "GET",
     })
@@ -36,31 +35,35 @@ const Menu = () => {
         setCategory(roots);
         console.log(roots);
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        console.error("Error:", error);
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <>
-      <div>
-        <Close className="m-2"/>
-        <div className="h-4"/>
-        <div className="flex  space-x-4">
-          {category?.map((one) => {
-            return (
-              <div className="w-2/3">
-                <div className="grid place-items-center">{one.name}</div>
-                <div className="grid place-items-center"> 
-                  {one.collapse && (
-                    <img
-                      src="/assets/underline_orange.svg"  
-                    />
-                  )}
+      {isLoading && <div>loading</div>}
+      {!isLoading && (
+        <div>
+          <Close className="m-2" />
+          <div className="h-4" />
+          <div className="grid  place-items-center">{error}</div>
+          <div className="flex  space-x-4">
+            {category?.map((one) => {
+              return (
+                <div className="w-2/3">
+                  <div className="grid place-items-center">{one.name}</div>
+                  <div className="grid place-items-center">
+                    {one.collapse && <img src="/assets/underline_orange.svg" />}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
