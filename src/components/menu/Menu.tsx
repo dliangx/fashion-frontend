@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { Router, Route, Link, json } from "react-router-dom";
 import { Category } from "../data/Category";
 import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";

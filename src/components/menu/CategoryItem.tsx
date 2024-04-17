@@ -17,7 +17,7 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
 
 type CollapseProps = {
   isCollapse: boolean;
-  onclick: (event: React.PointerEvent, props: Category) => void;
+  onclick: (event: React.PointerEvent) => void;
 };
 
 const Collapse = ({ isCollapse }: CollapseProps) => {
