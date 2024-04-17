@@ -2,11 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Router, Route, Link, json } from "react-router-dom";
 import { Category } from "../data/Category";
 import { Close } from "../common/Icon";
+import CategoryList from "./CategoryList";
 
 const Menu = () => {
   const [category, setCategory] = useState<[Category]>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [treeRoot, setTreeRoot] = useState<Category>();
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,13 +27,14 @@ const Menu = () => {
               id: ele["id"],
               name: ele["name"],
               level: ele["level"],
-              collapse: true,
+              collapse: false,
               sub: [],
             };
 
             return cate;
           });
-
+        roots[0].collapse = true;
+        setTreeRoot(roots[0]);
         setCategory(roots);
         console.log(roots);
       })
@@ -53,7 +56,7 @@ const Menu = () => {
           <div className="flex  space-x-4">
             {category?.map((one) => {
               return (
-                <div className="w-2/3">
+                <div className="w-2/3" key={one.id}>
                   <div className="grid place-items-center">{one.name}</div>
                   <div className="grid place-items-center">
                     {one.collapse && <img src="/assets/underline_orange.svg" />}
@@ -61,6 +64,13 @@ const Menu = () => {
                 </div>
               );
             })}
+          </div>
+          <div>
+            {treeRoot !== undefined ? (
+              <CategoryList {...treeRoot}></CategoryList>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       )}
