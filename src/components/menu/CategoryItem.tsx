@@ -1,4 +1,4 @@
-import { Category, CategoryItemProps } from "../data/Category";
+import { CategoryItemProps } from "../data/Category";
 import { Down, Up } from "../common/Icon";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
