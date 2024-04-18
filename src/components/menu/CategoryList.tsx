@@ -19,7 +19,7 @@ function CategoryList(props: Category) {
             ></CategoryItem>
             {param.sub.length > 0 ? (
               collapse && (
-                <CategoryList {...param} key={param.id}></CategoryList>
+                <CategoryList {...param} key={900 + param.id}></CategoryList>
               )
             ) : (
               <></>
