@@ -38,7 +38,7 @@ const Menu = () => {
             id: elemap.get(key)?.id || 0,
             name: elemap.get(key)?.name || "",
             level: elemap.get(key)?.level || 0,
-            collapse: false,
+            collapse: true,
             sub: [],
           };
           treeRoot.sub.push(item);
