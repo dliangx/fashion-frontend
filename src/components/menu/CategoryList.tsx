@@ -3,13 +3,13 @@ import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
 
 function CategoryList(props: Category) {
-  const handListClick = (_: React.PointerEvent) => {
-    alert();
-  };
-
   return (
     <>
       {props.sub.map((param) => {
+        const [collapse, setCollapse] = useState<boolean>();
+        const handListClick = (_: React.MouseEvent) => {
+          setCollapse(collapse ? false : true);
+        };
         return (
           <div>
             <CategoryItem
@@ -17,8 +17,10 @@ function CategoryList(props: Category) {
               onclick={handListClick}
               key={param.id}
             ></CategoryItem>
-            {param.sub.length > 0 && param.collapse == false ? (
-              <CategoryList {...param}></CategoryList>
+            {param.sub.length > 0 ? (
+              collapse && (
+                <CategoryList {...param} key={param.id}></CategoryList>
+              )
             ) : (
               <></>
             )}

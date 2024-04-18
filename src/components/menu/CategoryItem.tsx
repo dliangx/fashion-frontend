@@ -3,6 +3,10 @@ import { Down, Up } from "../common/Icon";
 import { useState } from "react";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
+  const [collapse, setCollapse] = useState<boolean>();
+  const handClick = (_: React.MouseEvent) => {
+    setCollapse(collapse ? false : true);
+  };
   function calcDepStr(level: number) {
     if (level == 0) {
       return "flex ml-6";
@@ -16,32 +20,28 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
       return "flex ml-28";
     }
   }
+  const Collapse = () => {
+    return (
+      <>
+        {props.sub.length > 0 && collapse && <Up />}
+        {props.sub.length > 0 && !collapse && <Down />}
+      </>
+    );
+  };
 
   return (
-    <div className="">
+    <div onClick={onclick} onMouseUp={handClick}>
       <div className="h-4" />
 
       <div className={calcDepStr(props.level)}>
         <div className=" flex-grow">{props.name}</div>
 
         <div className="mr-6 flex-grow-0">
-          <Collapse isCollapse={props.collapse} onclick={onclick}></Collapse>
+          <Collapse />
         </div>
       </div>
     </div>
   );
 };
 
-type CollapseProps = {
-  isCollapse: boolean;
-  onclick: (event: React.PointerEvent) => void;
-};
-
-const Collapse = ({ isCollapse }: CollapseProps) => {
-  if (isCollapse) {
-    return <Down />;
-  } else {
-    return <Up />;
-  }
-};
 export default CategoryItem;

@@ -15,5 +15,5 @@ export interface CategoryResp {
 
 export type CategoryItemProps = {
   props: Category;
-  onclick:(event: React.PointerEvent)=>void 
+  onclick:(event: React.MouseEvent)=>void 
 }
