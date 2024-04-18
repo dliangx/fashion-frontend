@@ -4,10 +4,10 @@ import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";
 
 const Menu = () => {
-  const [category, setCategory] = useState<Category[]>();
+  const [category, setCategory] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [treeRoot, setTreeRoot] = useState<Category>();
+  const [index, setIndex] = useState<number>(0);
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -80,7 +80,6 @@ const Menu = () => {
           buildTree(data, roots[index]);
         }
 
-        setTreeRoot(roots[0]);
         setCategory(roots);
         console.log(roots);
       })
@@ -102,7 +101,13 @@ const Menu = () => {
           <div className="flex  space-x-4">
             {category?.map((one) => {
               return (
-                <div className="w-2/3" key={one.id}>
+                <div
+                  className="w-2/3"
+                  key={one.id}
+                  onClick={() => {
+                    // setIndex(one.id);
+                  }}
+                >
                   <div className="grid place-items-center">{one.name}</div>
                   <div className="grid place-items-center">
                     {one.collapse && <img src="/assets/underline_orange.svg" />}
@@ -112,11 +117,7 @@ const Menu = () => {
             })}
           </div>
           <div>
-            {treeRoot !== undefined ? (
-              <CategoryList {...treeRoot}></CategoryList>
-            ) : (
-              <></>
-            )}
+            <CategoryList {...category[index]}></CategoryList>
           </div>
         </div>
       )}
