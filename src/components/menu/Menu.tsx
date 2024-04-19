@@ -1,14 +1,17 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "../data/Category";
 import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";
 
 type CollapseContextType = {
   collapseMap: Map<number, boolean>;
-  setCollapseMap: React.Dispatch<React.SetStateAction<Map<number, boolean>>>;
+  setCollapseMap: any;
 };
 
-const CollapseContext = createContext<CollapseContextType>(null);
+const CollapseContext = createContext<CollapseContextType>({
+  collapseMap: new Map(),
+  setCollapseMap: null,
+});
 
 const Menu = () => {
   const [category, setCategory] = useState<Category[]>([]);
@@ -21,11 +24,11 @@ const Menu = () => {
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
-    const elemap = new Map();
+    const eleMap = new Map();
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
       map.set(element.id, element.parent_id);
-      elemap.set(element.id, element);
+      eleMap.set(element.id, element);
     }
     function getKeysForValue<K, V>(map: Map<K, V>, valueToFind: V) {
       const keysWithMatchingValue = [];
@@ -38,26 +41,26 @@ const Menu = () => {
     }
     function buildTreeRecursion(
       map: Map<number, number>,
-      elemap: Map<number, CategoryResp>,
+      eleMap: Map<number, CategoryResp>,
       treeRoot: Category
     ) {
       if (map.has(treeRoot.id)) {
         const keys = getKeysForValue(map, treeRoot.id);
         keys.forEach((key) => {
           let item: Category = {
-            id: elemap.get(key)?.id || 0,
-            name: elemap.get(key)?.name || "",
-            level: elemap.get(key)?.level || 0,
+            id: eleMap.get(key)?.id || 0,
+            name: eleMap.get(key)?.name || "",
+            level: eleMap.get(key)?.level || 0,
             collapse: true,
             sub: [],
           };
           treeRoot.sub.push(item);
-          buildTreeRecursion(map, elemap, item);
+          buildTreeRecursion(map, eleMap, item);
         });
       }
     }
 
-    buildTreeRecursion(map, elemap, treeRoot);
+    buildTreeRecursion(map, eleMap, treeRoot);
   }
 
   useEffect(() => {
