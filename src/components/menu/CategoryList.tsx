@@ -3,10 +3,12 @@ import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
 
 function CategoryList(props: Category) {
+  const [collapse, setCollapse] = useState<boolean>();
   const [clickIndex, setClickIndex] = useState<number>();
 
   const handClickItem = (index: number) => {
     setClickIndex(index);
+    setCollapse(collapse ? false : true);
   };
 
   return (
@@ -22,7 +24,8 @@ function CategoryList(props: Category) {
                 key={param.id}
               ></CategoryItem>
               {param.sub.length > 0 ? (
-                index === clickIndex && (
+                index === clickIndex &&
+                collapse && (
                   <CategoryList {...param} key={900 + param.id}></CategoryList>
                 )
               ) : (
