@@ -14,17 +14,16 @@ function CategoryList(props: Category) {
   return (
     <>
       {props.sub !== undefined &&
-        props.sub.map((param, index) => {
+        props.sub.map((param) => {
           return (
             <div>
               <CategoryItem
                 props={param}
-                index={index}
-                onclick={() => handClickItem(index)}
+                onclick={() => handClickItem(param.id)}
                 key={param.id}
               ></CategoryItem>
               {param.sub.length > 0 ? (
-                index === clickIndex &&
+                param.id === clickIndex &&
                 collapse && (
                   <CategoryList {...param} key={900 + param.id}></CategoryList>
                 )

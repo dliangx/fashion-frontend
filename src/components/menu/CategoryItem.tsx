@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const [collapse, setCollapse] = useState<boolean>();
-  const handClick = (_: React.MouseEvent) => {
+  const handClick = () => {
     setCollapse(collapse ? false : true);
   };
   function calcDepStr(level: number) {
@@ -30,7 +30,12 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   };
 
   return (
-    <div onClick={onclick} onMouseUp={handClick}>
+    <div
+      onClick={() => {
+        onclick();
+        handClick();
+      }}
+    >
       <div className="h-4" />
 
       <div className={calcDepStr(props.level)}>
