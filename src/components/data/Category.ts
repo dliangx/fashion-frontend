@@ -15,5 +15,6 @@ export interface CategoryResp {
 
 export type CategoryItemProps = {
   props: Category;
+  index: number;
   onclick:(event: React.MouseEvent)=>void 
 }

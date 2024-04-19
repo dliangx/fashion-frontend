@@ -7,7 +7,7 @@ const Menu = () => {
   const [category, setCategory] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [index, setIndex] = useState<number>(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -99,25 +99,27 @@ const Menu = () => {
           <div className="h-4" />
           <div className="grid  place-items-center">{error}</div>
           <div className="flex  space-x-4">
-            {category?.map((one) => {
+            {category?.map((one, index) => {
               return (
                 <div
                   className="w-2/3"
                   key={one.id}
                   onClick={() => {
-                    // setIndex(one.id);
+                    setTabIndex(index);
                   }}
                 >
                   <div className="grid place-items-center">{one.name}</div>
                   <div className="grid place-items-center">
-                    {one.collapse && <img src="/assets/underline_orange.svg" />}
+                    {index === tabIndex && (
+                      <img src="/assets/underline_orange.svg" />
+                    )}
                   </div>
                 </div>
               );
             })}
           </div>
           <div>
-            <CategoryList {...category[index]}></CategoryList>
+            <CategoryList {...category[tabIndex]}></CategoryList>
           </div>
         </div>
       )}
