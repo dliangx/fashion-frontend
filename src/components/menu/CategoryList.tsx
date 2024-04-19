@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
+import { CollapseContext } from "./Menu";
 
 function CategoryList(props: Category) {
   const [collapse, setCollapse] = useState<boolean>();
-  const [clickIndex, setClickIndex] = useState<number>();
-
+  const { collapseMap, setCollapseMap } = useContext(CollapseContext);
   const handClickItem = (index: number) => {
-    setClickIndex(index);
     setCollapse(collapse ? false : true);
+    setCollapseMap(
+      collapseMap.set(index, collapseMap.get(index) ? false : true)
+    );
   };
 
   return (
@@ -23,8 +25,7 @@ function CategoryList(props: Category) {
                 key={param.id}
               ></CategoryItem>
               {param.sub.length > 0 ? (
-                param.id === clickIndex &&
-                collapse && (
+                collapseMap.get(param.id) && (
                   <CategoryList {...param} key={900 + param.id}></CategoryList>
                 )
               ) : (

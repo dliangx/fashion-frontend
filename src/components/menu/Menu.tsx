@@ -1,13 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { Category, CategoryResp } from "../data/Category";
 import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";
+
+type CollapseContextType = {
+  collapseMap: Map<number, boolean>;
+  setCollapseMap: React.Dispatch<React.SetStateAction<Map<number, boolean>>>;
+};
+
+const CollapseContext = createContext<CollapseContextType>(null);
 
 const Menu = () => {
   const [category, setCategory] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tabIndex, setTabIndex] = useState<number>(0);
+  const [collapseMap, setCollapseMap] = useState<Map<number, boolean>>(
+    new Map()
+  );
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -81,6 +91,7 @@ const Menu = () => {
         }
 
         setCategory(roots);
+
         console.log(roots);
       })
       .catch((error) => {
@@ -94,37 +105,39 @@ const Menu = () => {
     <>
       {isLoading && <div>loading</div>}
       {!isLoading && (
-        <div>
-          <Close className="m-2" />
-          <div className="h-4" />
-          <div className="grid  place-items-center">{error}</div>
-          <div className="flex  space-x-4">
-            {category?.map((one, index) => {
-              return (
-                <div
-                  className="w-2/3"
-                  key={one.id}
-                  onClick={() => {
-                    setTabIndex(index);
-                  }}
-                >
-                  <div className="grid place-items-center">{one.name}</div>
-                  <div className="grid place-items-center">
-                    {index === tabIndex && (
-                      <img src="/assets/underline_orange.svg" />
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        <CollapseContext.Provider value={{ collapseMap, setCollapseMap }}>
           <div>
-            <CategoryList {...category[tabIndex]}></CategoryList>
+            <Close className="m-2" />
+            <div className="h-4" />
+            <div className="grid  place-items-center">{error}</div>
+            <div className="flex  space-x-4">
+              {category?.map((one, index) => {
+                return (
+                  <div
+                    className="w-2/3"
+                    key={one.id}
+                    onClick={() => {
+                      setTabIndex(index);
+                    }}
+                  >
+                    <div className="grid place-items-center">{one.name}</div>
+                    <div className="grid place-items-center">
+                      {index === tabIndex && (
+                        <img src="/assets/underline_orange.svg" />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              <CategoryList {...category[tabIndex]}></CategoryList>
+            </div>
           </div>
-        </div>
+        </CollapseContext.Provider>
       )}
     </>
   );
 };
 
-export default Menu;
+export { CollapseContext, Menu };

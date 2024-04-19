@@ -1,12 +1,14 @@
 import { CategoryItemProps } from "../data/Category";
-import { Down, Up } from "../common/Icon";
-import { useState } from "react";
+import { Down, Forward, Up } from "../common/Icon";
+import { useContext, useState } from "react";
+import { CollapseContext } from "./Menu";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const [collapse, setCollapse] = useState<boolean>();
   const handClick = () => {
     setCollapse(collapse ? false : true);
   };
+  const { collapseMap, setCollapseMap } = useContext(CollapseContext);
   function calcDepStr(level: number) {
     if (level == 0) {
       return "flex ml-6";
@@ -23,8 +25,8 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const Collapse = () => {
     return (
       <>
-        {props.sub.length > 0 && collapse && <Up />}
-        {props.sub.length > 0 && !collapse && <Down />}
+        {props.sub.length > 0 && collapseMap.get(props.id) && <Down />}
+        {props.sub.length > 0 && !collapseMap.get(props.id) && <Forward />}
       </>
     );
   };
