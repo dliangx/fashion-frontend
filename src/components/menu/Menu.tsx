@@ -110,7 +110,7 @@ const Menu = () => {
       {!isLoading && (
         <CollapseContext.Provider value={{ collapseMap, setCollapseMap }}>
           <div>
-            <Close className="m-2" />
+            <Close className="m-2" onClick={() => history.go(-1)} />
             <div className="h-4" />
             <div className="grid  place-items-center">{error}</div>
             <div className="flex  space-x-4">
