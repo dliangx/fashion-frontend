@@ -106,4 +106,17 @@ button {
   button:active {
     background-color: #0f0f0f69;
   }
+  .phone-width {
+    max-width: 430px;
+    margin: 0 auto; /* 居中显示 */
+  }
+
+  .min-w-0 {
+    min-width: 0;
+  }
+  @media (min-width: 430px) {
+    .phone-width {
+      width: 430px;
+    }
+  }
 }
