@@ -6,11 +6,18 @@ import { CollapseContext } from "./Menu";
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const { collapseMap } = useContext(CollapseContext);
   function calcDepStr(level: number) {
-    const width = level * 2;
-    if (level <= 4) {
-      return "w-[" + width.toString() + "rem]";
+    if (level == 0) {
+      return "flex ml-6";
+    } else if (level == 1) {
+      return "flex ml-6";
+    } else if (level == 2) {
+      return "flex ml-12";
+    } else if (level == 3) {
+      return "flex ml-16";
+    } else if (level == 4) {
+      return "flex ml-28";
     } else {
-      return "w-[10rem]";
+      return "flex ml-28";
     }
   }
   const Collapse = () => {
