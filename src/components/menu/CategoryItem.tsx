@@ -23,18 +23,23 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   };
 
   return (
-    <div
-      onClick={() => {
-        onclick();
-      }}
-    >
-      <div className="h-4" />
-
-      <div className="flex">
+    <div>
+      <div className="flex mt-4 ">
         <div className={calcDepStr(props.level)}></div>
-        <div className=" flex-grow">{props.name}</div>
+        <div
+          className=" flex-grow"
+          onClick={() => console.log(props.name, props.id)}
+          //TODO route jump
+        >
+          {props.name}
+        </div>
 
-        <div className="mr-6 flex-grow-0">
+        <div
+          className="mr-6 ml-10 flex-grow-0"
+          onClick={() => {
+            onclick();
+          }}
+        >
           <Collapse />
         </div>
       </div>
