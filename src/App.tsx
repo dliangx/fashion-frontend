@@ -20,28 +20,25 @@ import AddNewCard from "./components/order/AddNewCard";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="/our_story" element={<OurStory />} />
-        <Route path="/contact_us" element={<ContactUs />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/search/:context" element={<SearchView />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<BlogDetail />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/add_new_address" element={<AddNewAddress />} />
-        <Route path="/add_new_card" element={<AddNewCard />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/collection/:id" element={<CollectionDetail />} />
-        <Route />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route path="/our_story" element={<OurStory />} />
+      <Route path="/contact_us" element={<ContactUs />} />
+      <Route path="/menu" element={<Menu />} />
+      <Route path="/search" element={<Search />} />
+      <Route path="/search/:context" element={<SearchView />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<BlogDetail />} />
+      <Route path="/product" element={<Product />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/add_new_address" element={<AddNewAddress />} />
+      <Route path="/add_new_card" element={<AddNewCard />} />
+      <Route path="/collection" element={<Collection />} />
+      <Route path="/collection/:id" element={<CollectionDetail />} />
+    </Routes>
   );
 }
 
