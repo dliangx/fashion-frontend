@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
-import { CollapseContext } from "./Menu";
+import { CollapseContext } from "../../App";
 
 function CategoryList(props: Category) {
   const [collapse, setCollapse] = useState<boolean>();

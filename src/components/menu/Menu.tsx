@@ -1,146 +1,40 @@
-import { createContext, useEffect, useState } from "react";
-import { Category, CategoryResp } from "../data/Category";
+import { useContext, useState } from "react";
 import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";
-
-type CollapseContextType = {
-  collapseMap: Map<number, boolean>;
-  setCollapseMap: any;
-};
-
-const CollapseContext = createContext<CollapseContextType>({
-  collapseMap: new Map(),
-  setCollapseMap: null,
-});
+import { CollapseContext } from "../../App";
 
 const Menu = () => {
-  const [category, setCategory] = useState<Category[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [tabIndex, setTabIndex] = useState<number>(0);
-  const [collapseMap, setCollapseMap] = useState<Map<number, boolean>>(
-    new Map()
-  );
-
-  function buildTree(items: CategoryResp[], treeRoot: Category) {
-    const map = new Map();
-    const eleMap = new Map();
-    for (let index = 0; index < items.length; index++) {
-      const element = items[index];
-      map.set(element.id, element.parent_id);
-      eleMap.set(element.id, element);
-    }
-    function getKeysForValue<K, V>(map: Map<K, V>, valueToFind: V) {
-      const keysWithMatchingValue = [];
-      for (const [key, value] of map) {
-        if (value === valueToFind) {
-          keysWithMatchingValue.push(key);
-        }
-      }
-      return keysWithMatchingValue;
-    }
-    function buildTreeRecursion(
-      map: Map<number, number>,
-      eleMap: Map<number, CategoryResp>,
-      treeRoot: Category
-    ) {
-      if (map.has(treeRoot.id)) {
-        const keys = getKeysForValue(map, treeRoot.id);
-        keys.forEach((key) => {
-          let item: Category = {
-            id: eleMap.get(key)?.id || 0,
-            name: eleMap.get(key)?.name || "",
-            level: eleMap.get(key)?.level || 0,
-            collapse: true,
-            sub: [],
-          };
-          treeRoot.sub.push(item);
-          buildTreeRecursion(map, eleMap, item);
-        });
-      }
-    }
-
-    buildTreeRecursion(map, eleMap, treeRoot);
-  }
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:8000/get_categorys", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const roots = data
-          .filter((ele: any) => {
-            return ele["level"] === 0;
-          })
-          .map((ele: any) => {
-            let cate: Category = {
-              id: ele["id"],
-              name: ele["name"],
-              level: ele["level"],
-              collapse: false,
-              sub: [],
-            };
-
-            return cate;
-          });
-        console.log(data);
-
-        roots[0].collapse = true;
-        console.log("build tree...");
-        for (let index = 0; index < roots.length; index++) {
-          buildTree(data, roots[index]);
-        }
-
-        setCategory(roots);
-
-        console.log(roots);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setError(error.message);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
-
+  const { category } = useContext(CollapseContext);
   return (
-    <>
-      {isLoading && <div>loading</div>}
-      {!isLoading && (
-        <CollapseContext.Provider value={{ collapseMap, setCollapseMap }}>
-          <div>
-            <Close className="m-2" onClick={() => history.go(-1)} />
-            <div className="h-4" />
-            <div className="grid  place-items-center">{error}</div>
-            <div className="flex  space-x-4">
-              {category?.map((one, index) => {
-                return (
-                  <div
-                    className="w-2/3"
-                    key={one.id}
-                    onClick={() => {
-                      setTabIndex(index);
-                    }}
-                  >
-                    <div className="grid place-items-center">{one.name}</div>
-                    <div className="grid place-items-center">
-                      {index === tabIndex && (
-                        <img src="/assets/underline_orange.svg" />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+    <div>
+      <Close className="m-2" onClick={() => history.go(-1)} />
+      <div className="h-4" />
+      <div className="flex  space-x-4">
+        {category?.map((one, index) => {
+          return (
+            <div
+              className="w-2/3"
+              key={one.id}
+              onClick={() => {
+                setTabIndex(index);
+              }}
+            >
+              <div className="grid place-items-center">{one.name}</div>
+              <div className="grid place-items-center">
+                {index === tabIndex && (
+                  <img src="/assets/underline_orange.svg" />
+                )}
+              </div>
             </div>
-            <div>
-              <CategoryList {...category[tabIndex]}></CategoryList>
-            </div>
-          </div>
-        </CollapseContext.Provider>
-      )}
-    </>
+          );
+        })}
+      </div>
+      <div>
+        <CategoryList {...category[tabIndex]}></CategoryList>
+      </div>
+    </div>
   );
 };
 
-export { CollapseContext, Menu };
+export { Menu };

@@ -1,7 +1,7 @@
 import { CategoryItemProps } from "../data/Category";
 import { Down, Forward } from "../common/Icon";
 import { useContext } from "react";
-import { CollapseContext } from "./Menu";
+import { CollapseContext } from "../../App";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const { collapseMap } = useContext(CollapseContext);
