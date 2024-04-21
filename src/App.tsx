@@ -119,7 +119,6 @@ function App() {
 
   return (
     <CollapseContext.Provider value={{ category, collapseMap, setCollapseMap }}>
-      {error}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/404" element={<NotFound />} />
@@ -139,6 +138,7 @@ function App() {
         <Route path="/collection" element={<Collection />} />
         <Route path="/collection/:id" element={<CollectionDetail />} />
       </Routes>
+      {error}
     </CollapseContext.Provider>
   );
 }

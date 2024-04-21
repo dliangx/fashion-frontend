@@ -18,7 +18,7 @@ function CategoryList(props: Category) {
       {props.sub !== undefined &&
         props.sub.map((param) => {
           return (
-            <div>
+            <div key={1000 + param.id}>
               <CategoryItem
                 props={param}
                 onclick={() => handClickItem(param.id)}
@@ -26,7 +26,7 @@ function CategoryList(props: Category) {
               ></CategoryItem>
               {param.sub.length > 0 ? (
                 collapseMap.get(param.id) && (
-                  <CategoryList {...param} key={900 + param.id}></CategoryList>
+                  <CategoryList {...param}></CategoryList>
                 )
               ) : (
                 <></>
