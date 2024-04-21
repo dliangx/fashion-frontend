@@ -129,7 +129,7 @@ export const Heart = memo((props: SVGProps<SVGSVGElement>) => (
   </svg>
 ));
 
-export const Search = memo((props: SVGProps<SVGSVGElement>) => (
+export const SearchIcon = memo((props: SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"

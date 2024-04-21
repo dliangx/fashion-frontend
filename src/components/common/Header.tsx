@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MenuIcon, Search, ShoppingBag } from "./Icon";
+import { MenuIcon, SearchIcon, ShoppingBag } from "./Icon";
 import { Logo } from "./Logo";
 
 const Header = () => {
@@ -8,12 +8,12 @@ const Header = () => {
       <Link to="/menu">
         <MenuIcon className="ml-4" />
       </Link>
-      <Link className="h-8 m-auto" to="/">
+      <Link className=" m-auto" to="/">
         <Logo className="h-8 m-auto" />
       </Link>
 
       <Link to="/search">
-        <Search className="mr-4" />
+        <SearchIcon className="mr-4" />
       </Link>
       <Link to="/cart">
         <ShoppingBag className="mr-4" />
