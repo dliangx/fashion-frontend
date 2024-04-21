@@ -16,7 +16,7 @@ const Header = () => {
         <SearchIcon className="mr-4" />
       </Link>
       <Link to="/cart">
-        <ShoppingBag className="mr-4" />
+        <ShoppingBag className="mr-4" color="#14142B" />
       </Link>
     </div>
   );
