@@ -8,8 +8,9 @@ const Header = () => {
       <Link to="/menu">
         <MenuIcon className="ml-4" />
       </Link>
-
-      <Logo className="h-8 m-auto" />
+      <Link className="h-8 m-auto" to="/">
+        <Logo className="h-8 m-auto" />
+      </Link>
 
       <Link to="/search">
         <Search className="mr-4" />
