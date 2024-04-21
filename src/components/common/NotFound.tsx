@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { Back, Backward } from "./Icon";
+import { Backward } from "./Icon";
 
 const NotFound = () => {
   return (
