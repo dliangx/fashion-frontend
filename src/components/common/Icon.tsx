@@ -108,8 +108,8 @@ export const Backward = memo((props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M9.61182 19L2.89474 12L9.61182 5" stroke="#14142B" />
-    <line x1="3.2666" y1="11.8911" x2="20.9997" y2="11.8911" stroke="#14142B" />
+    <path d="M9.61182 19L2.89474 12L9.61182 5" stroke="#fff" />
+    <line x1="3.2666" y1="11.8911" x2="20.9997" y2="11.8911" stroke="#fff" />
   </svg>
 ));
 
