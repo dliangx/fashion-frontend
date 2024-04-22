@@ -18,7 +18,7 @@ import AddNewAddress from "./components/order/AddNewAddress";
 import AddNewCard from "./components/order/AddNewCard";
 import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
-import { GridView } from "./components/common/Icon";
+import CategoryView from "./components/product/CategoryView";
 type CollapseContextType = {
   category: Category[];
   collapseMap: Map<number, boolean>;
@@ -130,7 +130,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/product" element={<GridView />} />
+          <Route path="/product" element={<CategoryView />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/add_new_address" element={<AddNewAddress />} />
