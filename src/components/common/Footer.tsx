@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="fixed bottom-0 left-0 right-0  h-16 pt-4 text-center  border-t  ">
+    <div className="fixed bottom-0 left-0 right-0  h-16 pt-4 text-center  border-t phone-width  ">
       <div className="flex">
         <div className="w-1/4 grid place-items-center">
           <Link to="/">
