@@ -19,6 +19,8 @@ import AddNewCard from "./components/order/AddNewCard";
 import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView from "./components/product/CategoryView";
+import Login from "./components/login/Login";
+import Register from "./components/login/Register";
 type CollapseContextType = {
   category: Category[];
   collapseMap: Map<number, boolean>;
@@ -137,6 +139,8 @@ function App() {
           <Route path="/add_new_card" element={<AddNewCard />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/collection/:id" element={<CollectionDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
