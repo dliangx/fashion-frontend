@@ -10,7 +10,7 @@ const Cart = () => {
         <div>You have no items in you Shopping Bag.</div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-12 pt-3 text-center text-white phone-width">
+      <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14 pt-3 text-center text-white phone-width">
         <div>
           <ShoppingBag className="absolute top-2 left-20 z-20" color="#fff" />
           CONTINUE SHOPPING
