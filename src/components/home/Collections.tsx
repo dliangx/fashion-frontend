@@ -6,8 +6,9 @@ const Collections = () => {
   const selectedRef = useRef<HTMLInputElement>(null);
   const { brandCollections, setBrandCollections } = useContext(AppContext);
   const [index, setIndex] = useState(0);
-  let collectionList: CollectionInfo[] = [];
+
   useEffect(() => {
+    let collectionList: CollectionInfo[] = [];
     if (brandCollections.length == 0) {
       fetch(import.meta.env.VITE_API_URL + "/home_new_collection", {
         method: "GET",
