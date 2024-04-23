@@ -40,7 +40,6 @@ const Collections = () => {
             <img
               key={collection.id}
               ref={index === i ? selectedRef : null}
-              // className={index === i ? "active" : ""}
               src={collection.pic}
               alt={"collection" + collection.id}
             />
@@ -51,7 +50,9 @@ const Collections = () => {
         {brandCollections.map((_, i) => (
           <button
             key={i}
-            className="w-4 h-4 mb-8 rounded-full border-2 "
+            className={`w-4 h-4 mb-8 rounded-full border-2 ${
+              i === index ? "border-red-500" : "border-white"
+            }`}
             onClick={() => {
               flushSync(() => {
                 if (index < brandCollections.length - 1) {
