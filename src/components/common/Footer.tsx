@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const [tabIndex, setTabIndex] = useState<number>(0);
+  const [tabIndex, setTabIndex] = useState<number>(1);
   return (
     <div className="fixed bottom-0 left-0 right-0  h-16 pt-4 text-center bg-black text-white border-t phone-width  ">
       <div className="flex">
