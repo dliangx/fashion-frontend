@@ -21,16 +21,29 @@ import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView from "./components/product/CategoryView";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
-type CollapseContextType = {
+
+type AppContextType = {
   category: Category[];
   collapseMap: Map<number, boolean>;
   setCollapseMap: any;
+  brandCollections: CollectionInfo[];
+  setBrandCollections: any;
+  newProducts: ProductInfo[];
+  setNewProducts: any;
+  recommendProducts: ProductInfo[];
+  setRecommendProducts: any;
 };
 
-const CollapseContext = createContext<CollapseContextType>({
+const AppContext = createContext<AppContextType>({
   category: [],
   collapseMap: new Map(),
   setCollapseMap: null,
+  brandCollections: [],
+  setBrandCollections: null,
+  newProducts: [],
+  setNewProducts: null,
+  recommendProducts: [],
+  setRecommendProducts: null,
 });
 
 function App() {
@@ -38,6 +51,12 @@ function App() {
   const [collapseMap, setCollapseMap] = useState<Map<number, boolean>>(
     new Map()
   );
+  const [brandCollections, setBrandCollections] = useState<CollectionInfo[]>(
+    []
+  );
+  const [newProducts, setNewProducts] = useState<ProductInfo[]>([]);
+  const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
+
   const [error, setError] = useState(null);
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -81,7 +100,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8000/get_categorys", {
+    fetch(import.meta.env.VITE_API_URL + "/get_categorys", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -120,7 +139,19 @@ function App() {
   }, []);
 
   return (
-    <CollapseContext.Provider value={{ category, collapseMap, setCollapseMap }}>
+    <AppContext.Provider
+      value={{
+        category,
+        collapseMap,
+        setCollapseMap,
+        brandCollections,
+        setBrandCollections,
+        newProducts,
+        setNewProducts,
+        recommendProducts,
+        setRecommendProducts,
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -145,9 +176,9 @@ function App() {
         </Routes>
       </BrowserRouter>
       {error}
-    </CollapseContext.Provider>
+    </AppContext.Provider>
   );
 }
 
-export { CollapseContext };
+export { AppContext };
 export default App;

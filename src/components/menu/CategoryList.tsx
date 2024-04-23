@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { Category } from "../data/Category";
 import CategoryItem from "./CategoryItem";
-import { CollapseContext } from "../../App";
+import { AppContext } from "../../App";
 
 function CategoryList(props: Category) {
   const [collapse, setCollapse] = useState<boolean>();
-  const { collapseMap, setCollapseMap } = useContext(CollapseContext);
+  const { collapseMap, setCollapseMap } = useContext(AppContext);
   const handClickItem = (index: number) => {
     setCollapse(collapse ? false : true);
     setCollapseMap(

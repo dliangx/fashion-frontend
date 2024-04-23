@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { Close } from "../common/Icon";
 import CategoryList from "./CategoryList";
-import { CollapseContext } from "../../App";
+import { AppContext } from "../../App";
 
 const Menu = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
-  const { category } = useContext(CollapseContext);
+  const { category } = useContext(AppContext);
   return (
     <div>
       <Close className="m-2" onClick={() => history.go(-1)} />

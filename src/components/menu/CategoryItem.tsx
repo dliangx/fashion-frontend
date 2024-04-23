@@ -1,10 +1,10 @@
 import { CategoryItemProps } from "../data/Category";
 import { Down, Forward } from "../common/Icon";
 import { useContext } from "react";
-import { CollapseContext } from "../../App";
+import { AppContext } from "../../App";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
-  const { collapseMap } = useContext(CollapseContext);
+  const { collapseMap } = useContext(AppContext);
   function calcDepStr(level: number) {
     if (level == 0) {
       return "flex ml-6";
