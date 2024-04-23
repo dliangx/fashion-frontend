@@ -3,7 +3,7 @@ import { flushSync } from "react-dom";
 import { AppContext } from "../../App";
 
 const Collections = () => {
-  const selectedRef = useRef<HTMLInputElement>(null);
+  const selectedRef = useRef<HTMLImageElement>(null);
   const { brandCollections, setBrandCollections } = useContext(AppContext);
   const [index, setIndex] = useState(0);
 
@@ -16,7 +16,7 @@ const Collections = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          for (let i = 0; i < data.length; i++) {
+          for (let i = data.length - 1; i >= 0; i--) {
             const collection = data[i];
             collectionList.push({
               id: collection.id,
