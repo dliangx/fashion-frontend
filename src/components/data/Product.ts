@@ -1,4 +1,4 @@
-type ProductInfo = {
+export type ProductInfo = {
     id: number,
     name: string,
     category: string,
@@ -8,8 +8,14 @@ type ProductInfo = {
     price: number;
 }
 
-type CollectionInfo = {
+export type CollectionInfo = {
     id: number,
     pic: string,
     name: string,
 }
+
+export type ImageSlide = {
+    src: string;
+    alt: string;
+}
+  

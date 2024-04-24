@@ -21,6 +21,7 @@ import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView from "./components/product/CategoryView";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
+import { CollectionInfo, ProductInfo } from "./components/data/Product";
 
 type AppContextType = {
   category: Category[];

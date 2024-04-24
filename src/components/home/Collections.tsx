@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { AppContext } from "../../App";
+import { CollectionInfo } from "../data/Product";
 
 const Collections = () => {
   const selectedRef = useRef<HTMLImageElement>(null);
