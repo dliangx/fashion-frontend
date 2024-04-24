@@ -31,11 +31,16 @@ const Collections = () => {
           console.error("Error:", error);
         });
     }
-    setInterval(() => {
+    const interval = setInterval(() => {
       console.log(intervalIndex);
       flushSync(() => {
-        intervalIndex = (intervalIndex + 1) % brandCollections.length;
-        setIndex(intervalIndex);
+        if (brandCollections.length > 0) {
+          intervalIndex = (intervalIndex + 1) % brandCollections.length;
+          setIndex(intervalIndex);
+        } else if (collectionList.length > 0) {
+          intervalIndex = (intervalIndex + 1) % collectionList.length;
+          setIndex(intervalIndex);
+        }
       });
       if (selectedRef.current) {
         selectedRef.current.scrollIntoView({
@@ -45,6 +50,7 @@ const Collections = () => {
         });
       }
     }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
