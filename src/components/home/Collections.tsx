@@ -9,7 +9,6 @@ const Collections = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    let intervalIndex = 0;
     let collectionList: CollectionInfo[] = [];
     if (brandCollections.length == 0) {
       fetch(import.meta.env.VITE_API_URL + "/home_new_collection", {
@@ -32,26 +31,6 @@ const Collections = () => {
           console.error("Error:", error);
         });
     }
-    const interval = setInterval(() => {
-      console.log(intervalIndex);
-      flushSync(() => {
-        if (brandCollections.length > 0) {
-          intervalIndex = (intervalIndex + 1) % brandCollections.length;
-          setIndex(intervalIndex);
-        } else if (collectionList.length > 0) {
-          intervalIndex = (intervalIndex + 1) % collectionList.length;
-          setIndex(intervalIndex);
-        }
-      });
-      if (selectedRef.current) {
-        selectedRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }, 5000);
-    return () => clearInterval(interval);
   }, []);
 
   return (
