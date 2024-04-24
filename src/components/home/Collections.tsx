@@ -66,7 +66,7 @@ const Collections = () => {
           <button
             key={i}
             className={`w-4 h-4 mb-8 rounded-full border-2 ${
-              i === index ? "border-red-500" : "border-white"
+              i === index ? "border-orange-500" : "border-white"
             }`}
             onClick={() => {
               flushSync(() => {
