@@ -2,6 +2,7 @@ import Footer from "../common/Footer";
 import Header from "../common/Header";
 import Collections from "./Collections";
 import NewArrival from "./NewArrival";
+import Recommend from "./Recommend";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Header />
       <Collections />
       <NewArrival />
+      <Recommend />
       <Footer />
     </div>
   );
