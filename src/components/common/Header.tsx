@@ -4,7 +4,7 @@ import { Logo } from "./Logo";
 
 const Header = () => {
   return (
-    <div className="flex h-10 mt-2 items-end w-full">
+    <div className="flex h-10 pt-2 items-end w-full">
       <Link to="/menu">
         <MenuIcon className="ml-4" />
       </Link>
