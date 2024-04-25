@@ -42,7 +42,7 @@ const NewArrival = () => {
         <h1 className="text-center text-xl font-serif">NEW ARRIVAL</h1>
         <img src="/assets/underline.svg"></img>
         <div>
-          <Products products={newProducts} option={3}></Products>
+          <Products products={newProducts} option={1}></Products>
         </div>
       </div>
     </>
