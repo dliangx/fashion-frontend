@@ -12,6 +12,7 @@ const Home = () => {
       <NewArrival />
       <Recommend />
       <Footer />
+      <div className="h-16" />
     </div>
   );
 };
