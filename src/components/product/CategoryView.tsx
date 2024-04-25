@@ -21,6 +21,7 @@ const CategoryView = () => {
       .then((data) => {
         console.log(data);
         setProducts(data);
+        setViewOption(1);
       })
       .catch((error) => {
         console.error("Error:", error);
