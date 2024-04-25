@@ -16,8 +16,8 @@ const NewArrival = () => {
           console.log(data);
           const products = data.map((element: any) => {
             const product: ProductInfo = {
-              id: element.product_id,
-              name: element.product_name,
+              id: element.id,
+              name: element.name,
               category: element.category,
               pic: element.pic,
               brand: element.brand,

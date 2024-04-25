@@ -2,9 +2,11 @@ import { CategoryItemProps } from "../data/Category";
 import { Down, Forward } from "../common/Icon";
 import { useContext } from "react";
 import { AppContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const { collapseMap } = useContext(AppContext);
+  const navigate = useNavigate();
   function calcDepStr(level: number) {
     if (level == 0) {
       return "flex ml-6";
@@ -35,7 +37,19 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
         <div className={calcDepStr(props.level)}></div>
         <div
           className=" flex-grow"
-          onClick={() => console.log(props.name, props.id)}
+          onClick={() => {
+            console.log(props);
+            navigate("/product", {
+              state: {
+                category: {
+                  id: props.id,
+                  name: props.name,
+                  level: props.level,
+                  parent_id: 0,
+                },
+              },
+            });
+          }}
           //TODO route jump
         >
           {props.name}
