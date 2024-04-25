@@ -42,6 +42,7 @@ const CategoryView = () => {
           className="mr-4 rounded-full bg-gray-200 w-20 flex   items-center justify-center"
           onClick={() => {
             setNewOption(newOption ? false : true);
+            setProducts(products.reverse());
           }}
         >
           <div>New</div>
