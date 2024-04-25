@@ -7,7 +7,7 @@ import Search from "./components/search/Search";
 import Cart from "./components/cart/Cart";
 import Blog from "./components/blog/Blog";
 import BlogDetail from "./components/blog/BlogDetail";
-import ProductDetail from "./components/product/ProductDetail";
+import ProductDetailView from "./components/product/ProductDetailView";
 import Collection from "./components/collection/Collection";
 import CollectionDetail from "./components/collection/CollectionDetail";
 import SearchView from "./components/search/SearchView";
@@ -165,7 +165,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/product" element={<CategoryView />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/add_new_address" element={<AddNewAddress />} />
           <Route path="/add_new_card" element={<AddNewCard />} />
