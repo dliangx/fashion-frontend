@@ -14,7 +14,7 @@ const Products = (props: productsProps) => {
         {props.option == 1 &&
           props.products.map((product, index) => {
             return (
-              <div className="w-1/2">
+              <div className="w-1/2" key={index}>
                 <ProductGrid {...product} key={index} />
               </div>
             );
@@ -31,7 +31,7 @@ const Products = (props: productsProps) => {
         {props.option == 3 &&
           props.products.map((product, index) => {
             return (
-              <div className="">
+              <div key={index}>
                 <ProductGrid {...product} key={index} />
               </div>
             );
