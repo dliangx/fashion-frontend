@@ -1,5 +1,13 @@
+import Footer from "../common/Footer";
+import Header from "../common/Header";
+
 const OurStory = () => {
-  return <></>;
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
 };
 
 export default OurStory;
