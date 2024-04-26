@@ -19,3 +19,7 @@ export type ImageSlide = {
     alt: string;
 }
   
+export type Page = {
+    start:number;
+    num:number;
+}

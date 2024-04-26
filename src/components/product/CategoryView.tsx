@@ -14,9 +14,18 @@ const CategoryView = () => {
   const category = location.state?.category;
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/get_product_by_category", {
+    let bodyStr = "";
+    let url = "";
+    if (category != undefined) {
+      bodyStr = JSON.stringify(category);
+      url = "/get_product_by_category";
+    } else {
+      bodyStr = JSON.stringify({ start: 0, num: 10 });
+      url = "/get_product_by_page";
+    }
+    fetch(import.meta.env.VITE_API_URL + url, {
       method: "POST",
-      body: JSON.stringify(category),
+      body: bodyStr,
       headers: {
         "content-type": "application/json",
       },
