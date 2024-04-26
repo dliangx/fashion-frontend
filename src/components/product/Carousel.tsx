@@ -26,9 +26,6 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
   const dragMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (isDragging.current) {
       dx = e.touches[0].clientX - touchStartX.current;
-      console.log(dx);
-      console.log("x" + touchStartX.current.toString());
-      console.log(currentIndex);
       if (carouselRef.current != null) {
         if (dx - currentIndex * slideWidth < 0) {
           carouselRef.current.style.transform = `translateX( ${
