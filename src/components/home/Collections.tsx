@@ -2,11 +2,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { AppContext } from "../../App";
 import { CollectionInfo } from "../data/Product";
+import { useNavigate } from "react-router-dom";
 
 const Collections = () => {
   const selectedRef = useRef<HTMLImageElement>(null);
   const { brandCollections, setBrandCollections } = useContext(AppContext);
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let collectionList: CollectionInfo[] = [];
@@ -43,15 +45,26 @@ const Collections = () => {
               ref={index === i ? selectedRef : null}
               src={collection.pic}
               alt={"collection" + collection.id}
+              onClick={() => navigate("/collection/" + collection.id)}
             />
           ))}
         </div>
+      </div>
+      <div className="absolute left-0 bottom-10  w-full flex items-center justify-center ">
+        <button
+          className="rounded-full bg-black p-2 bg-opacity-30 text-white"
+          onClick={() => {
+            navigate("/collection");
+          }}
+        >
+          EXPLORE COLLECTION
+        </button>
       </div>
       <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-4">
         {brandCollections.map((_, i) => (
           <button
             key={i}
-            className={`w-4 h-4 mb-8 rounded-full border-2 ${
+            className={`w-4 h-4 mb-4 rounded-full border-2 ${
               i === index ? "border-orange-500" : "border-white"
             }`}
             onClick={() => {
