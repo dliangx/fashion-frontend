@@ -26,7 +26,7 @@ const Footer = () => {
             setTabIndex(2);
           }}
         >
-          <Link to="/blog">
+          <Link to="/collection">
             <div className="h-6 ">EXPLORE</div>
           </Link>
           <div className="h-10">
