@@ -23,3 +23,9 @@ export type Page = {
     start:number;
     num:number;
 }
+
+export type CollectionDetailInfo = {
+    collection: CollectionInfo;
+    products: ProductInfo[];
+    
+}
