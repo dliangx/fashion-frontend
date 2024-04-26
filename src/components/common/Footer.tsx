@@ -57,7 +57,7 @@ const Footer = () => {
             setTabIndex(4);
           }}
         >
-          <Link to="/out_story">
+          <Link to="/our_story">
             <div className="h-6 ">ME</div>
           </Link>
           <div className="h-12">
