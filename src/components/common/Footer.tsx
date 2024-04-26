@@ -27,7 +27,7 @@ const Footer = () => {
           }}
         >
           <Link to="/blog">
-            <div className="h-6 ">BLOG</div>
+            <div className="h-6 ">EXPLORE</div>
           </Link>
           <div className="h-10">
             {2 === tabIndex && <img src="/assets/rect.svg" />}
@@ -58,7 +58,7 @@ const Footer = () => {
           }}
         >
           <Link to="/our_story">
-            <div className="h-6 ">ME</div>
+            <div className="h-6 ">MY</div>
           </Link>
           <div className="h-12">
             {4 === tabIndex && <img src="/assets/rect.svg" />}
