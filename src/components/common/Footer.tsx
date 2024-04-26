@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../App";
 
 const Footer = () => {
-  const [tabIndex, setTabIndex] = useState<number>(1);
+  const { tabIndex, setTabIndex } = useContext(AppContext);
   return (
     <div className="fixed bottom-0 left-0 right-0  h-16 pt-2 text-center bg-black text-white  border-none phone-width  ">
       <div className="flex">
@@ -38,7 +39,12 @@ const Footer = () => {
             setTabIndex(3);
           }}
         >
-          <Link to="/product">
+          <Link
+            to="/product"
+            onClick={() => {
+              setTabIndex(3);
+            }}
+          >
             <div className="h-6 ">SHIPPING</div>
           </Link>
           <div className="h-10">

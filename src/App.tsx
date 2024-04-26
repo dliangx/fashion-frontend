@@ -33,6 +33,8 @@ type AppContextType = {
   setNewProducts: any;
   recommendProducts: ProductInfo[];
   setRecommendProducts: any;
+  tabIndex: number;
+  setTabIndex: any;
 };
 
 const AppContext = createContext<AppContextType>({
@@ -45,6 +47,8 @@ const AppContext = createContext<AppContextType>({
   setNewProducts: null,
   recommendProducts: [],
   setRecommendProducts: null,
+  tabIndex: 0,
+  setTabIndex: null,
 });
 
 function App() {
@@ -57,6 +61,7 @@ function App() {
   );
   const [newProducts, setNewProducts] = useState<ProductInfo[]>([]);
   const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
+  const [tabIndex, setTabIndex] = useState<number>(1);
 
   const [error, setError] = useState(null);
   function buildTree(items: CategoryResp[], treeRoot: Category) {
@@ -151,6 +156,8 @@ function App() {
         setNewProducts,
         recommendProducts,
         setRecommendProducts,
+        tabIndex,
+        setTabIndex,
       }}
     >
       <BrowserRouter>
