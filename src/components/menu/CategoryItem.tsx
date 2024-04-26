@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
   const { collapseMap } = useContext(AppContext);
+  const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
   function calcDepStr(level: number) {
     if (level == 0) {
@@ -39,6 +40,7 @@ const CategoryItem = ({ props, onclick }: CategoryItemProps) => {
           className=" flex-grow"
           onClick={() => {
             console.log(props);
+            setTabIndex(3);
             navigate("/product", {
               state: {
                 category: {
