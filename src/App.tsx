@@ -5,6 +5,8 @@ import OurStory from "./components/about/OurStory";
 import { Menu } from "./components/menu/Menu";
 import Search from "./components/search/Search";
 import Cart from "./components/cart/Cart";
+import Blog from "./components/blog/Blog";
+import BlogDetail from "./components/blog/BlogDetail";
 import ProductDetailView from "./components/product/ProductDetailView";
 import Collection from "./components/collection/Collection";
 import CollectionDetail from "./components/collection/CollectionDetail";
@@ -167,6 +169,8 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/search/:context" element={<SearchView />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/product" element={<CategoryView />} />
           <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/checkout" element={<Checkout />} />
