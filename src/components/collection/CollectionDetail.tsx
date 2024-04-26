@@ -26,7 +26,10 @@ const CollectionDetail = () => {
     <>
       <Header />
       <div className="pb-8 pt-4">
-        <div className="m-4">
+        <div className="items-center justify-center ">
+          <img src="/assets/collection.png" />
+        </div>
+        <div>
           <img src={detail?.collection.pic} />
         </div>
         {detail?.products != undefined && (

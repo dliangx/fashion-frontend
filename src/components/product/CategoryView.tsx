@@ -20,7 +20,7 @@ const CategoryView = () => {
       bodyStr = JSON.stringify(category);
       url = "/get_product_by_category";
     } else {
-      bodyStr = JSON.stringify({ start: 0, num: 100 });
+      bodyStr = JSON.stringify({ start: 0, num: 10 });
       url = "/get_product_by_page";
     }
     fetch(import.meta.env.VITE_API_URL + url, {
