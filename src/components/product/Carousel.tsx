@@ -26,14 +26,16 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
   const dragMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (isDragging.current) {
       dx = e.touches[0].clientX - touchStartX.current;
-      //   if (carouselRef.current != null)
-      //     carouselRef.current.style.transform = `translateX( ${dx}px)`;
+      if (carouselRef.current != null)
+        carouselRef.current.style.transform = `translateX( ${
+          dx - currentIndex * slideWidth
+        }px)`;
     }
   };
 
   const dragEnd = () => {
     if (isDragging.current) {
-      const threshold = slideWidth / 2;
+      const threshold = slideWidth / 3;
 
       if (Math.abs(dx) > threshold) {
         setCurrentIndex(
