@@ -58,6 +58,7 @@ const ProductDetailView = () => {
       <div className="m-4">
         <Close
           className="absolute top-16 right-4 z-20"
+          color="black"
           onClick={() => history.go(-1)}
         />
         {previewType == 1 && <Carousel images={previewPics}></Carousel>}
