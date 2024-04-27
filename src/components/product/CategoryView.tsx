@@ -48,7 +48,7 @@ const CategoryView = () => {
         <div>{products.length} APPAREL</div>
         <div className="m-auto"></div>
         <button
-          className="mr-4 rounded-full bg-gray-200 w-20 flex   items-center justify-center"
+          className="mr-4 rounded-full  w-20 flex   items-center justify-center"
           onClick={() => {
             setNewOption(newOption ? false : true);
             setProducts(products.reverse());
@@ -59,7 +59,7 @@ const CategoryView = () => {
           {!newOption && <Up></Up>}
         </button>
         <button
-          className="mr-4 rounded-full bg-gray-200 w-8 flex items-center justify-center"
+          className="mr-4 rounded-full  w-8 flex items-center justify-center"
           onClick={() => {
             if (viewOption == 3) {
               setViewOption(1);
@@ -72,7 +72,7 @@ const CategoryView = () => {
           {viewOption == 2 && <ListView />}
           {viewOption == 3 && <Gallery />}
         </button>
-        <button className="rounded-full bg-gray-200 w-8 flex items-center justify-center ">
+        <button className="rounded-full  w-8 flex items-center justify-center ">
           <Filter />
         </button>
       </div>

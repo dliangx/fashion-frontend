@@ -24,6 +24,7 @@ import Register from "./components/login/Register";
 import { CollectionInfo, ProductInfo } from "./components/data/Product";
 
 type AppContextType = {
+  theme: string;
   category: Category[];
   collapseMap: Map<number, boolean>;
   setCollapseMap: any;
@@ -38,6 +39,7 @@ type AppContextType = {
 };
 
 const AppContext = createContext<AppContextType>({
+  theme: "light",
   category: [],
   collapseMap: new Map(),
   setCollapseMap: null,
@@ -52,6 +54,7 @@ const AppContext = createContext<AppContextType>({
 });
 
 function App() {
+  const [theme, setTheme] = useState<string>("light");
   const [category, setCategory] = useState<Category[]>([]);
   const [collapseMap, setCollapseMap] = useState<Map<number, boolean>>(
     new Map()
@@ -144,9 +147,26 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const theme = mediaQuery.matches ? "dark" : "light";
+    setTheme(theme);
+
+    const handleChange = () => {
+      setTheme(mediaQuery.matches ? "dark" : "light");
+    };
+
+    mediaQuery.addListener(handleChange);
+
+    return () => {
+      mediaQuery.removeListener(handleChange);
+    };
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
+        theme,
         category,
         collapseMap,
         setCollapseMap,
