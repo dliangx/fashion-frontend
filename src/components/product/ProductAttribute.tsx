@@ -36,19 +36,18 @@ const ProductAttribute = (props: AttributeProps) => {
   return (
     <>
       <div className="flex flex-wrap">
-        {attrs.map((attr) => {
+        {attrs.map((attr, index) => {
           return (
-            <>
-              <div className="flex ">
-                <h2 className="mr-4 font-sans">{attr.name}</h2>
+            <div className="flex " key={index.toString()}>
+              <h2 className="mr-4 font-sans">{attr.name}</h2>
 
-                {attr.values.map((value) => {
-                  return (
-                    <div className="mr-4">
-                      {attr.name == "Color" && (
-                        <>
-                          <button
-                            className={`w-4 h-4  rounded-full border-2  
+              {attr.values.map((value) => {
+                return (
+                  <div className="mr-4" key={value}>
+                    {attr.name == "Color" && (
+                      <>
+                        <button
+                          className={`w-4 h-4  rounded-full border-2  
                             ${value === "black" ? " bg-black" : "bg-black"} 
                             ${
                               value === "orange" ? " bg-orange-500" : "bg-black"
@@ -57,19 +56,18 @@ const ProductAttribute = (props: AttributeProps) => {
                                 value === "white" ? " bg-gray-200" : "bg-black"
                               } 
                             `}
-                          ></button>
-                        </>
-                      )}
-                      {attr.name != "Color" && (
-                        <button className="w-5 h-5  rounded-full border-2 text-xs  align-text-top">
-                          {value}
-                        </button>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </>
+                        ></button>
+                      </>
+                    )}
+                    {attr.name != "Color" && (
+                      <button className="w-5 h-5  rounded-full border-2 text-xs  align-text-top">
+                        {value}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           );
         })}
       </div>

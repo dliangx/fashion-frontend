@@ -53,7 +53,7 @@ const ProductDetailView = () => {
       });
   }, [id]);
   return (
-    <>
+    <div>
       <Header />
       <div className="m-4">
         <Close
@@ -67,15 +67,14 @@ const ProductDetailView = () => {
             <div className="flex overflow-x-scroll mt-4">
               {previewPics.map((pic, index) => {
                 return (
-                  <>
-                    <img
-                      src={pic.src}
-                      className="w-1/3 h-24 mr-4"
-                      onClick={() => {
-                        setPreviewIndex(index);
-                      }}
-                    />
-                  </>
+                  <img
+                    src={pic.src}
+                    key={index.toString()}
+                    className="w-1/3 h-24 mr-4"
+                    onClick={() => {
+                      setPreviewIndex(index);
+                    }}
+                  />
                 );
               })}
             </div>
@@ -104,7 +103,7 @@ const ProductDetailView = () => {
           <Heart color="#fff" className="mr-4" />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
