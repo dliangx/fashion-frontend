@@ -3,7 +3,8 @@ import { AppContext } from "../../App";
 
 export const InstagramIcon = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       preserveAspectRatio="none"
@@ -22,7 +23,8 @@ export const InstagramIcon = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const TwitterIcon = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       preserveAspectRatio="none"
@@ -41,7 +43,8 @@ export const TwitterIcon = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const YoutubeIcon = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       preserveAspectRatio="none"
@@ -60,7 +63,8 @@ export const YoutubeIcon = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const ShoppingBag = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -84,7 +88,8 @@ export const ShoppingBag = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Plus = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -102,7 +107,8 @@ export const Plus = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const ForwardArrow = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -126,7 +132,8 @@ export const ForwardArrow = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Backward = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -144,7 +151,8 @@ export const Backward = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Heart = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -164,7 +172,8 @@ export const Heart = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const SearchIcon = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -185,7 +194,8 @@ export const SearchIcon = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const MenuIcon = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -204,7 +214,8 @@ export const MenuIcon = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Close = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -226,7 +237,8 @@ export const Close = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const DoorDelivery = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -246,7 +258,8 @@ export const DoorDelivery = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Tag = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="25"
@@ -267,7 +280,8 @@ export const Tag = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Refresh = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="25"
@@ -301,7 +315,8 @@ export const Refresh = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Call = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -321,7 +336,8 @@ export const Call = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Location = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -342,7 +358,8 @@ export const Location = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const DoNotBleach = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -363,7 +380,8 @@ export const DoNotBleach = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const DoNotTumbleDry = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -392,7 +410,8 @@ export const DoNotTumbleDry = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const DoNotWash = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -417,7 +436,8 @@ export const DoNotWash = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const IronLowTemperature = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -438,7 +458,8 @@ export const IronLowTemperature = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Shipping = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -471,7 +492,8 @@ export const Shipping = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Export = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -496,7 +518,8 @@ export const Export = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Resize = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -531,7 +554,8 @@ export const Resize = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Voucher = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -551,7 +575,8 @@ export const Voucher = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Forward = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -568,7 +593,8 @@ export const Forward = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Up = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -588,7 +614,8 @@ export const Up = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Down = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -608,7 +635,8 @@ export const Down = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Back = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -625,7 +653,8 @@ export const Back = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Filter = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -647,7 +676,8 @@ export const Filter = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const GridView = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -667,7 +697,8 @@ export const GridView = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const Gallery = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"
@@ -687,7 +718,8 @@ export const Gallery = memo((props: SVGProps<SVGSVGElement>) => {
 
 export const ListView = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
-  const color = theme === "dark" ? "white" : "black";
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
       width="24"

@@ -6,7 +6,7 @@ import Recommend from "./Recommend";
 
 const Home = () => {
   return (
-    <div className="h-full bg-gray-300">
+    <div className="h-full ">
       <Header />
       <Collections />
       <NewArrival />
