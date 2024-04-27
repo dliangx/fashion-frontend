@@ -18,7 +18,7 @@ const ProductGrid = (props: ProductInfo) => {
       />
       <div className="font-serif text-lg">{props.brand}</div>
       <div className="font-sans">{props.name}</div>
-      <div className="font-sans">${props.price}</div>
+      <div className="font-sans text-orange-500">${props.price}</div>
     </div>
   );
 };

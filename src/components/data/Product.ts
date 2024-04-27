@@ -8,6 +8,35 @@ export type ProductInfo = {
     price: number;
 }
 
+export type Detail = {
+    t: string,
+    title:string,
+    detail: string,
+}
+
+export type Picture = {
+    t: number,
+    sort: number,
+    url: string,
+}
+
+export type Attribute = {
+    id: number,
+    name: string,
+    value: string,
+}
+
+export type AttributeProps = {
+    attrs: Attribute[]
+}
+
+export type ProductDetail = {
+    info: ProductInfo,
+    pics: Picture[],
+    attr: Attribute[],
+    details: Detail[],
+}
+
 export type CollectionInfo = {
     id: number,
     pic: string,

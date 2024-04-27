@@ -23,7 +23,7 @@ const ProductList = (props: ProductInfo) => {
         <div className="h32 w-3/4 ml-2">
           <div className="font-mono text-xl  mt-4">{props.brand}</div>
           <div className="font-sans">{props.name}</div>
-          <div className="font-sans">${props.price}</div>
+          <div className="font-sans text-orange-500">${props.price}</div>
           <div className="flex  place-items-center mt-2">
             <img src="/assets/favorite.svg" />
             <div className="">{props.rating} Rating</div>
