@@ -22,6 +22,7 @@ import CategoryView from "./components/product/CategoryView";
 import Login from "./components/login/Login";
 import Register from "./components/login/Register";
 import { CollectionInfo, ProductInfo } from "./components/data/Product";
+import RequireAuth from "./components/login/RequireAuth";
 
 type AppContextType = {
   theme: string;
@@ -196,10 +197,38 @@ function App() {
           <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/add_new_address" element={<AddNewAddress />} />
-          <Route path="/add_new_card" element={<AddNewCard />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/cart"
+            element={
+              <RequireAuth>
+                <Cart />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/add_new_address"
+            element={
+              <RequireAuth>
+                <AddNewAddress />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/add_new_card"
+            element={
+              <RequireAuth>
+                <AddNewCard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <RequireAuth>
+                <Checkout />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
