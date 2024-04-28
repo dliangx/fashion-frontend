@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { ProductDetail, Picture, ImageSlide } from "../data/Product";
 import { useParams } from "react-router-dom";
-import Header from "../common/Header";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Back, Backward, Close, Export, Heart, Plus } from "../common/Icon";
+import { Back, Export, Heart, Plus } from "../common/Icon";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
