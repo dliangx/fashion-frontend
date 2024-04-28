@@ -188,18 +188,18 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/search" element={<Search />} />
           <Route path="/search/:context" element={<SearchView />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/product" element={<CategoryView />} />
-          <Route path="/product/:id" element={<ProductDetailView />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/add_new_address" element={<AddNewAddress />} />
-          <Route path="/add_new_card" element={<AddNewCard />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/collection/:id" element={<CollectionDetail />} />
+          <Route path="/product" element={<CategoryView />} />
+          <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/add_new_address" element={<AddNewAddress />} />
+          <Route path="/add_new_card" element={<AddNewCard />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
