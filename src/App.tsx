@@ -20,7 +20,6 @@ import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView from "./components/product/CategoryView";
 import Login from "./components/login/Login";
-import Register from "./components/login/Register";
 import { CollectionInfo, ProductInfo } from "./components/data/Product";
 import RequireAuth from "./components/login/RequireAuth";
 
@@ -196,7 +195,6 @@ function App() {
           <Route path="/product" element={<CategoryView />} />
           <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route
             path="/cart"
             element={
