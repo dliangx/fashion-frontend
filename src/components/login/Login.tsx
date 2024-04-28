@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Back, Forward, ForwardArrow } from "../common/Icon";
+import { Back, ForwardArrow } from "../common/Icon";
 import { Logo } from "../common/Logo";
 
 const Login = () => {
