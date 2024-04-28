@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Header from "../common/Header";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Close, Heart, Plus } from "../common/Icon";
+import { Back, Backward, Close, Export, Heart, Plus } from "../common/Icon";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -54,13 +54,14 @@ const ProductDetailView = () => {
   }, [id]);
   return (
     <div>
-      <Header />
+      <div className="flex mt-4">
+        <Back className=" ml-4 " onClick={() => history.go(-1)} />
+        <div className="m-auto" />
+        <Export className="mr-4" />
+        <Heart className="mr-4" />
+      </div>
+
       <div className="m-4">
-        <Close
-          className="absolute top-16 right-4 z-20"
-          color="black"
-          onClick={() => history.go(-1)}
-        />
         {previewType == 1 && <Carousel images={previewPics}></Carousel>}
         {previewType == 2 && (
           <div>
@@ -97,11 +98,9 @@ const ProductDetailView = () => {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14 pt-3 text-white phone-width">
-        <div className="flex">
-          <Plus className="ml-4 mr-4" color="#fff" />
+        <div className="flex  place-content-center">
+          <Plus className="mr-4" color="#fff" />
           ADD TO BASKET
-          <div className="m-auto" />
-          <Heart color="#fff" className="mr-4" />
         </div>
       </div>
     </div>

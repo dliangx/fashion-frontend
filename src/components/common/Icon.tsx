@@ -503,7 +503,7 @@ export const Export = memo((props: SVGProps<SVGSVGElement>) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M17 6L11.5 1L6 6" stroke="#14142B" />
+      <path d="M17 6L11.5 1L6 6" stroke={color} />
       <line
         y1="-0.5"
         x2="13"
