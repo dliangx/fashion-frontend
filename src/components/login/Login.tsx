@@ -18,13 +18,18 @@ const Login = () => {
   const registerRepRef = useRef<HTMLInputElement>(null);
 
   const regexUsername = "^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
-  const regexPassword = "^[a-zA-Z]w{5,17}$";
+  const regexPassword =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,16}$/;
+
+  const usernameRegexNotMatch =
+    "username consists of characters and numbers, and is between 5 and 16 in length";
+  const passwordRegexNotMatch =
+    "password starts with a letter, is between 6~18 in length, and can only contain letters, numbers ";
+  const passwordTwiceNotMatch = "the password entered twice is not the same";
 
   function regex_username_test(username: string) {
     if (username != "" && !username.match(regexUsername)) {
-      setError(
-        "username consists of characters and numbers, and is between 5 and 16 in length "
-      );
+      setError(usernameRegexNotMatch);
     } else {
       setError("");
     }
@@ -32,9 +37,7 @@ const Login = () => {
 
   function regex_password_test(password: string) {
     if (password != "" && !password.match(regexPassword)) {
-      setError(
-        "password starts with a letter, is between 6~18 in length, and can only contain letters, numbers, and underscores "
-      );
+      setError(passwordRegexNotMatch);
     } else {
       setError("");
     }
@@ -42,15 +45,24 @@ const Login = () => {
 
   function handle_login(username: string, password: string) {
     if (username == "") {
-      console.log("please fill username ");
+      setError("please fill username ");
       loginNameRef.current?.focus();
+      return;
+    }
+    if (!username.match(regexUsername)) {
+      setError(usernameRegexNotMatch);
+      loginNameRef.current?.focus();
+      return;
     }
     if (password == "") {
-      console.log("please fill password");
+      setError("please fill password");
       loginPassRef.current?.focus();
+      return;
     }
-    if (error != "") {
-      console.log(error);
+    if (!password.match(regexPassword)) {
+      setError(passwordRegexNotMatch);
+      loginPassRef.current?.focus();
+      return;
     }
   }
 
@@ -60,19 +72,37 @@ const Login = () => {
     passwordRep: string
   ) {
     if (username == "") {
-      console.log("please fill username ");
+      setError("please fill username ");
       registerNameRef.current?.focus();
+      return;
+    }
+    if (!username.match(regexUsername)) {
+      setError(usernameRegexNotMatch);
+      registerNameRef.current?.focus();
+      return;
     }
     if (password == "") {
-      console.log("please fill password");
+      setError("please fill password");
       registerPassRef.current?.focus();
+      return;
+    }
+    if (!password.match(regexPassword)) {
+      setError(passwordRegexNotMatch);
+      registerPassRef.current?.focus();
+      return;
     }
     if (passwordRep == "") {
-      console.log("please fill password");
+      setError(passwordTwiceNotMatch);
       registerRepRef.current?.focus();
+      return;
     }
-    if (error != "") {
-      console.log(error);
+    if (!passwordRep.match(regexPassword)) {
+      setError(passwordRegexNotMatch);
+      registerRepRef.current?.focus();
+      return;
+    }
+    if (password !== passwordRep) {
+      setError(passwordTwiceNotMatch);
     }
   }
 
@@ -88,7 +118,13 @@ const Login = () => {
             className={`w-1/2 mr-2 h-8 ${
               tab == 1 && `border-orange-400 border-2`
             } `}
-            onClick={() => setTab(1)}
+            onClick={() => {
+              setTab(1);
+              setRegisterName("");
+              setRegisterPass("");
+              setRegisterRep("");
+              setError("");
+            }}
           >
             <div className="text-center">LOGIN</div>
           </button>
@@ -96,7 +132,12 @@ const Login = () => {
             className={`w-1/2 ml-2 h-8" ${
               tab == 2 && `border-orange-400 border-2`
             } `}
-            onClick={() => setTab(2)}
+            onClick={() => {
+              setTab(2);
+              setLoginName("");
+              setLoginPass("");
+              setError("");
+            }}
           >
             <div className="text-center ">REGISTER</div>
           </button>
