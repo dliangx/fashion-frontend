@@ -13,10 +13,20 @@ const Login = () => {
       </div>
       <div className="  mt-20 ">
         <div className="flex w-4/5 m-auto  pb-4">
-          <button className="w-1/2 mr-2 h-8" onClick={() => setTab(1)}>
+          <button
+            className={`w-1/2 mr-2 h-8 ${
+              tab == 1 && `border-orange-400 border-2`
+            } `}
+            onClick={() => setTab(1)}
+          >
             <div className="text-center">LOGIN</div>
           </button>
-          <button className="w-1/2 ml-2 h-8" onClick={() => setTab(2)}>
+          <button
+            className={`w-1/2 ml-2 h-8" ${
+              tab == 2 && `border-orange-400 border-2`
+            } `}
+            onClick={() => setTab(2)}
+          >
             <div className="text-center ">REGISTER</div>
           </button>
         </div>
