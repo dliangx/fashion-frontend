@@ -197,14 +197,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetailView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/cart"
-            element={
-              <RequireAuth>
-                <Cart />
-              </RequireAuth>
-            }
-          />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/add_new_address"
             element={
