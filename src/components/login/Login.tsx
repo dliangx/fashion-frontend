@@ -83,7 +83,9 @@ const Login = () => {
       })
       .then((data) => {
         if (!!data) {
-          console.log(data);
+          localStorage.setItem("username", loginName);
+          localStorage.setItem("user_token", data);
+
           history.go(-1);
         }
       })
