@@ -2,14 +2,15 @@ import { useRef, useState } from "react";
 import { Back, ForwardArrow } from "../common/Icon";
 import { Logo } from "../common/Logo";
 
-const Login = () => {
-  const [loginName, setLoginName] = useState("");
-  const [loginPass, setLoginPass] = useState("");
-
+const Register = () => {
+  const [registerName, setRegisterName] = useState("");
+  const [registerPass, setRegisterPass] = useState("");
+  const [registerRep, setRegisterRep] = useState("");
   const [error, setError] = useState("");
 
-  const loginNameRef = useRef<HTMLInputElement>(null);
-  const loginPassRef = useRef<HTMLInputElement>(null);
+  const registerNameRef = useRef<HTMLInputElement>(null);
+  const registerPassRef = useRef<HTMLInputElement>(null);
+  const registerRepRef = useRef<HTMLInputElement>(null);
 
   const regexUsername = "^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
   const regexPassword =
@@ -19,6 +20,7 @@ const Login = () => {
     "username consists of characters and numbers, and is between 5 and 16 in length";
   const passwordRegexNotMatch =
     "password starts with a letter, is between 6~18 in length, and can only contain letters, numbers ";
+  const passwordTwiceNotMatch = "the password entered twice is not the same";
 
   function regex_username_test(username: string) {
     if (username != "" && !username.match(regexUsername)) {
@@ -36,34 +38,54 @@ const Login = () => {
     }
   }
 
-  function handle_login(username: string, password: string) {
+  function handle_register(
+    username: string,
+    password: string,
+    passwordRep: string
+  ) {
     if (username == "") {
       setError("please fill username ");
-      loginNameRef.current?.focus();
-
+      registerNameRef.current?.focus();
       return;
     }
     if (!username.match(regexUsername)) {
       setError(usernameRegexNotMatch);
-      loginNameRef.current?.focus();
+      registerNameRef.current?.focus();
       return;
     }
     if (password == "") {
       setError("please fill password");
-      loginPassRef.current?.focus();
+      registerPassRef.current?.focus();
       return;
     }
     if (!password.match(regexPassword)) {
       setError(passwordRegexNotMatch);
-      loginPassRef.current?.focus();
+      registerPassRef.current?.focus();
       return;
     }
-    login();
+    if (passwordRep == "") {
+      setError(passwordTwiceNotMatch);
+      registerRepRef.current?.focus();
+      return;
+    }
+    if (!passwordRep.match(regexPassword)) {
+      setError(passwordRegexNotMatch);
+      registerRepRef.current?.focus();
+      return;
+    }
+    if (password !== passwordRep) {
+      setError(passwordTwiceNotMatch);
+      return;
+    }
+    register();
   }
 
-  const login = () => {
-    const url = import.meta.env.VITE_API_URL + "/login";
-    const bodyStr = JSON.stringify({ name: loginName, password: loginPass });
+  const register = () => {
+    const url = import.meta.env.VITE_API_URL + "/register";
+    const bodyStr = JSON.stringify({
+      name: registerName,
+      password: registerPass,
+    });
     fetch(url, {
       method: "POST",
       body: bodyStr,
@@ -71,20 +93,13 @@ const Login = () => {
         "content-type": "application/json",
       },
     })
-      .then(async (response) => {
-        const text = response.text();
-        if (response.ok) {
-          return text;
-        } else if (response.status == 400) {
-          console.log(response.status);
-          setError(await text);
-          return;
-        }
-      })
+      .then((response) => response.text())
       .then((data) => {
-        if (!!data) {
-          console.log(data);
+        console.log(data);
+        if (data == "success") {
           history.go(-1);
+        } else {
+          setError(data);
         }
       })
       .catch((error) => {
@@ -99,14 +114,14 @@ const Login = () => {
         <Logo className="h-8 m-auto" />
       </div>
       <div className="  mt-20 ">
-        <div className="w-4/5 m-auto  pb-4">
+        <div className="flex w-4/5 m-auto  pb-4">
           <div
-            className="text-center w-full mr-2 h-12 "
+            className="text-center w-full ml-2 h-8"
             onClick={() => {
               setError("");
             }}
           >
-            LOGIN
+            REGISTER
           </div>
         </div>
 
@@ -114,13 +129,13 @@ const Login = () => {
           <input
             placeholder="username"
             type="text"
-            ref={loginNameRef}
-            value={loginName}
+            ref={registerNameRef}
+            value={registerName}
             onChange={(e) => {
               regex_username_test(e.target.value);
-              setLoginName(e.target.value);
+              setRegisterName(e.target.value);
             }}
-            className="w-4/5  m-auto h-12 mb-4 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
+            className="w-4/5  m-auto h-12 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
             autoFocus
           ></input>
         </div>
@@ -129,17 +144,34 @@ const Login = () => {
             <input
               placeholder="password"
               type="password"
-              ref={loginPassRef}
-              value={loginPass}
+              ref={registerPassRef}
+              value={registerPass}
               onChange={(e) => {
                 regex_password_test(e.target.value);
-                setLoginPass(e.target.value);
+                setRegisterPass(e.target.value);
+              }}
+              className="w-full   m-auto h-12 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
+            ></input>
+          </div>
+        </div>
+        <div className="flex ">
+          <div className=" relative w-4/5   m-auto place-items-end ">
+            <input
+              placeholder="password"
+              type="password"
+              ref={registerRepRef}
+              value={registerRep}
+              onChange={(e) => {
+                regex_password_test(e.target.value);
+                setRegisterRep(e.target.value);
               }}
               className="w-full   m-auto h-12 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
             ></input>
             <ForwardArrow
               className="absolute bottom-2 right-2 z-10 "
-              onClick={() => handle_login(loginName, loginPass)}
+              onClick={() =>
+                handle_register(registerName, registerPass, registerRep)
+              }
             />
           </div>
         </div>
@@ -154,4 +186,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
