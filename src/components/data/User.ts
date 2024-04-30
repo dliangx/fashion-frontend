@@ -1,6 +1,6 @@
 export type User = {
   username: string;
-  userToken: string;
+  user_token: string;
 };
 
 export type Address = {

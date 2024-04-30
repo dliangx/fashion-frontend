@@ -19,7 +19,7 @@ const Login = () => {
 
   const regexUsername = "^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
   const regexPassword =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,16}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,18}$/;
 
   const usernameRegexNotMatch =
     "username consists of characters and numbers, and is between 5 and 16 in length";
@@ -64,6 +64,7 @@ const Login = () => {
       loginPassRef.current?.focus();
       return;
     }
+    login();
   }
 
   function handle_register(
@@ -103,8 +104,67 @@ const Login = () => {
     }
     if (password !== passwordRep) {
       setError(passwordTwiceNotMatch);
+      return;
     }
+    register();
   }
+
+  const login = () => {
+    const url = import.meta.env.VITE_API_URL + "/login";
+    const bodyStr = JSON.stringify({ name: loginName, password: loginPass });
+    fetch(url, {
+      method: "POST",
+      body: bodyStr,
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.text();
+        } else if (response.status == 400) {
+          console.log(response.status);
+          setError("username not found");
+          return;
+        }
+      })
+      .then((data) => {
+        if (!!data) {
+          console.log(data);
+          history.go(-1);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const register = () => {
+    const url = import.meta.env.VITE_API_URL + "/register";
+    const bodyStr = JSON.stringify({
+      name: registerName,
+      password: registerPass,
+    });
+    fetch(url, {
+      method: "POST",
+      body: bodyStr,
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        if (data == "success") {
+          setTab(1);
+        } else {
+          setError(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <>
