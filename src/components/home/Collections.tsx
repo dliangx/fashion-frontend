@@ -11,6 +11,7 @@ const Collections = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let intervalIndex = 0;
     let collectionList: CollectionInfo[] = [];
     if (brandCollections.length == 0) {
       fetch(import.meta.env.VITE_API_URL + "/home_new_collection", {
@@ -33,6 +34,26 @@ const Collections = () => {
           console.error("Error:", error);
         });
     }
+    const interval = setInterval(() => {
+      console.log(intervalIndex);
+      flushSync(() => {
+        if (brandCollections.length > 0) {
+          intervalIndex = (intervalIndex + 1) % brandCollections.length;
+          setIndex(intervalIndex);
+        } else if (collectionList.length > 0) {
+          intervalIndex = (intervalIndex + 1) % collectionList.length;
+          setIndex(intervalIndex);
+        }
+      });
+      if (selectedRef.current) {
+        selectedRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -60,12 +81,12 @@ const Collections = () => {
           EXPLORE COLLECTION
         </button>
       </div>
-      <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-4">
+      <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-1">
         {brandCollections.map((_, i) => (
           <button
             key={i}
-            className={`w-4 h-4 mb-4 rounded-full border-2 ${
-              i === index ? "border-orange-500" : "border-white"
+            className={`w-2 h-2 mb-4 rounded-full border-3 ${
+              i === index ? " bg-black" : "bg-white"
             }`}
             onClick={() => {
               flushSync(() => {

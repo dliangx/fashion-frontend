@@ -25,14 +25,14 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
         carouselRef.current.style.transform = `translateX( ${
           dx - currentIndex * slideWidth
         }px)`;
-        carouselRef.current.style.transition = "transform 0s";
+        carouselRef.current.style.transition = "transform 0.1s";
       }
     }
   };
 
   const dragEnd = () => {
     if (isDragging.current) {
-      const threshold = slideWidth / 3;
+      const threshold = slideWidth / 4;
 
       if (Math.abs(dx) > threshold) {
         if (currentIndex + (dx > 0 ? -1 : 1) > images.length - 1) {
@@ -48,7 +48,7 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
           currentIndex * slideWidth
         }px)`;
       if (carouselRef.current != null)
-        carouselRef.current.style.transition = "transform 0.5s";
+        carouselRef.current.style.transition = "transform 0.5s  ease-in-out ";
     }
     isDragging.current = false;
   };
@@ -75,6 +75,16 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
               className="w-full object-cover"
             />
           </div>
+        ))}
+      </div>
+      <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-1">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 mb-4 rounded-full border-3 ${
+              index === currentIndex ? " bg-black" : " bg-white"
+            }`}
+          ></button>
         ))}
       </div>
     </div>
