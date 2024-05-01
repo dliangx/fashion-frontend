@@ -10,11 +10,6 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
   let dx = 0;
   const slideWidth = carouselRef.current ? carouselRef.current.offsetWidth : 0;
 
-  const goToSlide = (slideIndex: number) => {
-    setCurrentIndex(slideIndex);
-    isDragging.current = false;
-  };
-
   const dragStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (carouselRef.current) {
       touchStartX.current = e.touches[0].clientX;
@@ -27,11 +22,10 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
     if (isDragging.current) {
       dx = e.touches[0].clientX - touchStartX.current;
       if (carouselRef.current != null) {
-        if (dx - currentIndex * slideWidth < 0) {
-          carouselRef.current.style.transform = `translateX( ${
-            dx - currentIndex * slideWidth
-          }px)`;
-        }
+        carouselRef.current.style.transform = `translateX( ${
+          dx - currentIndex * slideWidth
+        }px)`;
+        carouselRef.current.style.transition = "transform 0s";
       }
     }
   };
@@ -41,16 +35,20 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
       const threshold = slideWidth / 3;
 
       if (Math.abs(dx) > threshold) {
-        setCurrentIndex(
-          (prevIndex) => (prevIndex + (dx > 0 ? -1 : 1)) % images.length
-        );
+        if (currentIndex + (dx > 0 ? -1 : 1) > images.length - 1) {
+          setCurrentIndex(images.length - 1);
+        } else if (currentIndex + (dx > 0 ? -1 : 1) < 0) {
+          setCurrentIndex(0);
+        } else {
+          setCurrentIndex(currentIndex + (dx > 0 ? -1 : 1));
+        }
       }
       if (carouselRef.current != null)
         carouselRef.current.style.transform = `translateX(-${
           currentIndex * slideWidth
         }px)`;
       if (carouselRef.current != null)
-        carouselRef.current.style.transition = "transform 0.5s ease-out";
+        carouselRef.current.style.transition = "transform 0.5s";
     }
     isDragging.current = false;
   };
@@ -62,14 +60,14 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
         onTouchStart={dragStart}
         onTouchMove={dragMove}
         onTouchEnd={dragEnd}
-        className="flex transition duration-500 ease-in-out"
+        className="flex "
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((slide, index) => (
           <div
             key={index}
             className="flex-none w-full snap-center"
-            onClick={() => goToSlide((index + 1) % images.length)}
+            onClick={() => {}}
           >
             <img
               src={slide.src}
