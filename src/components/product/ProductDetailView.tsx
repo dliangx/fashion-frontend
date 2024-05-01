@@ -61,7 +61,9 @@ const ProductDetailView = () => {
       </div>
 
       <div className="m-4">
-        {previewType == 1 && <Carousel images={previewPics}></Carousel>}
+        {previewType == 1 && (
+          <Carousel images={previewPics} isListButton={false}></Carousel>
+        )}
         {previewType == 2 && (
           <div>
             <img src={previewPics[previewIndex].src} />

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { ImageSlide } from "../data/Product";
 import Carousel from "../product/Carousel";
 
@@ -17,11 +18,17 @@ const images: ImageSlide[] = [
 ];
 
 const Recommend = () => {
+  const navigate = useNavigate();
   return (
     <div className="grid place-items-center mt-10 mb-8">
       <h1 className="text-center text-xl font-serif">JUST FOR YOU</h1>
       <img src="/assets/underline.svg"></img>
-      <div className="mt-6">
+      <div
+        className="mt-6"
+        onClick={() => {
+          navigate("/product/16");
+        }}
+      >
         <Carousel images={images} isListButton={false} />
       </div>
     </div>
