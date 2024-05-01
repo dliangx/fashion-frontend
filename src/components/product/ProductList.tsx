@@ -29,7 +29,7 @@ const ProductList = (props: ProductInfo) => {
             <div className="">{props.rating} Rating</div>
             <div className="m-auto"></div>
             <div>
-              <Heart className="mr-8 w-4" />
+              <Heart className="mr-8 w-4" color="#ff4700" />
             </div>
           </div>
         </div>
