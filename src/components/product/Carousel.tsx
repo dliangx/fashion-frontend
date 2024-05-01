@@ -2,7 +2,10 @@
 import React, { useState, useRef } from "react";
 import { ImageSlide } from "../data/Product";
 
-const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
+const Carousel: React.FC<{ images: ImageSlide[]; isListButton: boolean }> = ({
+  images,
+  isListButton,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
@@ -77,16 +80,18 @@ const Carousel: React.FC<{ images: ImageSlide[] }> = ({ images }) => {
           </div>
         ))}
       </div>
-      <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-1">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 mb-4 rounded-full border-3 ${
-              index === currentIndex ? " bg-black" : " bg-white"
-            }`}
-          ></button>
-        ))}
-      </div>
+      {isListButton && (
+        <div className=" absolute left-0 bottom-0  w-full flex items-center justify-center space-x-1">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 mb-4 rounded-full border-3 ${
+                index === currentIndex ? " bg-black" : " bg-white"
+              }`}
+            ></button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

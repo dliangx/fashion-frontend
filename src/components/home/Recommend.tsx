@@ -22,7 +22,7 @@ const Recommend = () => {
       <h1 className="text-center text-xl font-serif">JUST FOR YOU</h1>
       <img src="/assets/underline.svg"></img>
       <div className="mt-6">
-        <Carousel images={images} />
+        <Carousel images={images} isListButton={false} />
       </div>
     </div>
   );

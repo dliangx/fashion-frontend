@@ -20,7 +20,7 @@ import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView from "./components/product/CategoryView";
 import Login from "./components/login/Login";
-import { CollectionInfo, ProductInfo } from "./components/data/Product";
+import { ImageSlide, ProductInfo } from "./components/data/Product";
 import RequireAuth from "./components/login/RequireAuth";
 import Register from "./components/login/Register";
 
@@ -29,7 +29,7 @@ type AppContextType = {
   category: Category[];
   collapseMap: Map<number, boolean>;
   setCollapseMap: any;
-  brandCollections: CollectionInfo[];
+  brandCollections: ImageSlide[];
   setBrandCollections: any;
   newProducts: ProductInfo[];
   setNewProducts: any;
@@ -60,9 +60,7 @@ function App() {
   const [collapseMap, setCollapseMap] = useState<Map<number, boolean>>(
     new Map()
   );
-  const [brandCollections, setBrandCollections] = useState<CollectionInfo[]>(
-    []
-  );
+  const [brandCollections, setBrandCollections] = useState<ImageSlide[]>([]);
   const [newProducts, setNewProducts] = useState<ProductInfo[]>([]);
   const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
   const [tabIndex, setTabIndex] = useState<number>(1);
