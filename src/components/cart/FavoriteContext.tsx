@@ -30,7 +30,7 @@ const cartReducer = (
   }
 };
 
-export const FavoriteProvider = (children: ReactNode) => {
+export const FavoriteProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, initialFavoriteState);
 
   return (

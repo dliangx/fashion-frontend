@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useReducer } from "react";
 import { CartItem } from "../data/Cart";
+import { FavoriteProvider } from "./FavoriteContext";
 
 type CartState = {
   items: CartItem[];
@@ -37,12 +38,12 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-export const CartProvider = (children: ReactNode) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
 
   return (
     <CartContext.Provider value={{ ...state, ...dispatch }}>
-      {children}
+      <FavoriteProvider>{children}</FavoriteProvider>
     </CartContext.Provider>
   );
 };
