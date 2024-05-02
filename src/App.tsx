@@ -66,7 +66,6 @@ function App() {
   const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
   const [tabIndex, setTabIndex] = useState<number>(1);
 
-  const [error, setError] = useState(null);
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
     const eleMap = new Map();
@@ -109,7 +108,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "/get_categorys", {
+    fetch(import.meta.env.VITE_API_URL + "/get_category", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -143,7 +142,6 @@ function App() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        setError(error.message);
       });
   }, []);
 
