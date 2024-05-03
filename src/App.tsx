@@ -37,6 +37,8 @@ type AppContextType = {
   setRecommendProducts: any;
   tabIndex: number;
   setTabIndex: any;
+  products: ProductInfo[];
+  setProducts: any;
 };
 
 const AppContext = createContext<AppContextType>({
@@ -52,6 +54,8 @@ const AppContext = createContext<AppContextType>({
   setRecommendProducts: null,
   tabIndex: 0,
   setTabIndex: null,
+  products: [],
+  setProducts: null,
 });
 
 function App() {
@@ -64,6 +68,7 @@ function App() {
   const [newProducts, setNewProducts] = useState<ProductInfo[]>([]);
   const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
   const [tabIndex, setTabIndex] = useState<number>(1);
+  const [products, setProducts] = useState<ProductInfo[]>([]);
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -175,6 +180,8 @@ function App() {
         setRecommendProducts,
         tabIndex,
         setTabIndex,
+        products,
+        setProducts,
       }}
     >
       <CartProvider>

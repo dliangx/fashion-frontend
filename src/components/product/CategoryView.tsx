@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { ProductInfo } from "../data/Product";
+import { useContext, useEffect, useState } from "react";
 import Products from "./Products";
 import { useLocation } from "react-router-dom";
 import Header from "../common/Header";
 import { Down, Filter, Gallery, GridView, ListView, Up } from "../common/Icon";
 import Footer from "../common/Footer";
+import { AppContext } from "../../App";
 
 const CategoryView = () => {
-  const [products, setProducts] = useState<ProductInfo[]>([]);
+  const { products, setProducts } = useContext(AppContext);
   const [viewOption, setViewOption] = useState<number>(1);
   const [newOption, setNewOption] = useState<boolean>(true);
   const location = useLocation();
@@ -22,6 +22,9 @@ const CategoryView = () => {
     } else {
       bodyStr = JSON.stringify({ start: 0, num: 10 });
       url = "/get_product_by_page";
+      if (products.length > 0) {
+        return;
+      }
     }
     fetch(import.meta.env.VITE_API_URL + url, {
       method: "POST",
