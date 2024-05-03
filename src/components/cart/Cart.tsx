@@ -27,7 +27,7 @@ const Cart = () => {
             setTabIndex(0);
           }}
         >
-          CART(0)
+          CART({state.items.length})
         </div>
         <div
           className={`flex w-1/2 h-8 place-content-center   place-items-center  border-r-0  border 
@@ -88,7 +88,6 @@ const Cart = () => {
           CONTINUE SHOPPING
         </div>
       </div>
-      <div className="h-16" />
     </div>
   );
 };
