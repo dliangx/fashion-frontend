@@ -53,7 +53,7 @@ const Cart = () => {
           return (
             <>
               <CartItemView
-                id={0}
+                id={item.id}
                 pic={item.pic}
                 brand={item.brand}
                 name={item.name}
