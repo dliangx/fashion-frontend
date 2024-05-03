@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductDetail, Picture, ImageSlide } from "../data/Product";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
 import { Back, Export, Heart, Plus } from "../common/Icon";
+import { CartContext } from "../cart/CartContext";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -12,6 +13,7 @@ const ProductDetailView = () => {
   const [previewPics, setPreviewPics] = useState<ImageSlide[]>([]);
   const [galleryPics, setGalleryPics] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState(1);
+  const { dispatch } = useContext(CartContext);
 
   useEffect(() => {
     let preview_type = 1;
@@ -98,7 +100,26 @@ const ProductDetailView = () => {
         })}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  place-content-center text-white phone-width">
+      <div
+        className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  
+      place-content-center text-white phone-width"
+        onClick={() => {
+          dispatch != null &&
+            detail != undefined &&
+            dispatch({
+              type: "ADD",
+              payload: {
+                id: detail?.info.id,
+                pic: detail?.info.pic,
+                brand: detail?.info.brand,
+                name: detail?.info.name,
+                price: detail?.info.price,
+                num: 0,
+                attr: [],
+              },
+            });
+        }}
+      >
         <div className="flex  place-content-center">
           <Plus className="mr-4" color="#fff" />
           ADD TO BASKET

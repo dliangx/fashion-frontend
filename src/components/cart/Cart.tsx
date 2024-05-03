@@ -42,7 +42,7 @@ const Cart = () => {
           <Heart className="h-4" />
         </div>
       </div>
-      {tabIndex == 0 && (
+      {tabIndex == 0 && state.items.length == 0 && (
         <div className="grid  place-items-center mt-24">
           <div>You Shopping Bag Is Empty.</div>
         </div>
