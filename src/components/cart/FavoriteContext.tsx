@@ -9,17 +9,32 @@ type FavoriteAction = {
   payload: FavoriteItem;
 };
 
+type FavoriteContextType = {
+  state: FavoriteState;
+  dispatch: null | React.Dispatch<FavoriteAction>;
+};
+
 const initialFavoriteState: FavoriteState = { items: [] };
 
-export const FavoriteContext = createContext<FavoriteState | null>(null);
+export const FavoriteContext = createContext<FavoriteContextType>({
+  dispatch: null,
+  state: {
+    items: [],
+  },
+});
 
-const cartReducer = (
+const favoriteReducer = (
   state: FavoriteState,
   action: FavoriteAction
 ): FavoriteState => {
   switch (action.type) {
     case "ADD":
-      state.items.push(action.payload);
+      const itemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (itemIndex < 0) {
+        state.items.push(action.payload);
+      }
       return state;
     case "REMOVE":
       return {
@@ -31,10 +46,10 @@ const cartReducer = (
 };
 
 export const FavoriteProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialFavoriteState);
+  const [state, dispatch] = useReducer(favoriteReducer, initialFavoriteState);
 
   return (
-    <FavoriteContext.Provider value={{ ...state, ...dispatch }}>
+    <FavoriteContext.Provider value={{ state, dispatch }}>
       {children}
     </FavoriteContext.Provider>
   );

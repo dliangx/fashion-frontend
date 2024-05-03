@@ -22,6 +22,7 @@ import { ImageSlide, ProductInfo } from "./components/data/Product";
 import RequireAuth from "./components/login/RequireAuth";
 import Register from "./components/login/Register";
 import { CartProvider } from "./components/cart/CartContext";
+import { FavoriteProvider } from "./components/cart/FavoriteContext";
 
 type AppContextType = {
   theme: string;
@@ -177,48 +178,50 @@ function App() {
       }}
     >
       <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/our_story" element={<OurStory />} />
-            <Route path="/contact_us" element={<ContactUs />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/search/:context" element={<SearchView />} />
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/collection/:id" element={<CollectionDetail />} />
-            <Route path="/product" element={<CategoryView />} />
-            <Route path="/product/:id" element={<ProductDetailView />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route
-              path="/add_new_address"
-              element={
-                <RequireAuth>
-                  <AddNewAddress />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/add_new_card"
-              element={
-                <RequireAuth>
-                  <AddNewCard />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/checkout"
-              element={
-                <RequireAuth>
-                  <Checkout />
-                </RequireAuth>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <FavoriteProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/our_story" element={<OurStory />} />
+              <Route path="/contact_us" element={<ContactUs />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/search/:context" element={<SearchView />} />
+              <Route path="/collection" element={<Collection />} />
+              <Route path="/collection/:id" element={<CollectionDetail />} />
+              <Route path="/product" element={<CategoryView />} />
+              <Route path="/product/:id" element={<ProductDetailView />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/add_new_address"
+                element={
+                  <RequireAuth>
+                    <AddNewAddress />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/add_new_card"
+                element={
+                  <RequireAuth>
+                    <AddNewCard />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <RequireAuth>
+                    <Checkout />
+                  </RequireAuth>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </FavoriteProvider>
       </CartProvider>
     </AppContext.Provider>
   );
