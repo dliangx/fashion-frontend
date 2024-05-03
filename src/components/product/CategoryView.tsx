@@ -5,13 +5,25 @@ import Header from "../common/Header";
 import { Down, Filter, Gallery, GridView, ListView, Up } from "../common/Icon";
 import Footer from "../common/Footer";
 import { AppContext } from "../../App";
+import { Page } from "../data/Product";
+import { CategoryResp } from "../data/Category";
+
+export type CategorySearchParam = {
+  category: CategoryResp;
+  search: string;
+  page: Page;
+};
 
 const CategoryView = () => {
   const { products, setProducts } = useContext(AppContext);
+  const { categorySearchParam, setCategorySearchParam } =
+    useContext(AppContext);
   const [viewOption, setViewOption] = useState<number>(1);
   const [newOption, setNewOption] = useState<boolean>(true);
   const location = useLocation();
   const category = location.state?.category;
+  const search = location.state?.search;
+  const page: Page = location.state?.page;
 
   useEffect(() => {
     let bodyStr = "";
@@ -19,13 +31,55 @@ const CategoryView = () => {
     if (category != undefined) {
       bodyStr = JSON.stringify(category);
       url = "/get_product_by_category";
+      if (
+        products.length > 0 &&
+        categorySearchParam?.category != undefined &&
+        categorySearchParam?.category.id === category.id &&
+        categorySearchParam?.category.level === category.level &&
+        categorySearchParam?.category.name === category.name &&
+        categorySearchParam?.category.parent_id === category.parent_id
+      ) {
+        return;
+      } else {
+        setCategorySearchParam({ category: category });
+      }
+    } else if (search != undefined) {
+      bodyStr = JSON.stringify(search);
+      url = "/get_product_by_search";
+      if (products.length > 0 && categorySearchParam?.search === search) {
+        return;
+      } else {
+        setCategorySearchParam({ search: search });
+      }
+    } else if (page != undefined) {
+      bodyStr = JSON.stringify({ start: 0, num: 10 });
+      url = "/get_product_by_page";
+      if (
+        products.length > 0 &&
+        categorySearchParam?.page != undefined &&
+        categorySearchParam?.page.num == page.num &&
+        categorySearchParam?.page.start == page.start
+      ) {
+        return;
+      } else {
+        setCategorySearchParam({ page: page });
+      }
     } else {
       bodyStr = JSON.stringify({ start: 0, num: 10 });
       url = "/get_product_by_page";
-      if (products.length > 0) {
+      const initPage = { num: 10, start: 0 };
+      if (
+        products.length > 0 &&
+        categorySearchParam?.page != undefined &&
+        categorySearchParam?.page.num == initPage.num &&
+        categorySearchParam?.page.start == initPage.start
+      ) {
         return;
+      } else {
+        setCategorySearchParam({ page: initPage });
       }
     }
+
     fetch(import.meta.env.VITE_API_URL + url, {
       method: "POST",
       body: bodyStr,

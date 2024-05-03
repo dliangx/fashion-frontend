@@ -4,16 +4,17 @@ import { AppContext } from "../../App";
 
 const Footer = () => {
   const { tabIndex, setTabIndex } = useContext(AppContext);
+
   return (
     <div className="fixed bottom-0 left-0 right-0  h-16 pt-2 text-center bg-black text-white  border-none phone-width  ">
       <div className="flex">
-        <div
-          className="w-1/4 grid place-items-center"
-          onClick={() => {
-            setTabIndex(1);
-          }}
-        >
-          <Link to="/">
+        <div className="w-1/4 grid place-items-center">
+          <Link
+            to="/"
+            onClick={() => {
+              setTabIndex(1);
+            }}
+          >
             <div className="h-6 text-bottom">HOME</div>
           </Link>
           <div className="h-12">
@@ -42,13 +43,13 @@ const Footer = () => {
             {2 === tabIndex && <img src="/assets/rect.svg" />}
           </div>
         </div>
-        <div
-          className="w-1/4 grid place-items-center"
-          onClick={() => {
-            setTabIndex(4);
-          }}
-        >
-          <Link to="/our_story">
+        <div className="w-1/4 grid place-items-center">
+          <Link
+            to="/our_story"
+            onClick={() => {
+              setTabIndex(4);
+            }}
+          >
             <div className="h-6 ">MY</div>
           </Link>
           <div className="h-12">

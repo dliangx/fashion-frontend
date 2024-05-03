@@ -16,7 +16,9 @@ import AddNewAddress from "./components/order/AddNewAddress";
 import AddNewCard from "./components/order/AddNewCard";
 import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
-import CategoryView from "./components/product/CategoryView";
+import CategoryView, {
+  CategorySearchParam,
+} from "./components/product/CategoryView";
 import Login from "./components/login/Login";
 import { ImageSlide, ProductInfo } from "./components/data/Product";
 import RequireAuth from "./components/login/RequireAuth";
@@ -39,6 +41,8 @@ type AppContextType = {
   setTabIndex: any;
   products: ProductInfo[];
   setProducts: any;
+  categorySearchParam: CategorySearchParam | null;
+  setCategorySearchParam: any;
 };
 
 const AppContext = createContext<AppContextType>({
@@ -56,6 +60,8 @@ const AppContext = createContext<AppContextType>({
   setTabIndex: null,
   products: [],
   setProducts: null,
+  categorySearchParam: null,
+  setCategorySearchParam: null,
 });
 
 function App() {
@@ -69,6 +75,7 @@ function App() {
   const [recommendProducts, setRecommendProducts] = useState<ProductInfo[]>([]);
   const [tabIndex, setTabIndex] = useState<number>(1);
   const [products, setProducts] = useState<ProductInfo[]>([]);
+  const [categorySearchParam, setCategorySearchParam] = useState(null);
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -182,6 +189,8 @@ function App() {
         setTabIndex,
         products,
         setProducts,
+        categorySearchParam,
+        setCategorySearchParam,
       }}
     >
       <CartProvider>
