@@ -14,7 +14,7 @@ const Cart = () => {
   const favoriteState = favoriteContext.state;
 
   return (
-    <div className="">
+    <div className="h-full">
       <Close className="m-2" onClick={() => history.go(-1)} />
 
       <div className="flex mt-4 place-items-center  ">
@@ -82,10 +82,7 @@ const Cart = () => {
           );
         })}
 
-      <div
-        className="fixed bottom-0 left-0 right-0 bg-black 
-      text-color=#fff h-14  text-center text-white phone-width place-content-center"
-      >
+      <div className="fixed bottom-0 left-0 right-0  h-14 text-center bg-black text-white  border-none phone-width   place-content-center ">
         <div className="flex place-content-center ">
           <ShoppingBag className="mr-4" color="#fff" />
           CONTINUE SHOPPING

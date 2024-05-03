@@ -98,7 +98,7 @@ const ProductDetailView = () => {
         })}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14 pt-3 text-white phone-width">
+      <div className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  place-content-center text-white phone-width">
         <div className="flex  place-content-center">
           <Plus className="mr-4" color="#fff" />
           ADD TO BASKET

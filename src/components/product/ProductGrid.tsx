@@ -3,10 +3,12 @@ import { ProductInfo } from "../data/Product";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "../common/Icon";
+import { FavoriteContext } from "../cart/FavoriteContext";
 
 const ProductGrid = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
+  const { dispatch } = useContext(FavoriteContext);
   return (
     <div className="grid  m-2">
       <div className="relative">
@@ -19,7 +21,23 @@ const ProductGrid = (props: ProductInfo) => {
           }}
         />
 
-        <Heart className="absolute right-2 bottom-2 h-4 " color="#ff4700" />
+        <Heart
+          className="absolute right-2 bottom-2 h-4 "
+          color="#ff4700"
+          onClick={() => {
+            dispatch != null &&
+              dispatch({
+                type: "ADD",
+                payload: {
+                  id: props.id,
+                  pic: props.pic,
+                  brand: props.brand,
+                  name: props.name,
+                  price: props.price,
+                },
+              });
+          }}
+        />
       </div>
       <div className="font-serif text-lg">{props.brand}</div>
       <div className="font-sans">{props.name}</div>
