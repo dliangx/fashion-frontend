@@ -47,7 +47,7 @@ const ProductAttribute = (props: AttributeProps) => {
                     {attr.name == "Color" && (
                       <>
                         <button
-                          className={`w-4 h-4  rounded-full border-2  
+                          className={`w-4 h-4  rounded-full border  
                             ${value === "black" ? " bg-black" : "bg-black"} 
                             ${
                               value === "orange" ? " bg-orange-500" : "bg-black"
@@ -60,7 +60,7 @@ const ProductAttribute = (props: AttributeProps) => {
                       </>
                     )}
                     {attr.name != "Color" && (
-                      <button className="w-5 h-5  rounded-full border-2 text-xs  align-text-top">
+                      <button className="w-5 h-5  rounded-full border text-xs  align-text-top">
                         {value}
                       </button>
                     )}

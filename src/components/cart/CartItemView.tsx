@@ -23,13 +23,14 @@ const CartItemView = (props: CartItem) => {
         <div className="h32 w-3/4 ml-2">
           <div className="font-mono text-xl  mt-4">{props.brand}</div>
           <div className="font-sans">{props.name}</div>
-          <div>
-            <button className="w-6 h-6 mr-2 rounded-full border text-xs  align-text-top justify-center">
-              <MINUS className="w-3" />
+          <div className="flex mt-2 mb-2">
+            <button className="mr-2 rounded-full border   place-content-center ">
+              <MINUS />
             </button>
-            {props.num}
-            <button className="w-6 h-6 ml-2 rounded-full border text-xs  align-text-top">
-              <Plus className="h-4" />
+            <div className=" align-middle">{props.num}</div>
+
+            <button className="ml-2 rounded-full border">
+              <Plus />
             </button>
           </div>
           <div className="font-sans text-orange-500">${props.price}</div>

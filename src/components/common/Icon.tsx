@@ -92,13 +92,14 @@ export const MINUS = memo((props: SVGProps<SVGSVGElement>) => {
   const color = props.color !== undefined ? props.color : theme_color;
   return (
     <svg
-      width="18"
-      height="2"
-      viewBox="0 0 18 2"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
-      <path d="M0 1L18 1" stroke={color} />
+      <path d="M3 12L21 12" stroke={color} />
     </svg>
   );
 });
