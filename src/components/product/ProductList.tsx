@@ -3,10 +3,12 @@ import { Heart } from "../common/Icon";
 import { ProductInfo } from "../data/Product";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { FavoriteContext } from "../cart/FavoriteContext";
 
 const ProductList = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
+  const { dispatch } = useContext(FavoriteContext);
   return (
     <>
       <div className="flex w-full m-2">
@@ -29,7 +31,27 @@ const ProductList = (props: ProductInfo) => {
             <div className="">{props.rating} Rating</div>
             <div className="m-auto"></div>
             <div>
-              <Heart className="mr-8 w-4" color="#ff4700" />
+              <Heart
+                className="mr-8 w-4"
+                color="#ff4700"
+                onClick={() => {
+                  if (localStorage.getItem("user_token") == undefined) {
+                    navigate("/login");
+                    return;
+                  }
+                  dispatch != null &&
+                    dispatch({
+                      type: "ADD",
+                      payload: {
+                        id: props.id,
+                        pic: props.pic,
+                        brand: props.brand,
+                        name: props.name,
+                        price: props.price,
+                      },
+                    });
+                }}
+              />
             </div>
           </div>
         </div>

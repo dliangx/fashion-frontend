@@ -9,6 +9,7 @@ const ProductGrid = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
   const { dispatch } = useContext(FavoriteContext);
+
   return (
     <div className="grid  m-2">
       <div className="relative">
@@ -25,6 +26,10 @@ const ProductGrid = (props: ProductInfo) => {
           className="absolute right-2 bottom-2 h-4 "
           color="#ff4700"
           onClick={() => {
+            if (localStorage.getItem("user_token") == undefined) {
+              navigate("/login");
+              return;
+            }
             dispatch != null &&
               dispatch({
                 type: "ADD",

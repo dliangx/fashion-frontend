@@ -67,6 +67,7 @@ const Cart = () => {
         })}
 
       {tabIndex == 1 &&
+        localStorage.getItem("user_token") != undefined &&
         favoriteState.items.map((item, index) => {
           return (
             <>
