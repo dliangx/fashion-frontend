@@ -36,7 +36,7 @@ const Cart = () => {
         </div>
       </div>
       {tabIndex == 0 && (
-        <div className="grid place-items-center min-h-screen pb-12">
+        <div className="grid  place-items-center mt-24">
           <div>You Shopping Bag Is Empty.</div>
         </div>
       )}
