@@ -5,7 +5,6 @@ import { AppContext } from "../../App";
 const Cart = () => {
   const { theme } = useContext(AppContext);
   const [tabIndex, setTabIndex] = useState(0);
-  const [num, setNum] = useState(0);
 
   return (
     <div className="h-full">
@@ -17,20 +16,26 @@ const Cart = () => {
           ${theme === "dark" ? "border-white " : "border-black"}
           ${tabIndex == 0 ? "text-lg " : "text-sm"}
           `}
+          onClick={() => {
+            setTabIndex(0);
+          }}
         >
-          CART({num})
+          CART(0)
         </div>
         <div
           className={`flex w-1/2 h-8 place-content-center   place-items-center  border-r-0  border 
           ${theme === "dark" ? "border-white " : "border-black"}
           ${tabIndex == 1 ? "text-lg" : "text-sm"}
           `}
+          onClick={() => {
+            setTabIndex(1);
+          }}
         >
           FAVORITE
           <Heart className="h-4" />
         </div>
       </div>
-      {tabIndex == 0 && num == 0 && (
+      {tabIndex == 0 && (
         <div className="grid place-items-center min-h-screen pb-12">
           <div>You Shopping Bag Is Empty.</div>
         </div>

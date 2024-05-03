@@ -8,12 +8,13 @@ const OurStory = () => {
   const isUserLoggedIn = () => {
     return !!localStorage.getItem("user_token");
   };
+  const username = localStorage.getItem("username");
   return (
     <>
       <Header />
       {!isUserLoggedIn() && (
         <div>
-          <div className="h-10 mt-20 font-sans  text-xl  text-center">
+          <div className="h-10 mt-20  text-xl  text-center">
             Welcome to your account
           </div>
           <div>
@@ -38,8 +39,8 @@ const OurStory = () => {
       )}
       {isUserLoggedIn() && (
         <div>
-          <div className="h-10 mt-20 font-sans  text-xl  text-center">
-            CONTACT ME
+          <div className="h-10 mt-20  text-xl  text-center">
+            Welcome,{username}
           </div>
         </div>
       )}

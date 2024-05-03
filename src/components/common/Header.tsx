@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MenuIcon, SearchIcon, ShoppingBag } from "./Icon";
+import { MenuIcon, SearchIcon } from "./Icon";
 import { Logo } from "./Logo";
 
 const Header = () => {
