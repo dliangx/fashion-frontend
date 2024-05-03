@@ -15,9 +15,6 @@ const Header = () => {
       <Link to="/search">
         <SearchIcon className="mr-4" />
       </Link>
-      <Link to="/cart">
-        <ShoppingBag className="mr-4" />
-      </Link>
     </div>
   );
 };

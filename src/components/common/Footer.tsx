@@ -20,25 +20,8 @@ const Footer = () => {
             {1 === tabIndex && <img src="/assets/rect.svg" />}
           </div>
         </div>
-        <div
-          className="w-1/4 grid place-items-center"
-          onClick={() => {
-            setTabIndex(2);
-          }}
-        >
-          <Link to="/blog">
-            <div className="h-6 ">EXPLORE</div>
-          </Link>
-          <div className="h-10">
-            {2 === tabIndex && <img src="/assets/rect.svg" />}
-          </div>
-        </div>
-        <div
-          className="w-1/4 grid place-items-center"
-          onClick={() => {
-            setTabIndex(3);
-          }}
-        >
+
+        <div className="w-1/4 grid place-items-center">
           <Link
             to="/product"
             onClick={() => {
@@ -49,6 +32,14 @@ const Footer = () => {
           </Link>
           <div className="h-10">
             {3 === tabIndex && <img src="/assets/rect.svg" />}
+          </div>
+        </div>
+        <div className="w-1/4 grid place-items-center">
+          <Link to="/cart">
+            <div className="h-6 ">CART</div>
+          </Link>
+          <div className="h-10">
+            {2 === tabIndex && <img src="/assets/rect.svg" />}
           </div>
         </div>
         <div
