@@ -86,6 +86,23 @@ export const ShoppingBag = memo((props: SVGProps<SVGSVGElement>) => {
   );
 });
 
+export const MINUS = memo((props: SVGProps<SVGSVGElement>) => {
+  const { theme } = useContext(AppContext);
+  const theme_color = theme === "dark" ? "white" : "black";
+  const color = props.color !== undefined ? props.color : theme_color;
+  return (
+    <svg
+      width="18"
+      height="2"
+      viewBox="0 0 18 2"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 1L18 1" stroke={color} />
+    </svg>
+  );
+});
+
 export const Plus = memo((props: SVGProps<SVGSVGElement>) => {
   const { theme } = useContext(AppContext);
   const theme_color = theme === "dark" ? "white" : "black";
