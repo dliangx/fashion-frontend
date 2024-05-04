@@ -134,6 +134,7 @@ const CategoryView = () => {
         </button>
       </div>
       <Products products={products} option={viewOption}></Products>
+      <div className="h-16" />
       <Footer></Footer>
     </>
   );

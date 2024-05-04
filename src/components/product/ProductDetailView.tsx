@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductDetail, Picture, ImageSlide } from "../data/Product";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Back, Export, Heart, Plus } from "../common/Icon";
+import { Back, Export, Heart, Plus, ShoppingBag } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
 
 const ProductDetailView = () => {
@@ -13,7 +13,9 @@ const ProductDetailView = () => {
   const [previewPics, setPreviewPics] = useState<ImageSlide[]>([]);
   const [galleryPics, setGalleryPics] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState(1);
-  const { dispatch } = useContext(CartContext);
+
+  const { state, dispatch } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let preview_type = 1;
@@ -121,8 +123,18 @@ const ProductDetailView = () => {
         }}
       >
         <div className="flex  place-content-center">
-          <Plus className="mr-4" color="#fff" />
+          <Plus className="mr-4 ml-4" color="#fff" />
           ADD TO BASKET
+          <div className="m-auto" />
+          {/* <ShoppingBag color="#fff" /> */}
+          <div
+            className="mr-4   place-content-start"
+            onClick={() => {
+              navigate("/cart");
+            }}
+          >
+            CART({state.items.length})
+          </div>
         </div>
       </div>
     </div>
