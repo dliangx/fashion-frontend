@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Heart } from "../common/Icon";
 import { ProductInfo } from "../data/Product";
 import { AppContext } from "../../App";
@@ -9,6 +9,15 @@ const ProductList = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
   const { dispatch } = useContext(FavoriteContext);
+  const favoriteContext = useContext(FavoriteContext);
+  const favoriteState = favoriteContext.state;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const itemIndex = favoriteState.items.findIndex(
+    (item) => item.id === props.id
+  );
+  useEffect(() => {
+    setIsFavorite(itemIndex >= 0 ? true : false);
+  }, []);
   return (
     <>
       <div className="flex w-full m-2">
@@ -34,22 +43,40 @@ const ProductList = (props: ProductInfo) => {
               <Heart
                 className="mr-8 w-4"
                 color="#ff4700"
+                fill={isFavorite ? "#ff4700" : "none"}
                 onClick={() => {
                   if (localStorage.getItem("user_token") == undefined) {
                     navigate("/login");
+
                     return;
                   }
-                  dispatch != null &&
-                    dispatch({
-                      type: "ADD",
-                      payload: {
-                        id: props.id,
-                        pic: props.pic,
-                        brand: props.brand,
-                        name: props.name,
-                        price: props.price,
-                      },
-                    });
+                  if (itemIndex >= 0) {
+                    dispatch != null &&
+                      dispatch({
+                        type: "REMOVE",
+                        payload: {
+                          id: props.id,
+                          pic: props.pic,
+                          brand: props.brand,
+                          name: props.name,
+                          price: props.price,
+                        },
+                      });
+                    setIsFavorite(false);
+                  } else {
+                    dispatch != null &&
+                      dispatch({
+                        type: "ADD",
+                        payload: {
+                          id: props.id,
+                          pic: props.pic,
+                          brand: props.brand,
+                          name: props.name,
+                          price: props.price,
+                        },
+                      });
+                    setIsFavorite(true);
+                  }
                 }}
               />
             </div>

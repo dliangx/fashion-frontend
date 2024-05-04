@@ -49,7 +49,7 @@ const Cart = () => {
       )}
 
       {tabIndex == 0 &&
-        state.items.map((item, index) => {
+        state.items.map((item) => {
           return (
             <>
               <CartItemView
@@ -60,7 +60,7 @@ const Cart = () => {
                 num={item.num}
                 price={item.price}
                 attr={item.attr}
-                key={index.toString()}
+                key={item.id.toString()}
               />
             </>
           );
@@ -68,7 +68,7 @@ const Cart = () => {
 
       {tabIndex == 1 &&
         localStorage.getItem("user_token") != undefined &&
-        favoriteState.items.map((item, index) => {
+        favoriteState.items.map((item) => {
           return (
             <>
               <FavoriteItemView
@@ -77,7 +77,7 @@ const Cart = () => {
                 brand={item.brand}
                 name={item.name}
                 price={item.price}
-                key={index}
+                key={item.id.toString()}
               />
             </>
           );

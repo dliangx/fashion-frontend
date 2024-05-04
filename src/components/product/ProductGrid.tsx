@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductInfo } from "../data/Product";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,15 @@ const ProductGrid = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
   const { dispatch } = useContext(FavoriteContext);
+  const favoriteContext = useContext(FavoriteContext);
+  const favoriteState = favoriteContext.state;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const itemIndex = favoriteState.items.findIndex(
+    (item) => item.id === props.id
+  );
+  useEffect(() => {
+    setIsFavorite(itemIndex >= 0 ? true : false);
+  }, []);
 
   return (
     <div className="grid  m-2">
@@ -25,22 +34,40 @@ const ProductGrid = (props: ProductInfo) => {
         <Heart
           className="absolute right-2 bottom-2 h-4 "
           color="#ff4700"
+          fill={isFavorite ? "#ff4700" : "none"}
           onClick={() => {
             if (localStorage.getItem("user_token") == undefined) {
               navigate("/login");
+
               return;
             }
-            dispatch != null &&
-              dispatch({
-                type: "ADD",
-                payload: {
-                  id: props.id,
-                  pic: props.pic,
-                  brand: props.brand,
-                  name: props.name,
-                  price: props.price,
-                },
-              });
+            if (itemIndex >= 0) {
+              dispatch != null &&
+                dispatch({
+                  type: "REMOVE",
+                  payload: {
+                    id: props.id,
+                    pic: props.pic,
+                    brand: props.brand,
+                    name: props.name,
+                    price: props.price,
+                  },
+                });
+              setIsFavorite(false);
+            } else {
+              dispatch != null &&
+                dispatch({
+                  type: "ADD",
+                  payload: {
+                    id: props.id,
+                    pic: props.pic,
+                    brand: props.brand,
+                    name: props.name,
+                    price: props.price,
+                  },
+                });
+              setIsFavorite(true);
+            }
           }}
         />
       </div>
