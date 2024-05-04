@@ -3,7 +3,7 @@ import { ProductDetail, Picture, ImageSlide } from "../data/Product";
 import { useNavigate, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Back, Export, Heart, Plus, ShoppingBag } from "../common/Icon";
+import { Back, Export, Heart, Plus } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
 
 const ProductDetailView = () => {
