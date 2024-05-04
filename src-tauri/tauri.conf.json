@@ -11,8 +11,8 @@
   "app": {"windows": [
       {
         "title": "fashion-frontend",
-        "width": 800,
-        "height": 600
+        "width": 430,
+        "height": 932
       }
     ],
     "security": {
