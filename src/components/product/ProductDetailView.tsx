@@ -5,6 +5,7 @@ import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
 import { Back, Export, Heart, Plus } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
+import { FavoriteContext } from "../cart/FavoriteContext";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -16,6 +17,17 @@ const ProductDetailView = () => {
 
   const { state, dispatch } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const favoriteContext = useContext(FavoriteContext);
+  const favoriteState = favoriteContext.state;
+  const favoriteDispatch = favoriteContext.dispatch;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const itemIndex = favoriteState.items.findIndex(
+    (item) => item.id === Number(id)
+  );
+  useEffect(() => {
+    setIsFavorite(itemIndex >= 0 ? true : false);
+  }, []);
 
   useEffect(() => {
     let preview_type = 1;
@@ -61,7 +73,45 @@ const ProductDetailView = () => {
         <Back className=" ml-4 " onClick={() => history.go(-1)} />
         <div className="m-auto" />
         <Export className="mr-4" />
-        <Heart className="mr-4" />
+        <Heart
+          className="mr-4"
+          color="#ff4700"
+          fill={isFavorite ? "#ff4700" : "none"}
+          onClick={() => {
+            if (localStorage.getItem("user_token") == undefined) {
+              navigate("/login");
+
+              return;
+            }
+            if (itemIndex >= 0) {
+              favoriteDispatch != null &&
+                favoriteDispatch({
+                  type: "REMOVE",
+                  payload: {
+                    id: detail?.info != undefined ? detail?.info.id : 0,
+                    pic: detail?.info != undefined ? detail?.info.pic : "",
+                    brand: detail?.info != undefined ? detail?.info.brand : "",
+                    name: detail?.info != undefined ? detail?.info.name : "",
+                    price: detail?.info != undefined ? detail?.info.price : 0,
+                  },
+                });
+              setIsFavorite(false);
+            } else {
+              favoriteDispatch != null &&
+                favoriteDispatch({
+                  type: "ADD",
+                  payload: {
+                    id: detail?.info != undefined ? detail?.info.id : 0,
+                    pic: detail?.info != undefined ? detail?.info.pic : "",
+                    brand: detail?.info != undefined ? detail?.info.brand : "",
+                    name: detail?.info != undefined ? detail?.info.name : "",
+                    price: detail?.info != undefined ? detail?.info.price : 0,
+                  },
+                });
+              setIsFavorite(true);
+            }
+          }}
+        />
       </div>
 
       <div className="m-4">
