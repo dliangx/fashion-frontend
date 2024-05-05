@@ -6,6 +6,8 @@ import ProductAttribute from "./ProductAttribute";
 import { Back, Export, Heart, Plus } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
 import { FavoriteContext } from "../cart/FavoriteContext";
+import { createPortal } from "react-dom";
+import ProductFullView from "./ProductFullView";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -14,6 +16,7 @@ const ProductDetailView = () => {
   const [previewPics, setPreviewPics] = useState<ImageSlide[]>([]);
   const [galleryPics, setGalleryPics] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState(1);
+  const [isShowFullPage, setIsShowFullPage] = useState(false);
 
   const { state, dispatch } = useContext(CartContext);
   const navigate = useNavigate();
@@ -115,8 +118,20 @@ const ProductDetailView = () => {
       </div>
 
       <div className="m-4">
+        {isShowFullPage &&
+          createPortal(
+            <ProductFullView
+              pics={previewPics}
+              onClose={() => {
+                setIsShowFullPage(false);
+              }}
+            />,
+            document.body
+          )}
         {previewType == 1 && (
-          <Carousel images={previewPics} isListButton={false}></Carousel>
+          <div onClick={() => setIsShowFullPage(true)}>
+            <Carousel images={previewPics} isListButton={false}></Carousel>
+          </div>
         )}
         {previewType == 2 && (
           <div>

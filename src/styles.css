@@ -58,7 +58,7 @@ button:active {
 }
 
 .modal {
-  background-color: white;
+  background-color: black;
   position: absolute;
   right: 0;
   top: 0;
