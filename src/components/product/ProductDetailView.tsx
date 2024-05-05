@@ -170,26 +170,30 @@ const ProductDetailView = () => {
       <div
         className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  
       place-content-center text-white phone-width"
-        onClick={() => {
-          dispatch != null &&
-            detail != undefined &&
-            dispatch({
-              type: "ADD",
-              payload: {
-                id: detail?.info.id,
-                pic: detail?.info.pic,
-                brand: detail?.info.brand,
-                name: detail?.info.name,
-                price: detail?.info.price,
-                num: 0,
-                attr: [],
-              },
-            });
-        }}
       >
         <div className="flex  place-content-center">
-          <Plus className="mr-4 ml-4" color="#fff" />
-          ADD TO BASKET
+          <div
+            className="flex"
+            onClick={() => {
+              dispatch != null &&
+                detail != undefined &&
+                dispatch({
+                  type: "ADD",
+                  payload: {
+                    id: detail?.info.id,
+                    pic: detail?.info.pic,
+                    brand: detail?.info.brand,
+                    name: detail?.info.name,
+                    price: detail?.info.price,
+                    num: 0,
+                    attr: [],
+                  },
+                });
+            }}
+          >
+            <Plus className="mr-4 ml-4" color="#fff" />
+            <div>ADD TO BASKET</div>
+          </div>
           <div className="m-auto" />
           {/* <ShoppingBag color="#fff" /> */}
           <div

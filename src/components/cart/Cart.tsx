@@ -53,7 +53,7 @@ const Cart = () => {
       {tabIndex == 0 &&
         state.items.map((item) => {
           return (
-            <>
+            <div>
               <CartItemView
                 id={item.id}
                 pic={item.pic}
@@ -64,7 +64,7 @@ const Cart = () => {
                 attr={item.attr}
                 key={item.id.toString()}
               />
-            </>
+            </div>
           );
         })}
 
@@ -72,7 +72,7 @@ const Cart = () => {
         localStorage.getItem("user_token") != undefined &&
         favoriteState.items.map((item) => {
           return (
-            <>
+            <div>
               <FavoriteItemView
                 id={item.id}
                 pic={item.pic}
@@ -81,14 +81,14 @@ const Cart = () => {
                 price={item.price}
                 key={item.id.toString()}
               />
-            </>
+            </div>
           );
         })}
 
       <div className="fixed bottom-0 left-0 right-0  h-14 text-center bg-black text-white  border-none phone-width   place-content-center ">
         {tabIndex == 0 && state.items.length == 0 && (
           <div
-            className="flex place-content-center "
+            className="flex place-content-center w-full "
             onClick={() => {
               setTabIndex(3);
               navigate("/product");
@@ -100,7 +100,7 @@ const Cart = () => {
         )}
         {tabIndex == 0 && state.items.length > 0 && (
           <div
-            className="flex place-content-center "
+            className=" place-content-center w-full "
             onClick={() => {
               navigate("/checkout");
             }}
@@ -109,7 +109,7 @@ const Cart = () => {
           </div>
         )}
         {tabIndex == 1 && (
-          <div className="flex place-content-center ">ADD TO CART</div>
+          <div className=" place-content-center w-full ">ADD TO CART</div>
         )}
       </div>
       <div className="h-16" />
