@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { ImageSlide } from "../data/Product";
-import Carousel from "../product/Carousel";
+import Carousel2 from "../product/Carousel2";
 
 const images: ImageSlide[] = [
   { src: "/assets/2-3.jpg", alt: "Image 0" },
@@ -18,19 +17,11 @@ const images: ImageSlide[] = [
 ];
 
 const Recommend = () => {
-  const navigate = useNavigate();
   return (
     <div className="grid place-items-center mt-10 mb-8">
       <h1 className="text-center text-xl font-serif">JUST FOR YOU</h1>
       <img src="/assets/underline.svg"></img>
-      <div
-        className="mt-6"
-        onClick={() => {
-          navigate("/product/16");
-        }}
-      >
-        <Carousel images={images} isListButton={false} />
-      </div>
+      <Carousel2 images={images} width={"w-3/4"} padding={"p-2"}></Carousel2>
     </div>
   );
 };
