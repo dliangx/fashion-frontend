@@ -5,6 +5,7 @@ import { CartContext } from "./CartContext";
 import CartItemView from "./CartItemView";
 import { FavoriteContext } from "./FavoriteContext";
 import FavoriteItemView from "./FavoriteItemView";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { theme } = useContext(AppContext);
@@ -12,6 +13,7 @@ const Cart = () => {
   const { state } = useContext(CartContext);
   const favoriteContext = useContext(FavoriteContext);
   const favoriteState = favoriteContext.state;
+  const navigate = useNavigate();
 
   return (
     <div className="h-full">
@@ -84,10 +86,31 @@ const Cart = () => {
         })}
 
       <div className="fixed bottom-0 left-0 right-0  h-14 text-center bg-black text-white  border-none phone-width   place-content-center ">
-        <div className="flex place-content-center ">
-          <ShoppingBag className="mr-4" color="#fff" />
-          CONTINUE SHOPPING
-        </div>
+        {tabIndex == 0 && state.items.length == 0 && (
+          <div
+            className="flex place-content-center "
+            onClick={() => {
+              setTabIndex(3);
+              navigate("/product");
+            }}
+          >
+            <ShoppingBag className="mr-4" color="#fff" />
+            CONTINUE SHOPPING
+          </div>
+        )}
+        {tabIndex == 0 && state.items.length > 0 && (
+          <div
+            className="flex place-content-center "
+            onClick={() => {
+              navigate("/checkout");
+            }}
+          >
+            CHECKOUT
+          </div>
+        )}
+        {tabIndex == 1 && (
+          <div className="flex place-content-center ">ADD TO CART</div>
+        )}
       </div>
       <div className="h-16" />
     </div>
