@@ -6,6 +6,7 @@ import CartItemView from "./CartItemView";
 import { FavoriteContext } from "./FavoriteContext";
 import FavoriteItemView from "./FavoriteItemView";
 import { useNavigate } from "react-router-dom";
+import { CartItem } from "../data/Cart";
 
 const Cart = () => {
   const { theme } = useContext(AppContext);
@@ -14,6 +15,14 @@ const Cart = () => {
   const favoriteContext = useContext(FavoriteContext);
   const favoriteState = favoriteContext.state;
   const navigate = useNavigate();
+
+  function calcItemPrice(items: CartItem[]) {
+    let price = 0;
+    for (let index = 0; index < items.length; index++) {
+      price += items[index].price;
+    }
+    return price;
+  }
 
   return (
     <div className="h-full">
@@ -50,10 +59,10 @@ const Cart = () => {
         </div>
       )}
 
-      {tabIndex == 0 &&
-        state.items.map((item) => {
-          return (
-            <div>
+      {tabIndex == 0 && (
+        <div>
+          {state.items.map((item) => {
+            return (
               <CartItemView
                 id={item.id}
                 pic={item.pic}
@@ -64,9 +73,17 @@ const Cart = () => {
                 attr={item.attr}
                 key={item.id.toString()}
               />
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+      )}
+      {tabIndex == 0 && state.items.length > 0 && (
+        <div className="flex p-4">
+          TOTAL
+          <div className="m-auto " />
+          <div className=" text-orange-500"> ${calcItemPrice(state.items)}</div>
+        </div>
+      )}
 
       {tabIndex == 1 &&
         localStorage.getItem("user_token") != undefined &&
