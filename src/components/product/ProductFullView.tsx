@@ -6,7 +6,7 @@ const ProductFullView = (props: { pics: ImageSlide[]; onClose: any }) => {
     <div className=" modal">
       <Close className="m-4" onClick={props.onClose} color="white" />
       {props.pics.map((pic) => {
-        return <img src={pic.src} alt={pic.alt} />;
+        return <img src={pic.src} alt={pic.alt} className="w-full" />;
       })}
     </div>
   );
