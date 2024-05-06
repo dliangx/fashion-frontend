@@ -8,13 +8,9 @@ import { FavoriteContext } from "../cart/FavoriteContext";
 const ProductGrid = (props: ProductInfo) => {
   const { setTabIndex } = useContext(AppContext);
   const navigate = useNavigate();
-  const { dispatch } = useContext(FavoriteContext);
-  const favoriteContext = useContext(FavoriteContext);
-  const favoriteState = favoriteContext.state;
+  const { state, dispatch } = useContext(FavoriteContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const itemIndex = favoriteState.items.findIndex(
-    (item) => item.id === props.id
-  );
+  const itemIndex = state.items.findIndex((item) => item.id === props.id);
   useEffect(() => {
     setIsFavorite(itemIndex >= 0 ? true : false);
   }, []);
