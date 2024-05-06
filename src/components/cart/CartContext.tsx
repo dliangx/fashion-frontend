@@ -5,7 +5,7 @@ type CartState = {
   items: CartItem[];
 };
 type CartAction = {
-  type: "ADD" | "REMOVE";
+  type: "ADD" | "MINUS" | "REMOVE";
   payload: CartItem;
 };
 
@@ -36,12 +36,26 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       if (itemIndex >= 0) {
         return {
           items: state.items.map((item, index) =>
-            index === itemIndex ? { ...item, quantity: item.num + 1 } : item
+            index === itemIndex ? { ...item, num: item.num + 1 } : item
           ),
         };
       } else {
         return { items: [...state.items, { ...action.payload, num: 1 }] };
       }
+    case "MINUS":
+      const itemIndex2 = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (itemIndex2 >= 0) {
+        return {
+          items: state.items.map((item, index) =>
+            index === itemIndex2
+              ? { ...item, num: item.num - 1 >= 1 ? item.num - 1 : 1 }
+              : item
+          ),
+        };
+      }
+      return { items: state.items };
     case "REMOVE":
       return {
         items: state.items.filter((item) => item.id !== action.payload.id),

@@ -1,11 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartItem } from "../data/Cart";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { MINUS, Plus } from "../common/Icon";
+import { Close, MINUS, Plus } from "../common/Icon";
+import { CartContext } from "./CartContext";
 
 const CartItemView = (props: CartItem) => {
   const { setTabIndex } = useContext(AppContext);
+  const [num, setNum] = useState(props.num);
+  const { dispatch } = useContext(CartContext);
   const navigate = useNavigate();
   return (
     <>
@@ -25,12 +28,67 @@ const CartItemView = (props: CartItem) => {
           <div className="font-sans">{props.name}</div>
           <div className="flex mt-2 mb-2">
             <button className="mr-2 rounded-full border   place-content-center ">
-              <MINUS />
+              <MINUS
+                onClick={() => {
+                  setNum(num - 1 >= 1 ? num - 1 : 1);
+                  dispatch != null &&
+                    dispatch({
+                      type: "MINUS",
+                      payload: {
+                        id: props.id,
+                        pic: props.pic,
+                        brand: props.brand,
+                        name: props.name,
+                        price: props.price,
+                        num: 0,
+                        attr: props.attr,
+                      },
+                    });
+                }}
+              />
             </button>
-            <div className=" align-middle">{props.num}</div>
+            <div className=" align-middle">{num}</div>
 
             <button className="ml-2 rounded-full border">
-              <Plus />
+              <Plus
+                onClick={() => {
+                  setNum(num + 1);
+                  dispatch != null &&
+                    dispatch({
+                      type: "ADD",
+                      payload: {
+                        id: props.id,
+                        pic: props.pic,
+                        brand: props.brand,
+                        name: props.name,
+                        price: props.price,
+                        num: 0,
+                        attr: props.attr,
+                      },
+                    });
+                }}
+              />
+            </button>
+            <div className="m-auto"></div>
+            <button className="mr-8 rounded-full border ">
+              <Close
+                onClick={() => {
+                  setNum(num + 1);
+                  dispatch != null &&
+                    dispatch({
+                      type: "REMOVE",
+                      payload: {
+                        id: props.id,
+                        pic: props.pic,
+                        brand: props.brand,
+                        name: props.name,
+                        price: props.price,
+                        num: 0,
+                        attr: props.attr,
+                      },
+                    });
+                }}
+              />
             </button>
           </div>
           <div className="font-sans text-orange-500">${props.price}</div>
