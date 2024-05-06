@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
 
-const OurStory = () => {
+const MyProfile = () => {
   const navigate = useNavigate();
 
   const isUserLoggedIn = () => {
@@ -49,4 +49,4 @@ const OurStory = () => {
   );
 };
 
-export default OurStory;
+export default MyProfile;

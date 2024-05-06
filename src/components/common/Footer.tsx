@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
         <div className="w-1/4 grid place-items-center">
           <Link
-            to="/our_story"
+            to="/profile"
             onClick={() => {
               setTabIndex(4);
             }}

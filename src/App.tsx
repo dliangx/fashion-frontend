@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./components/home/Home";
-import OurStory from "./components/about/OurStory";
 import { Menu } from "./components/menu/Menu";
 import Search from "./components/search/Search";
 import Cart from "./components/cart/Cart";
@@ -25,6 +24,7 @@ import RequireAuth from "./components/login/RequireAuth";
 import Register from "./components/login/Register";
 import { CartProvider } from "./components/cart/CartContext";
 import { FavoriteProvider } from "./components/cart/FavoriteContext";
+import MyProfile from "./components/about/MyProfile";
 
 type AppContextType = {
   theme: string;
@@ -198,7 +198,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/our_story" element={<OurStory />} />
+              <Route path="/profile" element={<MyProfile />} />
               <Route path="/contact_us" element={<ContactUs />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/search" element={<Search />} />
