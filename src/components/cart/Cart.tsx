@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Close, Heart, ShoppingBag } from "../common/Icon";
 import { AppContext } from "../../App";
 import { CartContext } from "./CartContext";
