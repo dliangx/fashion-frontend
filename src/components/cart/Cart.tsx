@@ -50,7 +50,6 @@ const Cart = () => {
           }}
         >
           FAVORITE
-          <Heart className="h-4" />
         </div>
       </div>
       {cartIndex == 0 && state.items.length == 0 && (
