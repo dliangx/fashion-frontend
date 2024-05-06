@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode, useReducer, useState } from "react";
 import { CartItem } from "../data/Cart";
 
 type CartState = {
@@ -12,6 +12,8 @@ type CartAction = {
 type CartContextType = {
   state: CartState;
   dispatch: null | React.Dispatch<CartAction>;
+  cartIndex: number;
+  setCartIndex: any;
 };
 
 const initialCartState: CartState = { items: [] };
@@ -21,6 +23,8 @@ export const CartContext = createContext<CartContextType>({
   state: {
     items: [],
   },
+  cartIndex: 0,
+  setCartIndex: null,
 });
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
@@ -49,9 +53,9 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
-
+  const [cartIndex, setCartIndex] = useState(0);
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, cartIndex, setCartIndex }}>
       {children}
     </CartContext.Provider>
   );

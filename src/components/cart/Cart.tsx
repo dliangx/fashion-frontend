@@ -10,7 +10,7 @@ import { CartItem } from "../data/Cart";
 
 const Cart = () => {
   const { theme } = useContext(AppContext);
-  const [tabIndex, setTabIndex] = useState(0);
+  const { cartIndex, setCartIndex } = useContext(CartContext);
   const { state } = useContext(CartContext);
   const favoriteContext = useContext(FavoriteContext);
   const favoriteState = favoriteContext.state;
@@ -32,10 +32,10 @@ const Cart = () => {
         <div
           className={`w-1/2 h-8  content-center text-center  border-r-0 border-l-0  border 
           ${theme === "dark" ? "border-white " : "border-black"}
-          ${tabIndex == 0 ? "text-lg " : "text-sm"}
+          ${cartIndex == 0 ? "text-lg " : "text-sm"}
           `}
           onClick={() => {
-            setTabIndex(0);
+            setCartIndex(0);
           }}
         >
           CART({state.items.length})
@@ -43,23 +43,23 @@ const Cart = () => {
         <div
           className={`flex w-1/2 h-8 place-content-center   place-items-center  border-r-0  border 
           ${theme === "dark" ? "border-white " : "border-black"}
-          ${tabIndex == 1 ? "text-lg" : "text-sm"}
+          ${cartIndex == 1 ? "text-lg" : "text-sm"}
           `}
           onClick={() => {
-            setTabIndex(1);
+            setCartIndex(1);
           }}
         >
           FAVORITE
           <Heart className="h-4" />
         </div>
       </div>
-      {tabIndex == 0 && state.items.length == 0 && (
+      {cartIndex == 0 && state.items.length == 0 && (
         <div className="grid  place-items-center mt-24">
           <div>You Shopping Bag Is Empty.</div>
         </div>
       )}
 
-      {tabIndex == 0 && (
+      {cartIndex == 0 && (
         <div>
           {state.items.map((item) => {
             return (
@@ -77,7 +77,7 @@ const Cart = () => {
           })}
         </div>
       )}
-      {tabIndex == 0 && state.items.length > 0 && (
+      {cartIndex == 0 && state.items.length > 0 && (
         <div className="flex p-4">
           TOTAL
           <div className="m-auto " />
@@ -85,7 +85,7 @@ const Cart = () => {
         </div>
       )}
 
-      {tabIndex == 1 &&
+      {cartIndex == 1 &&
         localStorage.getItem("user_token") != undefined &&
         favoriteState.items.map((item) => {
           return (
@@ -103,11 +103,11 @@ const Cart = () => {
         })}
 
       <div className="fixed bottom-0 left-0 right-0  h-14 text-center bg-black text-white  border-none phone-width   place-content-center ">
-        {tabIndex == 0 && state.items.length == 0 && (
+        {cartIndex == 0 && state.items.length == 0 && (
           <div
             className="flex place-content-center w-full "
             onClick={() => {
-              setTabIndex(3);
+              setCartIndex(3);
               navigate("/product");
             }}
           >
@@ -115,17 +115,17 @@ const Cart = () => {
             CONTINUE SHOPPING
           </div>
         )}
-        {tabIndex == 0 && state.items.length > 0 && (
+        {cartIndex == 0 && state.items.length > 0 && (
           <div
             className=" place-content-center w-full "
             onClick={() => {
               navigate("/checkout");
             }}
           >
-            CHECKOUT
+            BUY NOW
           </div>
         )}
-        {tabIndex == 1 && (
+        {cartIndex == 1 && (
           <div className=" place-content-center w-full ">ADD TO CART</div>
         )}
       </div>
