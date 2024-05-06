@@ -1,23 +1,33 @@
-import { ImageSlide } from "../data/Product";
+import { ProductInfo } from "../data/Product";
 
 const Carousel2 = ({
-  images,
+  products,
   width,
   padding,
+  onclick,
 }: {
-  images: ImageSlide[];
+  products: ProductInfo[];
   width: string;
   padding: string;
+  onclick: any;
 }) => {
   return (
-    <div className=" flex overflow-x-scroll w-full ">
-      {images.map((slide, index) => (
-        <img
-          src={slide.src}
-          alt={slide.alt}
-          className={`${width} object-cover ${padding}`}
-          key={index}
-        />
+    <div className=" flex overflow-x-scroll">
+      {products.map((product, index) => (
+        <div className="flex-none snap-center">
+          <img
+            src={product.pic}
+            alt={product.name}
+            className={`${width} object-cover ${padding} h-96`}
+            key={index}
+            onClick={onclick}
+          />
+          <div className="font-serif text-lg text-center">{product.name}</div>
+          <div className="font-sans text-center">{product.brand}</div>
+          <div className="font-sans text-center text-orange-500">
+            ${product.price}
+          </div>
+        </div>
       ))}
     </div>
   );

@@ -1,27 +1,54 @@
-import { ImageSlide } from "../data/Product";
+import { useContext, useEffect } from "react";
+import { ProductInfo } from "../data/Product";
 import Carousel2 from "../product/Carousel2";
-
-const images: ImageSlide[] = [
-  { src: "/assets/2-3.jpg", alt: "Image 0" },
-  { src: "/assets/2-3-1.jpg", alt: "Image 1" },
-  { src: "/assets/2-3-2.jpg", alt: "Image 2" },
-  { src: "/assets/2-3-3.jpg", alt: "Image 3" },
-  { src: "/assets/2-3-4.jpg", alt: "Image 4" },
-  { src: "/assets/2-3-5.jpg", alt: "Image 5" },
-  { src: "/assets/2-3-6.jpg", alt: "Image 6" },
-  { src: "/assets/2-3-7.jpg", alt: "Image 7" },
-  { src: "/assets/2-3-8.jpg", alt: "Image 8" },
-  { src: "/assets/2-3-9.jpg", alt: "Image 9" },
-  { src: "/assets/2-3-10.jpg", alt: "Image 10" },
-  // 更多图片...
-];
+import { AppContext } from "../../App";
 
 const Recommend = () => {
+  const { recommendProducts, setRecommendProducts } = useContext(AppContext);
+
+  useEffect(() => {
+    if (recommendProducts.length == 0) {
+      fetch(import.meta.env.VITE_API_URL + "/home_recommend_product", {
+        method: "POST",
+        body: JSON.stringify({ name: localStorage.getItem("username") }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          const products = data.map((element: any) => {
+            const product: ProductInfo = {
+              id: element.id,
+              name: element.name,
+              category: element.category,
+              pic: element.pic,
+              brand: element.brand,
+              rating: element.rating,
+              price: element.price,
+            };
+
+            return product;
+          });
+
+          setRecommendProducts(products);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, []);
   return (
     <div className="grid place-items-center mt-10 mb-8">
       <h1 className="text-center text-xl font-serif">JUST FOR YOU</h1>
       <img src="/assets/underline.svg"></img>
-      <Carousel2 images={images} width={"w-3/4"} padding={"p-2"}></Carousel2>
+      <Carousel2
+        products={recommendProducts}
+        width={"w-full"}
+        padding={"p-2"}
+        onclick={null}
+      ></Carousel2>
     </div>
   );
 };
