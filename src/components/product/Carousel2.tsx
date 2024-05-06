@@ -14,7 +14,7 @@ const Carousel2 = ({
   return (
     <div className=" flex overflow-x-scroll">
       {products.map((product, index) => (
-        <div className="flex-none snap-center">
+        <div className="flex-none snap-center" key={index}>
           <img
             src={product.pic}
             alt={product.name}
