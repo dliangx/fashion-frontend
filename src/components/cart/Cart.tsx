@@ -19,7 +19,7 @@ const Cart = () => {
   function calcItemPrice(items: CartItem[]) {
     let price = 0;
     for (let index = 0; index < items.length; index++) {
-      price += items[index].price;
+      price += items[index].price * items[index].num;
     }
     return price;
   }
