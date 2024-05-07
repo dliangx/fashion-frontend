@@ -1,14 +1,22 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ProductDetail, Picture, ImageSlide } from "../data/Product";
 import { useNavigate, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Back, Export, Heart, Plus } from "../common/Icon";
+import { Back, Close, Export, Heart, Plus } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
 import { FavoriteContext } from "../cart/FavoriteContext";
 import { createPortal } from "react-dom";
 import ProductFullView from "./ProductFullView";
 import Details from "./Details";
+
+export const AttrContext = createContext<{
+  selectAttrMap: Map<string, string>;
+  setSelectAttrMap: any;
+}>({
+  selectAttrMap: new Map(),
+  setSelectAttrMap: null,
+});
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -18,6 +26,11 @@ const ProductDetailView = () => {
   const [galleryPics, setGalleryPics] = useState<string[]>([]);
   const [previewIndex, setPreviewIndex] = useState(1);
   const [isShowFullPage, setIsShowFullPage] = useState(false);
+  const [isShowAttrAlert, setIsShowAttrAlert] = useState(false);
+  const [isShowSuccessAlert, setIsShowSuccessAlert] = useState(false);
+  const [selectAttrMap, setSelectAttrMap] = useState<Map<string, string>>(
+    new Map()
+  );
 
   const { state, dispatch } = useContext(CartContext);
   const navigate = useNavigate();
@@ -158,7 +171,11 @@ const ProductDetailView = () => {
           <div className="font-sans">{detail?.info.name}</div>
           <div className="font-sans text-orange-500">${detail?.info.price}</div>
         </div>
-        {detail?.attr != undefined && <ProductAttribute attrs={detail.attr} />}
+        {detail?.attr != undefined && (
+          <AttrContext.Provider value={{ selectAttrMap, setSelectAttrMap }}>
+            <ProductAttribute attrs={detail.attr} />
+          </AttrContext.Provider>
+        )}
         {galleryPics.map((pic, index) => {
           return (
             <div className="mt-4">
@@ -169,6 +186,38 @@ const ProductDetailView = () => {
         {detail?.details != undefined && <Details details={detail.details} />}
       </div>
       <div className="h-16"></div>
+      {isShowAttrAlert &&
+        createPortal(
+          <div className="fixed flex bg-black bottom-14 left-0 right-0 ">
+            <Close
+              className="m-4"
+              onClick={() => {
+                setIsShowAttrAlert(false);
+              }}
+              color="white"
+            />
+            <div className="h-10 text-center  place-content-center mt-2">
+              please select product attribute!
+            </div>
+          </div>,
+          document.body
+        )}
+      {isShowSuccessAlert &&
+        createPortal(
+          <div className="fixed flex bg-black bottom-14 left-0 right-0 ">
+            <Close
+              className="m-4"
+              onClick={() => {
+                setIsShowSuccessAlert(false);
+              }}
+              color="white"
+            />
+            <div className="h-10 text-center  place-content-center mt-2">
+              Add to Cart success!
+            </div>
+          </div>,
+          document.body
+        )}
       <div
         className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  
       place-content-center text-white phone-width"
@@ -177,7 +226,15 @@ const ProductDetailView = () => {
           <div
             className="flex"
             onClick={() => {
+              let flag = true;
+              selectAttrMap.forEach((value) => {
+                if (value == "") {
+                  flag = false;
+                  setIsShowAttrAlert(true);
+                }
+              });
               dispatch != null &&
+                flag &&
                 detail != undefined &&
                 dispatch({
                   type: "ADD",
@@ -188,9 +245,16 @@ const ProductDetailView = () => {
                     name: detail?.info.name,
                     price: detail?.info.price,
                     num: 0,
-                    attr: [],
+                    attr: Array.from(selectAttrMap.entries()).map((value) => {
+                      return {
+                        name: value[0],
+                        value: value[1],
+                      };
+                    }),
                   },
                 });
+
+              flag && setIsShowSuccessAlert(true);
             }}
           >
             <Plus className="mr-4 ml-4" color="#fff" />

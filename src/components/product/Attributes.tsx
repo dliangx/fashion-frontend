@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AttrContext } from "./ProductDetailView";
 
 export type Attr = {
   name: string;
@@ -7,6 +8,7 @@ export type Attr = {
 
 const Attributes = (attr: Attr) => {
   const [selectIndex, setSelectIndex] = useState(-1);
+  const { selectAttrMap, setSelectAttrMap } = useContext(AttrContext);
   return (
     <div className="flex ">
       <h2 className="mr-4 font-sans">{attr.name}</h2>
@@ -32,6 +34,7 @@ const Attributes = (attr: Attr) => {
                             `}
                   onClick={() => {
                     setSelectIndex(attrIndex);
+                    setSelectAttrMap(selectAttrMap.set("Color", value));
                   }}
                 ></button>
               </>
@@ -47,6 +50,7 @@ const Attributes = (attr: Attr) => {
                         `}
                 onClick={() => {
                   setSelectIndex(attrIndex);
+                  setSelectAttrMap(selectAttrMap.set(attr.name, value));
                 }}
               >
                 {value}
