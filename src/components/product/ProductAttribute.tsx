@@ -41,8 +41,8 @@ const ProductAttribute = (props: AttributeProps) => {
   return (
     <>
       <div className="flex flex-wrap">
-        {attrs.map((attr) => {
-          return <Attributes {...attr} />;
+        {attrs.map((attr, index) => {
+          return <Attributes {...attr} key={index} />;
         })}
       </div>
     </>

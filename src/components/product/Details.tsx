@@ -21,14 +21,14 @@ const Details = (props: { details: Detail[] }) => {
     <div className="mt-8">
       {props.details.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             {item.t != 2 && (
-              <div key={index} className="mt-8">
+              <div className="mt-8">
                 <h2>{item.title}</h2>
                 <div>
-                  {item.detail.split(";").map((line) => {
+                  {item.detail.split(";").map((line, index2) => {
                     return (
-                      <div className="mt-2">
+                      <div className="mt-2" key={index2}>
                         {line} <br />
                       </div>
                     );
@@ -45,7 +45,7 @@ const Details = (props: { details: Detail[] }) => {
                 </div>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>
