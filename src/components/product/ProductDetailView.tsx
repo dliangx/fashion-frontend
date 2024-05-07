@@ -3,12 +3,13 @@ import { ProductDetail, Picture, ImageSlide } from "../data/Product";
 import { useNavigate, useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ProductAttribute from "./ProductAttribute";
-import { Back, Close, Export, Heart, Plus } from "../common/Icon";
+import { Back, Export, Heart, Plus } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
 import { FavoriteContext } from "../cart/FavoriteContext";
 import { createPortal } from "react-dom";
 import ProductFullView from "./ProductFullView";
 import Details from "./Details";
+import AlertModal from "./AlertModal";
 
 export const AttrContext = createContext<{
   selectAttrMap: Map<string, string>;
@@ -188,34 +189,22 @@ const ProductDetailView = () => {
       <div className="h-16"></div>
       {isShowAttrAlert &&
         createPortal(
-          <div className="fixed flex bg-black bottom-14 left-0 right-0 ">
-            <Close
-              className="m-4"
-              onClick={() => {
-                setIsShowAttrAlert(false);
-              }}
-              color="white"
-            />
-            <div className="h-10 text-center  place-content-center mt-2">
-              please select product attribute!
-            </div>
-          </div>,
+          <AlertModal
+            content={"please select product attribute!"}
+            onClose={() => {
+              setIsShowAttrAlert(false);
+            }}
+          />,
           document.body
         )}
       {isShowSuccessAlert &&
         createPortal(
-          <div className="fixed flex bg-black bottom-14 left-0 right-0 ">
-            <Close
-              className="m-4"
-              onClick={() => {
-                setIsShowSuccessAlert(false);
-              }}
-              color="white"
-            />
-            <div className="h-10 text-center  place-content-center mt-2">
-              Add to Cart success!
-            </div>
-          </div>,
+          <AlertModal
+            content={"Add to Cart success!"}
+            onClose={() => {
+              setIsShowSuccessAlert(false);
+            }}
+          />,
           document.body
         )}
       <div
