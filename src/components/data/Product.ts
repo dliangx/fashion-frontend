@@ -1,60 +1,59 @@
 export type ProductInfo = {
-    id: number,
-    name: string,
-    category: string,
-    pic: string,
-    brand: string,
-    rating: number,
-    price: number;
-}
+  id: number;
+  name: string;
+  category: string;
+  pic: string;
+  brand: string;
+  rating: number;
+  price: number;
+};
 
 export type Detail = {
-    t: string,
-    title:string,
-    detail: string,
-}
+  t: number;
+  title: string;
+  detail: string;
+};
 
 export type Picture = {
-    t: number,
-    sort: number,
-    url: string,
-}
+  t: number;
+  sort: number;
+  url: string;
+};
 
 export type Attribute = {
-    id: number,
-    name: string,
-    value: string,
-}
+  id: number;
+  name: string;
+  value: string;
+};
 
 export type AttributeProps = {
-    attrs: Attribute[]
-}
+  attrs: Attribute[];
+};
 
 export type ProductDetail = {
-    info: ProductInfo,
-    pics: Picture[],
-    attr: Attribute[],
-    details: Detail[],
-}
+  info: ProductInfo;
+  pics: Picture[];
+  attr: Attribute[];
+  details: Detail[];
+};
 
 export type CollectionInfo = {
-    id: number,
-    pic: string,
-    name: string,
-}
+  id: number;
+  pic: string;
+  name: string;
+};
 
 export type ImageSlide = {
-    src: string;
-    alt: string;
-}
-  
+  src: string;
+  alt: string;
+};
+
 export type Page = {
-    start:number;
-    num:number;
-}
+  start: number;
+  num: number;
+};
 
 export type CollectionDetailInfo = {
-    collection: CollectionInfo;
-    products: ProductInfo[];
-    
-}
+  collection: CollectionInfo;
+  products: ProductInfo[];
+};

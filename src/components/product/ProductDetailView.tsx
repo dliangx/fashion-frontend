@@ -8,6 +8,7 @@ import { CartContext } from "../cart/CartContext";
 import { FavoriteContext } from "../cart/FavoriteContext";
 import { createPortal } from "react-dom";
 import ProductFullView from "./ProductFullView";
+import Details from "./Details";
 
 const ProductDetailView = () => {
   const [detail, setDetail] = useState<ProductDetail>();
@@ -165,8 +166,9 @@ const ProductDetailView = () => {
             </div>
           );
         })}
+        {detail?.details != undefined && <Details details={detail.details} />}
       </div>
-
+      <div className="h-16"></div>
       <div
         className="fixed bottom-0 left-0 right-0 bg-black text-color=#fff h-14  
       place-content-center text-white phone-width"
