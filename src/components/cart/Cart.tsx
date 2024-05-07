@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Close, Heart, ShoppingBag } from "../common/Icon";
+import { Close, ShoppingBag } from "../common/Icon";
 import { AppContext } from "../../App";
 import { CartContext } from "./CartContext";
 import CartItemView from "./CartItemView";
