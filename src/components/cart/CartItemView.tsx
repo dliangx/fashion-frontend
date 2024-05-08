@@ -13,6 +13,7 @@ const CartItemView = (props: CartItem) => {
   return (
     <>
       <div className="flex w-full m-2">
+        <div></div>
         <div className="h32 w-1/4">
           <img
             src={props.pic}
@@ -24,7 +25,32 @@ const CartItemView = (props: CartItem) => {
           />
         </div>
         <div className="h32 w-3/4 ml-2">
-          <div className="font-mono text-xl  mt-4">{props.brand}</div>
+          <div className="flex">
+            <div className="font-mono text-xl  mt-2">{props.brand}</div>
+            <div className="m-auto"></div>
+            <div className="mt-2">
+              <Close
+                className="mr-8"
+                onClick={() => {
+                  setNum(num + 1);
+                  dispatch != null &&
+                    dispatch({
+                      type: "REMOVE",
+                      payload: {
+                        id: props.id,
+                        pic: props.pic,
+                        brand: props.brand,
+                        name: props.name,
+                        price: props.price,
+                        num: 0,
+                        attr: props.attr,
+                      },
+                    });
+                }}
+              />
+            </div>
+          </div>
+
           <div className="font-sans">{props.name}</div>
           <div className="flex mt-2 mb-2">
             <button className="mr-2 rounded-full border   place-content-center ">
@@ -56,27 +82,6 @@ const CartItemView = (props: CartItem) => {
                   dispatch != null &&
                     dispatch({
                       type: "ADD",
-                      payload: {
-                        id: props.id,
-                        pic: props.pic,
-                        brand: props.brand,
-                        name: props.name,
-                        price: props.price,
-                        num: 0,
-                        attr: props.attr,
-                      },
-                    });
-                }}
-              />
-            </button>
-            <div className="m-auto"></div>
-            <button className="mr-8 rounded-full border ">
-              <Close
-                onClick={() => {
-                  setNum(num + 1);
-                  dispatch != null &&
-                    dispatch({
-                      type: "REMOVE",
                       payload: {
                         id: props.id,
                         pic: props.pic,
