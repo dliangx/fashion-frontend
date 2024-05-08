@@ -91,6 +91,16 @@ const CartItemView = (props: CartItem) => {
               />
             </button>
           </div>
+          <div className="flex flex-wrap">
+            {props.attr.map((attr) => {
+              return (
+                <div className="flex  ">
+                  <div>{attr.name}-</div>
+                  <div>({attr.value});</div>
+                </div>
+              );
+            })}
+          </div>
           <div className="font-sans text-orange-500">${props.price}</div>
         </div>
       </div>
