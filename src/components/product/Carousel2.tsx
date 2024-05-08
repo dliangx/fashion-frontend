@@ -18,7 +18,7 @@ const Carousel2 = ({
           <img
             src={product.pic}
             alt={product.name}
-            className={`${width} object-cover ${padding} h-96`}
+            className={`${width} ${padding} h-96`}
             key={index}
             onClick={onclick}
           />
