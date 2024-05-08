@@ -45,7 +45,7 @@ const Recommend = () => {
       <img src="/assets/underline.svg"></img>
       <Carousel2
         products={recommendProducts}
-        width={"w-full"}
+        width={"w-3/4"}
         padding={"p-2"}
         onclick={null}
       ></Carousel2>

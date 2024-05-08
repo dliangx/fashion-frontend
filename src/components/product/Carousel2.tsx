@@ -14,11 +14,11 @@ const Carousel2 = ({
   return (
     <div className=" flex overflow-x-scroll">
       {products.map((product, index) => (
-        <div className="flex-none snap-center" key={index}>
+        <div className={`flex-none snap-center ${width}`} key={index}>
           <img
             src={product.pic}
             alt={product.name}
-            className={`${width} ${padding} h-96`}
+            className={` ${padding} `}
             key={index}
             onClick={onclick}
           />
