@@ -16,7 +16,15 @@ type CartContextType = {
   setCartIndex: any;
 };
 
-const initialCartState: CartState = { items: [] };
+const storedCart = localStorage.getItem("cart");
+
+let initialCartState: CartState;
+
+if (storedCart === null) {
+  initialCartState = { items: [] };
+} else {
+  initialCartState = JSON.parse(storedCart);
+}
 
 export const CartContext = createContext<CartContextType>({
   dispatch: null,
@@ -34,32 +42,42 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         (item) => item.id === action.payload.id
       );
       if (itemIndex >= 0) {
-        return {
+        const cart_res = {
           items: state.items.map((item, index) =>
             index === itemIndex ? { ...item, num: item.num + 1 } : item
           ),
         };
+        localStorage.setItem("cart", JSON.stringify(cart_res));
+        return cart_res;
       } else {
-        return { items: [...state.items, { ...action.payload, num: 1 }] };
+        const cart_res = {
+          items: [...state.items, { ...action.payload, num: 1 }],
+        };
+        localStorage.setItem("cart", JSON.stringify(cart_res));
+        return cart_res;
       }
     case "MINUS":
       const itemIndex2 = state.items.findIndex(
         (item) => item.id === action.payload.id
       );
       if (itemIndex2 >= 0) {
-        return {
+        const cart_res = {
           items: state.items.map((item, index) =>
             index === itemIndex2
               ? { ...item, num: item.num - 1 >= 1 ? item.num - 1 : 1 }
               : item
           ),
         };
+        localStorage.setItem("cart", JSON.stringify(cart_res));
+        return cart_res;
       }
       return { items: state.items };
     case "REMOVE":
-      return {
+      const cart_res = {
         items: state.items.filter((item) => item.id !== action.payload.id),
       };
+      localStorage.setItem("cart", JSON.stringify(cart_res));
+      return cart_res;
     default:
       throw new Error();
   }
