@@ -24,7 +24,7 @@ export const SearchInput = () => {
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
-        className="w-11/12 m-4 h-10 bg-transparent p-2 pl-8 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
+        className="w-11/12 m-4 h-10 bg-transparent p-2 pl-8 border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
         autoFocus
       ></input>
       <SearchIcon

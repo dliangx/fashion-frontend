@@ -128,7 +128,7 @@ const Login = () => {
               regex_username_test(e.target.value);
               setLoginName(e.target.value);
             }}
-            className="w-4/5  m-auto h-12 mb-4 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
+            className="w-4/5  m-auto h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
             autoFocus
           ></input>
         </div>
@@ -143,7 +143,7 @@ const Login = () => {
                 regex_password_test(e.target.value);
                 setLoginPass(e.target.value);
               }}
-              className="w-full   m-auto h-12 bg-transparent p-2 border-b border-gray-600 hover:border-gray-300 focus:outline-none "
+              className="w-full   m-auto h-12 bg-transparent p-2 border-b rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
             ></input>
             <ForwardArrow
               className="absolute bottom-2 right-2 z-10 "
