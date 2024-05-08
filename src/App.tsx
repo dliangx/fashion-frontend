@@ -7,7 +7,6 @@ import Cart from "./components/cart/Cart";
 import ProductDetailView from "./components/product/ProductDetailView";
 import Collection from "./components/collection/Collection";
 import CollectionDetail from "./components/collection/CollectionDetail";
-import SearchView from "./components/search/SearchView";
 import ContactUs from "./components/about/ContactUs";
 import NotFound from "./components/common/NotFound";
 import Checkout from "./components/order/Checkout";
@@ -25,6 +24,8 @@ import Register from "./components/login/Register";
 import { CartProvider } from "./components/cart/CartContext";
 import { FavoriteProvider } from "./components/cart/FavoriteContext";
 import MyProfile from "./components/about/MyProfile";
+import PlaceOrder from "./components/order/PlaceOrder";
+import Order from "./components/order/Order";
 
 type AppContextType = {
   theme: string;
@@ -202,7 +203,6 @@ function App() {
               <Route path="/contact_us" element={<ContactUs />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/search/:context" element={<SearchView />} />
               <Route path="/collection" element={<Collection />} />
               <Route path="/collection/:id" element={<CollectionDetail />} />
               <Route path="/product" element={<CategoryView />} />
@@ -227,10 +227,26 @@ function App() {
                 }
               />
               <Route
+                path="/place_order"
+                element={
+                  <RequireAuth>
+                    <PlaceOrder />
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path="/checkout"
                 element={
                   <RequireAuth>
                     <Checkout />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/order"
+                element={
+                  <RequireAuth>
+                    <Order />
                   </RequireAuth>
                 }
               />
