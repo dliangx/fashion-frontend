@@ -92,9 +92,9 @@ const CartItemView = (props: CartItem) => {
             </button>
           </div>
           <div className="flex flex-wrap">
-            {props.attr.map((attr) => {
+            {props.attr.map((attr, index) => {
               return (
-                <div className="flex  ">
+                <div className="flex  " key={index}>
                   <div>{attr.name}-</div>
                   <div>({attr.value});</div>
                 </div>
