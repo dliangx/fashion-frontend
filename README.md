@@ -1,7 +1,13 @@
-# Tauri + React + Typescript
+# OpenFashion  
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+A simple and beautiful shopping app, Implemented with react ,tailwindcss and tauri. web app host in netlify. It can also package into a mobile app.
 
-## Recommended IDE Setup
+content including category view,category search,home recommend product ,collection show,product view,search product,product detail view,cart,favorite product,order,checkout,user profile
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+## develop
+
+yarn && yarn dev
+
+## backend
+
+you can visit my project in github: <https://github.com/humga/fashion>
