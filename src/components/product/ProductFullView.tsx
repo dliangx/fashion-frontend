@@ -3,7 +3,7 @@ import { ImageSlide } from "../data/Product";
 
 const ProductFullView = (props: { pics: ImageSlide[]; onClose: any }) => {
   return (
-    <div className=" modal">
+    <div className=" modal phone-width ">
       <Close className="m-4" onClick={props.onClose} color="white" />
       {props.pics.map((pic, index) => {
         return (
