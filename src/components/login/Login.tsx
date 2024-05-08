@@ -85,7 +85,13 @@ const Login = () => {
         if (!!data) {
           localStorage.setItem("username", loginName);
           localStorage.setItem("user_token", data);
-
+          var now = new Date();
+          localStorage.setItem(
+            "expire_time",
+            new Date(
+              now.getTime() + 99 * 24 * 60 * 60 * 1000
+            ).toLocaleDateString()
+          );
           history.go(-1);
         }
       })
