@@ -52,55 +52,59 @@ const Cart = () => {
           FAVORITE
         </div>
       </div>
-      {cartIndex == 0 && state.items.length == 0 && (
-        <div className="grid  place-items-center mt-24">
-          <div>You Shopping Bag Is Empty.</div>
-        </div>
-      )}
+      <div className="m-2 mb-16">
+        {cartIndex == 0 && state.items.length == 0 && (
+          <div className="grid  place-items-center mt-24">
+            <div>You Shopping Bag Is Empty.</div>
+          </div>
+        )}
 
-      {cartIndex == 0 && (
-        <div>
-          {state.items.map((item) => {
+        {cartIndex == 0 && (
+          <div>
+            {state.items.map((item) => {
+              return (
+                <CartItemView
+                  id={item.id}
+                  pic={item.pic}
+                  brand={item.brand}
+                  name={item.name}
+                  num={item.num}
+                  price={item.price}
+                  attr={item.attr}
+                  key={item.id.toString()}
+                />
+              );
+            })}
+          </div>
+        )}
+        {cartIndex == 0 && state.items.length > 0 && (
+          <div className="flex p-4">
+            TOTAL
+            <div className="m-auto " />
+            <div className=" text-orange-500">
+              {" "}
+              ${calcItemPrice(state.items)}
+            </div>
+          </div>
+        )}
+
+        {cartIndex == 1 &&
+          localStorage.getItem("user_token") != undefined &&
+          favoriteState.items.map((item) => {
             return (
-              <CartItemView
-                id={item.id}
-                pic={item.pic}
-                brand={item.brand}
-                name={item.name}
-                num={item.num}
-                price={item.price}
-                attr={item.attr}
-                key={item.id.toString()}
-              />
+              <div>
+                <FavoriteItemView
+                  id={item.id}
+                  pic={item.pic}
+                  brand={item.brand}
+                  name={item.name}
+                  price={item.price}
+                  key={item.id.toString()}
+                />
+              </div>
             );
           })}
-        </div>
-      )}
-      {cartIndex == 0 && state.items.length > 0 && (
-        <div className="flex p-4">
-          TOTAL
-          <div className="m-auto " />
-          <div className=" text-orange-500"> ${calcItemPrice(state.items)}</div>
-        </div>
-      )}
-
-      {cartIndex == 1 &&
-        localStorage.getItem("user_token") != undefined &&
-        favoriteState.items.map((item) => {
-          return (
-            <div>
-              <FavoriteItemView
-                id={item.id}
-                pic={item.pic}
-                brand={item.brand}
-                name={item.name}
-                price={item.price}
-                key={item.id.toString()}
-              />
-            </div>
-          );
-        })}
-
+      </div>
       <div className="fixed bottom-0 left-0 right-0  h-14 text-center bg-black text-white  border-none phone-width   place-content-center ">
         {cartIndex == 0 && state.items.length == 0 && (
           <div
@@ -118,7 +122,7 @@ const Cart = () => {
           <div
             className=" place-content-center w-full "
             onClick={() => {
-              navigate("/checkout");
+              navigate("/place_order");
             }}
           >
             BUY NOW
@@ -128,7 +132,6 @@ const Cart = () => {
           <div className=" place-content-center w-full ">ADD TO CART</div>
         )}
       </div>
-      <div className="h-16" />
     </div>
   );
 };

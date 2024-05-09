@@ -12,7 +12,7 @@ const CartItemView = (props: CartItem) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex w-full m-2">
+      <div className="flex w-full">
         <div></div>
         <div className="h32 w-1/4">
           <img
@@ -99,7 +99,7 @@ const CartItemView = (props: CartItem) => {
           <div className="flex flex-wrap">
             {props.attr.map((attr, index) => {
               return (
-                <div className="flex  " key={index}>
+                <div className="flex  font-sans" key={index}>
                   <div>{attr.name}-</div>
                   <div>({attr.value});</div>
                 </div>
