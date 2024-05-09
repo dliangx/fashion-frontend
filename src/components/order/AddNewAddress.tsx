@@ -69,11 +69,11 @@ export const ShippingAddress = (props: {
   setSelectShippingAddressIndex: any;
 }) => {
   const [isCollapse, setIsCollapse] = useState<boolean>(false);
-
+  const [index, setIndex] = useState<number>(-1);
   return (
     <div>
       <div>SHIPPING ADDRESS</div>
-
+      {index >= 0 && <AddressView address={props.shippingAddress[index]} />}
       <button
         className="w-full  rounded-3xl p-3 mt-2"
         onClick={() => {
@@ -89,6 +89,8 @@ export const ShippingAddress = (props: {
       {isCollapse &&
         props.shippingAddress != undefined &&
         props.shippingAddress.map((address, index) => {
+          setIndex(index);
+          props.setSelectShippingAddressIndex(index);
           return <AddressView address={address} key={index} />;
         })}
       {isCollapse && props.shippingAddress.length == 0 && (

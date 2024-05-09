@@ -17,10 +17,11 @@ export const PaymentMethod = (props: {
   setSelectPaymentMethodIndex: any;
 }) => {
   const [isCollapse, setIsCollapse] = useState<boolean>(false);
+  const [index, setIndex] = useState<number>(-1);
   return (
     <div className="mt-4">
       <div>PAYMENT METHOD</div>
-
+      {index >= 0 && <CardView card={props.paymentMethod[index]} />}
       <button
         className="w-full  rounded-3xl p-3 mt-2"
         onClick={() => {
@@ -36,6 +37,8 @@ export const PaymentMethod = (props: {
       {isCollapse &&
         props.paymentMethod != undefined &&
         props.paymentMethod.map((card, index) => {
+          setIndex(index);
+          props.setSelectPaymentMethodIndex(index);
           return <CardView card={card} key={index} />;
         })}
       {isCollapse && props.paymentMethod.length == 0 && (
