@@ -13,8 +13,15 @@ type FavoriteContextType = {
   state: FavoriteState;
   dispatch: null | React.Dispatch<FavoriteAction>;
 };
+const storedCart = localStorage.getItem("favorite");
 
-const initialFavoriteState: FavoriteState = { items: [] };
+let initialFavoriteState: FavoriteState;
+
+if (storedCart === null) {
+  initialFavoriteState = { items: [] };
+} else {
+  initialFavoriteState = JSON.parse(storedCart);
+}
 
 export const FavoriteContext = createContext<FavoriteContextType>({
   dispatch: null,
@@ -35,11 +42,14 @@ const favoriteReducer = (
       if (itemIndex < 0) {
         state.items.push(action.payload);
       }
+      localStorage.setItem("favorite", JSON.stringify(state));
       return state;
     case "REMOVE":
-      return {
+      const res = {
         items: state.items.filter((item) => item.id !== action.payload.id),
       };
+      localStorage.setItem("favorite", JSON.stringify(res));
+      return res;
     default:
       throw new Error();
   }
