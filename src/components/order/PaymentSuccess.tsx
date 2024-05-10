@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Close } from "../common/Icon";
 
 const PaymentSuccess = (props: { onclick: any }) => {
+  const navigate = useNavigate();
   return (
     <div className="absolute bottom-0 top-0 left-0 right-0 bg-black  bg-opacity-80 phone-width  z-10">
       <div className="mt-20 m-4 pt-4 alert ">
@@ -21,7 +23,9 @@ const PaymentSuccess = (props: { onclick: any }) => {
           </div>
           <div className="flex w-full p-4">
             <button className="w-1/2 m-2 h-10">SUBMIT</button>
-            <button className="w-1/2 m-2 h-10">BACK TO HOME</button>
+            <button className="w-1/2 m-2 h-10" onClick={() => navigate("/")}>
+              BACK TO HOME
+            </button>
           </div>
         </div>
       </div>

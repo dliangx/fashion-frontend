@@ -6,7 +6,7 @@ import { ShippingAddress, ShippingMethod } from "./AddNewAddress";
 import { PaymentMethod } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
 
-const OrderItems = () => {
+export const OrderItems = () => {
   const { state } = useContext(CartContext);
 
   return (
