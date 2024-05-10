@@ -211,22 +211,6 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
               <Route
-                path="/add_new_address"
-                element={
-                  <RequireAuth>
-                    <AddNewAddress />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/add_new_card"
-                element={
-                  <RequireAuth>
-                    <AddNewCard />
-                  </RequireAuth>
-                }
-              />
-              <Route
                 path="/place_order"
                 element={
                   <RequireAuth>
