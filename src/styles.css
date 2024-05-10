@@ -24,12 +24,18 @@ button:active {
 
 .modal {
   background-color: #f6f6f6;
+  color: #0f0f0f;
   position: absolute;
   right: 0;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 1000;
+}
+
+.alert {
+  background-color: #f6f6f6;
+  color: #0f0f0f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,12 +59,18 @@ button:active {
 
   .modal {
     background-color: #2f2f2f;
+    color: #f6f6f6;
     position: absolute;
     right: 0;
     top: 0;
     left: 0;
     bottom: 0;
     z-index: 1000;
+  }
+
+  .alert{
+    background-color: #2f2f2f;
+    color: #f6f6f6; 
   }
 
 }
