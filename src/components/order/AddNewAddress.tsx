@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Down, Forward } from "../common/Icon";
+import { Close, Down, Forward } from "../common/Icon";
 import { Address } from "../data/User";
+import { createPortal } from "react-dom";
 
 export const ShippingMethod = (props: {
   shippingMethod: string;
@@ -71,6 +72,7 @@ export const ShippingAddress = (props: {
 }) => {
   const [isCollapse, setIsCollapse] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(-1);
+  const [isShowAddNewAddress, setIsShowAddNewAddress] = useState(false);
   return (
     <div>
       <div>SHIPPING ADDRESS</div>
@@ -96,14 +98,77 @@ export const ShippingAddress = (props: {
           return <AddressView address={address} key={index} />;
         })}
       {isCollapse && props.shippingAddress.length == 0 && (
-        <div className="ml-8 h-10 place-content-end ">Add New address</div>
+        <div
+          className="ml-8 h-10 place-content-end "
+          onClick={() => {
+            setIsShowAddNewAddress(true);
+          }}
+        >
+          Add New address
+        </div>
       )}
+      {isShowAddNewAddress &&
+        createPortal(
+          <AddNewAddress
+            onClose={() => {
+              setIsShowAddNewAddress(false);
+            }}
+          ></AddNewAddress>,
+          document.body
+        )}
     </div>
   );
 };
 
-const AddNewAddress = () => {
-  return <></>;
+const AddNewAddress = (props: { onClose: any }) => {
+  return (
+    <div className="modal">
+      <Close className="m-4" onClick={props.onClose} />
+      <div className="grid place-items-center mt-10 mb-8">
+        <h1 className="text-center text-xl ">ADD SHIPPING ADDRESS</h1>
+        <img src="/assets/underline.svg"></img>
+      </div>
+      <div className="m-4">
+        <div className="flex">
+          <input
+            placeholder="First name"
+            className="w-1/2  h-12 mb-4 mr-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          />
+          <input
+            placeholder="Second name"
+            className="w-1/2  h-12 mb-4 ml-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          />
+        </div>
+        <input
+          placeholder="Address"
+          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        />
+        <input
+          placeholder="City"
+          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        />
+        <div className="flex">
+          <input
+            placeholder="State"
+            className="w-1/2  h-12 mb-4 mr-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          />
+          <input
+            placeholder="ZIP code"
+            className="w-1/2  h-12 mb-4 ml-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          />
+        </div>
+        <input
+          placeholder="Phone number"
+          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        />
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
+        <div className="flex  text-center  place-content-center">
+          <div>ADD NOW</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AddNewAddress;
