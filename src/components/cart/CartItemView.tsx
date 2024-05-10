@@ -12,8 +12,7 @@ const CartItemView = (props: CartItem) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex w-full">
-        <div></div>
+      <div className="flex w-full mt-2">
         <div className="h32 w-1/4">
           <img
             src={props.pic}
