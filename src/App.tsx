@@ -10,8 +10,6 @@ import CollectionDetail from "./components/collection/CollectionDetail";
 import ContactUs from "./components/about/ContactUs";
 import NotFound from "./components/common/NotFound";
 import Checkout from "./components/order/Checkout";
-import AddNewAddress from "./components/order/AddNewAddress";
-import AddNewCard from "./components/order/AddNewCard";
 import { createContext, useEffect, useState } from "react";
 import { Category, CategoryResp } from "./components/data/Category";
 import CategoryView, {
