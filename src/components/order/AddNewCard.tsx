@@ -69,7 +69,7 @@ export const PaymentMethod = (props: {
 };
 const AddNewCard = (props: { onClose: any }) => {
   return (
-    <div className="modal">
+    <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
       <div className="grid place-items-center mt-10 mb-8">
         <h1 className="text-center text-xl ">PAYMENT METHOD</h1>
