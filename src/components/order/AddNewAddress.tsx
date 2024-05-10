@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Forward } from "../common/Icon";
+import { Down, Forward } from "../common/Icon";
 import { Address } from "../data/User";
 
 export const ShippingMethod = (props: {
@@ -23,7 +23,8 @@ export const ShippingMethod = (props: {
           {selectIndex < 0 && <div>Select shipping method</div>}
           {selectIndex >= 0 && <div>{methods[selectIndex]}</div>}
           <div className="m-auto"></div>
-          <Forward />
+          {isCollapse && <Down />}
+          {!isCollapse && <Forward />}
         </div>
       </button>
       {isCollapse &&
@@ -83,7 +84,8 @@ export const ShippingAddress = (props: {
         <div className="flex">
           <div className=" ">Select shipping address</div>
           <div className="m-auto"></div>
-          <Forward />
+          {isCollapse && <Down />}
+          {!isCollapse && <Forward />}
         </div>
       </button>
       {isCollapse &&

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Forward } from "../common/Icon";
+import { Down, Forward } from "../common/Icon";
 import { PaymentCard } from "../data/User";
 
 export const CardView = (props: { card: PaymentCard }) => {
@@ -31,7 +31,8 @@ export const PaymentMethod = (props: {
         <div className="flex">
           <div className=" ">Select payment method</div>
           <div className="m-auto"></div>
-          <Forward />
+          {isCollapse && <Down />}
+          {!isCollapse && <Forward />}
         </div>
       </button>
       {isCollapse &&
