@@ -2,12 +2,43 @@ import { useState } from "react";
 import Header from "../common/Header";
 import { ShoppingBag } from "../common/Icon";
 import PaymentSuccess from "./PaymentSuccess";
+import { OrderItems } from "./PlaceOrder";
+import { AddressView } from "./AddNewAddress";
+import { CardView } from "./AddNewCard";
+import { Address, PaymentCard } from "../data/User";
 
 const Checkout = () => {
   const [isSuccess, setIsSuccess] = useState(false);
+  let shippingAddress: Address = {
+    username: 0,
+    first_name: "Name",
+    second_name: "Second_name",
+    address: "Address",
+    city: "city",
+    state: "state",
+    zip: "1000",
+    phone: "13111111111",
+  };
+  let paymentCard: PaymentCard = {
+    username: 0,
+    card_type: 1,
+    card_name: "name",
+    card_num: "1222333444556",
+    exp_mon: "3",
+    exp_date: "2025/01/01",
+    cvv: "003",
+  };
   return (
     <div>
       <Header />
+      <div className="m-4 mb-16">
+        <div className="mt-4">
+          <OrderItems />
+        </div>
+        <AddressView address={shippingAddress} />
+        <CardView card={paymentCard} />
+      </div>
+
       {isSuccess && (
         <PaymentSuccess
           onclick={() => {
