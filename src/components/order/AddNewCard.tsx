@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Close, Down, Forward } from "../common/Icon";
 import { PaymentCard } from "../data/User";
 import { createPortal } from "react-dom";
+import CustomInput from "./CustomInput";
 
 export const CardView = (props: { card: PaymentCard }) => {
   function card_name(index: number) {
@@ -91,6 +92,13 @@ export const PaymentMethod = (props: {
   );
 };
 const AddNewCard = (props: { onClose: any }) => {
+  const name_regular = "^.{3,30}$";
+  const card_regular =
+    "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$";
+  const month_regular = "^[0-9]{2}$";
+  const year_regular = "^[0-9]{4}$";
+  const cvv_regular = "^[0-9]{3,4}$";
+
   return (
     <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
@@ -99,27 +107,43 @@ const AddNewCard = (props: { onClose: any }) => {
         <img src="/assets/underline.svg"></img>
       </div>
       <div className="m-4">
-        <input
-          placeholder="Name On Card"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        <CustomInput
+          locationStyle={"mt-4"}
+          placeholder={"Name On Card"}
+          type={"text"}
+          regular={name_regular}
+          errorMsg={"please input the name on credit card"}
         />
-        <input
-          placeholder="Card Number"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        <CustomInput
+          locationStyle={"mt-4"}
+          placeholder={"Card Number"}
+          type={"text"}
+          regular={card_regular}
+          errorMsg={"please input credit card number"}
         />
+
         <div className="flex">
-          <input
-            placeholder="Exp Month"
-            className="w-1/2  h-12 mb-4 mr-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2 mt-4 mr-2"}
+            placeholder={"Exp Month"}
+            type={"number"}
+            regular={month_regular}
+            errorMsg={"please input month"}
           />
-          <input
-            placeholder="Exp Date"
-            className="w-1/2  h-12 mb-4 ml-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2 mt-4 ml-2"}
+            placeholder={"Exp Year"}
+            type={"number"}
+            regular={year_regular}
+            errorMsg={"please input year"}
           />
         </div>
-        <input
-          placeholder="CVV"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        <CustomInput
+          locationStyle={"w-full mt-4"}
+          placeholder={"CVV"}
+          type={"text"}
+          regular={cvv_regular}
+          errorMsg={"please input credit card CVV"}
         />
       </div>
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">

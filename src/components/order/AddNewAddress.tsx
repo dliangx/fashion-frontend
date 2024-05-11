@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Close, Down, Forward } from "../common/Icon";
 import { Address } from "../data/User";
 import { createPortal } from "react-dom";
+import CustomInput from "./CustomInput";
 
 export const ShippingMethod = (props: {
   shippingMethod: string;
@@ -127,6 +128,12 @@ export const ShippingAddress = (props: {
 };
 
 const AddNewAddress = (props: { onClose: any }) => {
+  const name_regular = "^.{3,30}$";
+  const address_regular = "^.{3,60}$";
+  const city_state_regular = "^.{1,20}$";
+  const zip_regular = "^.{3,10}$";
+  const phone_regular = "^1[3-9][0-9]{9}$";
+
   return (
     <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
@@ -136,36 +143,59 @@ const AddNewAddress = (props: { onClose: any }) => {
       </div>
       <div className="m-4">
         <div className="flex">
-          <input
-            placeholder="First name"
-            className="w-1/2  h-12 mb-4 mr-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2 mt-4 mr-2 "}
+            placeholder={"First name"}
+            type={"text"}
+            regular={name_regular}
+            errorMsg={"input length 3-30"}
           />
-          <input
-            placeholder="Second name"
-            className="w-1/2  h-12 mb-4 ml-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2  mt-4 ml-2"}
+            placeholder={"Second name"}
+            type={"text"}
+            regular={name_regular}
+            errorMsg={"input length 3-30"}
           />
         </div>
-        <input
-          placeholder="Address"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+
+        <CustomInput
+          locationStyle={"mt-4 "}
+          placeholder={"Address"}
+          type={"text"}
+          regular={address_regular}
+          errorMsg={"please input address,length is 3-60 "}
         />
-        <input
-          placeholder="City"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        <CustomInput
+          locationStyle={"mt-4 "}
+          placeholder={"City"}
+          type={"text"}
+          regular={city_state_regular}
+          errorMsg={"please input city,max length is 20"}
         />
+
         <div className="flex">
-          <input
-            placeholder="State"
-            className="w-1/2  h-12 mb-4 mr-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2 mt-4 mr-2"}
+            placeholder={"State"}
+            type={"text"}
+            regular={city_state_regular}
+            errorMsg={"max length is 20"}
           />
-          <input
-            placeholder="ZIP code"
-            className="w-1/2  h-12 mb-4 ml-2 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+          <CustomInput
+            locationStyle={"w-1/2  mt-4 ml-2"}
+            placeholder={"ZIP code"}
+            type={"text"}
+            regular={zip_regular}
+            errorMsg={"max length is 20"}
           />
         </div>
-        <input
-          placeholder="Phone number"
-          className="w-full  h-12 mb-4 bg-transparent p-2  border-b  rounded-none border-gray-600 hover:border-gray-300 focus:outline-none "
+        <CustomInput
+          locationStyle={"mt-4 w-full"}
+          placeholder={"Phone Number"}
+          type={"text"}
+          regular={phone_regular}
+          errorMsg={"please input cellphone number"}
         />
       </div>
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
