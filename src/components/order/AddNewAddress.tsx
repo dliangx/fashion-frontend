@@ -50,17 +50,23 @@ export const ShippingMethod = (props: {
 
 export const AddressView = (props: { address: Address }) => {
   return (
-    <div>
+    <div className="flex  pt-4 pb-4 border-b">
       <div>
-        {props.address.first_name}
-        {props.address.second_name}
+        <div className="font-serif">
+          {props.address.first_name}&nbsp;
+          {props.address.second_name}
+        </div>
+        <div>
+          {props.address.zip}
+          {props.address.state}
+        </div>
+        <div>{props.address.address}</div>
+        <div>{props.address.phone}</div>
       </div>
-      <div>
-        {props.address.zip}
-        {props.address.state}
+      <div className="m-auto"></div>
+      <div className="ml-8 place-content-center">
+        <Forward />
       </div>
-      <div>{props.address.address}</div>
-      <div>{props.address.phone}</div>
     </div>
   );
 };

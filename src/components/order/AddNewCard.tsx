@@ -4,10 +4,33 @@ import { PaymentCard } from "../data/User";
 import { createPortal } from "react-dom";
 
 export const CardView = (props: { card: PaymentCard }) => {
+  function card_name(index: number) {
+    if (index == 1) {
+      return "Master Card";
+    } else if (index == 2) {
+      return "VISA";
+    } else if (index == 3) {
+      return "Union Pay";
+    }
+  }
+  function card_icon(index: number) {
+    if (index == 1) {
+      return <img src="/icon/Master-Card.svg" className="h-10" />;
+    } else if (index == 2) {
+      return <img src="/icon/VISA.svg" />;
+    } else if (index == 3) {
+      return <img src="/icon/Union-Pay.svg" />;
+    }
+  }
   return (
-    <div className="flex">
-      {props.card.card_type}
+    <div className="flex pt-4 pb-4 place-items-center border-b">
+      {card_icon(props.card.card_type)}
+      {card_name(props.card.card_type)}&nbsp;
       {props.card.card_num.slice(-4)}
+      <div className="m-auto"></div>
+      <div className="ml-8 place-content-center">
+        <Forward />
+      </div>
     </div>
   );
 };
