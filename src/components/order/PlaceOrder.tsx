@@ -56,17 +56,20 @@ const PlaceOrder = () => {
   const [alertMsg, setAlertMsg] = useState("");
 
   const handlePlaceOrder = () => {
-    if (selectPaymentMethodIndex < 0) {
-      setAlertMsg("please select payment method!");
-      setIsShowAlert(true);
-    }
     if (selectShippingAddressIndex < 0) {
       setAlertMsg("please select shipping address!");
       setIsShowAlert(true);
+      return;
     }
     if (shippingMethod == "") {
       setAlertMsg("please select shipping method!");
       setIsShowAlert(true);
+      return;
+    }
+    if (selectPaymentMethodIndex < 0) {
+      setAlertMsg("please select payment method!");
+      setIsShowAlert(true);
+      return;
     }
     //place order
   };
