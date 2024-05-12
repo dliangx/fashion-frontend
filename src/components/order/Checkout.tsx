@@ -25,7 +25,7 @@ const Checkout = () => {
     card_name: "name",
     card_num: "1222333444556",
     exp_mon: "3",
-    exp_date: "2025/01/01",
+    exp_year: "2025",
     cvv: "003",
   };
   return (

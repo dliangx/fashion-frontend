@@ -161,6 +161,7 @@ const AddNewAddress = (props: { onClose: any }) => {
       address.zip !== "" &&
       address.phone != ""
     ) {
+      console.log(address);
     } else {
       setIsShowAlert(true);
     }

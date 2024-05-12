@@ -115,7 +115,7 @@ const AddNewCard = (props: { onClose: any }) => {
     card_name: "",
     card_num: "",
     exp_mon: "",
-    exp_date: "",
+    exp_year: "",
     cvv: "",
   });
 
@@ -129,7 +129,7 @@ const AddNewCard = (props: { onClose: any }) => {
       cardDate.card_name !== "" &&
       cardDate.card_num !== "" &&
       cardDate.exp_mon !== "" &&
-      cardDate.exp_date !== "" &&
+      cardDate.exp_year !== "" &&
       cardDate.cvv !== ""
     ) {
       function get_card_type() {
@@ -163,6 +163,7 @@ const AddNewCard = (props: { onClose: any }) => {
         }
       }
       get_card_type();
+      console.log(cardDate);
     } else {
       setIsShowAlert(true);
     }
@@ -222,7 +223,7 @@ const AddNewCard = (props: { onClose: any }) => {
             errorMsg={"please input year"}
             setValue={(value) => {
               if (value != undefined) {
-                setCardDate({ ...cardDate, exp_mon: value });
+                setCardDate({ ...cardDate, exp_year: value });
               }
             }}
           />

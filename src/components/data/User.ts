@@ -20,6 +20,6 @@ export type PaymentCard = {
   card_name: string;
   card_num: string;
   exp_mon: string;
-  exp_date: string;
+  exp_year: string;
   cvv: string;
 };
