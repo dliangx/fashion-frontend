@@ -3,6 +3,7 @@ import { Close, Down, Forward } from "../common/Icon";
 import { Address } from "../data/User";
 import { createPortal } from "react-dom";
 import CustomInput from "./CustomInput";
+import AlertModal from "../product/AlertModal";
 
 export const ShippingMethod = (props: {
   shippingMethod: string;
@@ -134,6 +135,7 @@ const AddNewAddress = (props: { onClose: any }) => {
   const zip_regular = "^.{3,10}$";
   const phone_regular = "^1[3-9][0-9]{9}$";
 
+  const [isShowAlert, setIsShowAlert] = useState(false);
   const [address, setAddress] = useState<Address>({
     username: "",
     first_name: "",
@@ -145,7 +147,24 @@ const AddNewAddress = (props: { onClose: any }) => {
     phone: "",
   });
 
-  function handleAddAddress() {}
+  function handleAddAddress() {
+    const username = localStorage.getItem("username");
+    if (username != undefined) {
+      address.username = username;
+    }
+    if (
+      address.first_name !== "" &&
+      address.second_name !== "" &&
+      address.address !== "" &&
+      address.city !== "" &&
+      address.state !== "" &&
+      address.zip !== "" &&
+      address.phone != ""
+    ) {
+    } else {
+      setIsShowAlert(true);
+    }
+  }
   return (
     <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
@@ -245,6 +264,16 @@ const AddNewAddress = (props: { onClose: any }) => {
           }}
         />
       </div>
+      {isShowAlert &&
+        createPortal(
+          <AlertModal
+            content={"please fill all input!"}
+            onClose={() => {
+              setIsShowAlert(false);
+            }}
+          />,
+          document.body
+        )}
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
         <div
           className="flex  text-center  place-content-center"

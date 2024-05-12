@@ -3,6 +3,7 @@ import { Close, Down, Forward } from "../common/Icon";
 import { PaymentCard } from "../data/User";
 import { createPortal } from "react-dom";
 import CustomInput from "./CustomInput";
+import AlertModal from "../product/AlertModal";
 
 export const CardView = (props: { card: PaymentCard }) => {
   function card_name(index: number) {
@@ -94,19 +95,20 @@ export const PaymentMethod = (props: {
 const AddNewCard = (props: { onClose: any }) => {
   const name_regular = "^.{3,30}$";
 
-  // const visa_card_regular = "^4[0-9]{12}(?:[0-9]{3})?$"; // Visa
-  // const master_card_regular = "^5[1-5][0-9]{14}$"; // MasterCard
-  // const american_card_regular = "^3[47][0-9]{13}$"; // American Express
-  // const diners_club_regular = "^3(?:0[0-5]|[68][0-9])[0-9]{11}$ "; // Diners Club
-  // const discover_club_regular = "^6(?:011|5[0-9]{2})[0-9]{12}$"; // Discover
-  // const jcb_club_regular = "^(?:2131|1800|35d{3})d{11}$"; // JCB";
-  // const union_pay_regular = "^62[0-9]{14,17}$"; //UnionPay
+  const visa_card_regular = "^4[0-9]{12}(?:[0-9]{3})?$"; // Visa
+  const master_card_regular = "^5[1-5][0-9]{14}$"; // MasterCard
+  const american_card_regular = "^3[47][0-9]{13}$"; // American Express
+  const diners_club_regular = "^3(?:0[0-5]|[68][0-9])[0-9]{11}$ "; // Diners Club
+  const discover_club_regular = "^6(?:011|5[0-9]{2})[0-9]{12}$"; // Discover
+  const jcb_club_regular = "^(?:2131|1800|35d{3})d{11}$"; // JCB";
+  const union_pay_regular = "^62[0-9]{14,17}$"; //UnionPay
   const card_regular =
     "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11}|62[0-9]{14,17})$";
   const month_regular = "^[0-9]{2}$";
   const year_regular = "^[0-9]{4}$";
   const cvv_regular = "^[0-9]{3,4}$";
 
+  const [isShowAlert, setIsShowAlert] = useState(false);
   const [cardDate, setCardDate] = useState<PaymentCard>({
     username: "",
     card_type: 0,
@@ -117,7 +119,54 @@ const AddNewCard = (props: { onClose: any }) => {
     cvv: "",
   });
 
-  function handleAddCard() {}
+  function handleAddCard() {
+    const username = localStorage.getItem("username");
+    if (username != undefined) {
+      cardDate.username = username;
+    }
+
+    if (
+      cardDate.card_name !== "" &&
+      cardDate.card_num !== "" &&
+      cardDate.exp_mon !== "" &&
+      cardDate.exp_date !== "" &&
+      cardDate.cvv !== ""
+    ) {
+      function get_card_type() {
+        if (cardDate.card_name.match(visa_card_regular)) {
+          cardDate.card_type = 1;
+          return;
+        }
+        if (cardDate.card_name.match(master_card_regular)) {
+          cardDate.card_type = 2;
+          return;
+        }
+        if (cardDate.card_name.match(american_card_regular)) {
+          cardDate.card_type = 3;
+          return;
+        }
+        if (cardDate.card_name.match(diners_club_regular)) {
+          cardDate.card_type = 4;
+          return;
+        }
+        if (cardDate.card_name.match(discover_club_regular)) {
+          cardDate.card_type = 5;
+          return;
+        }
+        if (cardDate.card_name.match(jcb_club_regular)) {
+          cardDate.card_type = 6;
+          return;
+        }
+        if (cardDate.card_name.match(union_pay_regular)) {
+          cardDate.card_type = 7;
+          return;
+        }
+      }
+      get_card_type();
+    } else {
+      setIsShowAlert(true);
+    }
+  }
 
   return (
     <div className="modal phone-width">
@@ -191,6 +240,16 @@ const AddNewCard = (props: { onClose: any }) => {
           }}
         />
       </div>
+      {isShowAlert &&
+        createPortal(
+          <AlertModal
+            content={"please fill all input!"}
+            onClose={() => {
+              setIsShowAlert(false);
+            }}
+          />,
+          document.body
+        )}
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
         <div
           className="flex  text-center  place-content-center"
