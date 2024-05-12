@@ -162,6 +162,26 @@ const AddNewAddress = (props: { onClose: any }) => {
       address.phone != ""
     ) {
       console.log(address);
+      const url = import.meta.env.VITE_API_URL + "/api/add_shipping_address";
+      const bodyStr = JSON.stringify(address);
+      const token = localStorage.getItem("user_token");
+      if (token != undefined) {
+        fetch(url, {
+          method: "POST",
+          body: bodyStr,
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     } else {
       setIsShowAlert(true);
     }
@@ -244,7 +264,7 @@ const AddNewAddress = (props: { onClose: any }) => {
             placeholder={"ZIP code"}
             type={"text"}
             regular={zip_regular}
-            errorMsg={"max length is 20"}
+            errorMsg={"max length is 10"}
             setValue={(value) => {
               if (value != undefined) {
                 setAddress({ ...address, zip: value });

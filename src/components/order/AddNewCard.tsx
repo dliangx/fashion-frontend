@@ -164,6 +164,27 @@ const AddNewCard = (props: { onClose: any }) => {
       }
       get_card_type();
       console.log(cardDate);
+
+      const url = import.meta.env.VITE_API_URL + "/api/add_payment_method";
+      const bodyStr = JSON.stringify(cardDate);
+      const token = localStorage.getItem("user_token");
+      if (token != undefined) {
+        fetch(url, {
+          method: "POST",
+          body: bodyStr,
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     } else {
       setIsShowAlert(true);
     }
