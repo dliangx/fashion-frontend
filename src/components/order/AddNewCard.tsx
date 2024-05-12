@@ -99,6 +99,18 @@ const AddNewCard = (props: { onClose: any }) => {
   const year_regular = "^[0-9]{4}$";
   const cvv_regular = "^[0-9]{3,4}$";
 
+  const [cardDate, setCardDate] = useState<PaymentCard>({
+    username: "",
+    card_type: 0,
+    card_name: "",
+    card_num: "",
+    exp_mon: "",
+    exp_date: "",
+    cvv: "",
+  });
+
+  function handleAddCard() {}
+
   return (
     <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
@@ -113,6 +125,11 @@ const AddNewCard = (props: { onClose: any }) => {
           type={"text"}
           regular={name_regular}
           errorMsg={"please input the name on credit card"}
+          setValue={(value) => {
+            if (value != undefined) {
+              setCardDate({ ...cardDate, card_name: value });
+            }
+          }}
         />
         <CustomInput
           locationStyle={"mt-4"}
@@ -120,6 +137,11 @@ const AddNewCard = (props: { onClose: any }) => {
           type={"text"}
           regular={card_regular}
           errorMsg={"please input credit card number"}
+          setValue={(value) => {
+            if (value != undefined) {
+              setCardDate({ ...cardDate, card_num: value });
+            }
+          }}
         />
 
         <div className="flex">
@@ -129,6 +151,11 @@ const AddNewCard = (props: { onClose: any }) => {
             type={"number"}
             regular={month_regular}
             errorMsg={"please input month"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setCardDate({ ...cardDate, exp_mon: value });
+              }
+            }}
           />
           <CustomInput
             locationStyle={"w-1/2 mt-4 ml-2"}
@@ -136,6 +163,11 @@ const AddNewCard = (props: { onClose: any }) => {
             type={"number"}
             regular={year_regular}
             errorMsg={"please input year"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setCardDate({ ...cardDate, exp_mon: value });
+              }
+            }}
           />
         </div>
         <CustomInput
@@ -144,10 +176,18 @@ const AddNewCard = (props: { onClose: any }) => {
           type={"text"}
           regular={cvv_regular}
           errorMsg={"please input credit card CVV"}
+          setValue={(value) => {
+            if (value != undefined) {
+              setCardDate({ ...cardDate, cvv: value });
+            }
+          }}
         />
       </div>
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
-        <div className="flex  text-center  place-content-center">
+        <div
+          className="flex  text-center  place-content-center"
+          onClick={handleAddCard}
+        >
           <div>ADD CARD</div>
         </div>
       </div>

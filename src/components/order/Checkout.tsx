@@ -10,7 +10,7 @@ import { Address, PaymentCard } from "../data/User";
 const Checkout = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   let shippingAddress: Address = {
-    username: 0,
+    username: "",
     first_name: "Name",
     second_name: "Second_name",
     address: "Address",
@@ -20,7 +20,7 @@ const Checkout = () => {
     phone: "13111111111",
   };
   let paymentCard: PaymentCard = {
-    username: 0,
+    username: "",
     card_type: 1,
     card_name: "name",
     card_num: "1222333444556",

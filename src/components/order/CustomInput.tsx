@@ -6,6 +6,7 @@ const CustomInput = (props: {
   type: string;
   regular: string;
   errorMsg: string;
+  setValue: (value: string) => void;
 }) => {
   const [isInput, setIsInput] = useState(false);
 
@@ -19,6 +20,7 @@ const CustomInput = (props: {
             setIsInput(true);
           } else {
             setIsInput(false);
+            props.setValue(e.target.value);
           }
         }}
         className="w-full h-10 bg-transparent   border-b  rounded-none

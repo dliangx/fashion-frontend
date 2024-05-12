@@ -134,6 +134,18 @@ const AddNewAddress = (props: { onClose: any }) => {
   const zip_regular = "^.{3,10}$";
   const phone_regular = "^1[3-9][0-9]{9}$";
 
+  const [address, setAddress] = useState<Address>({
+    username: "",
+    first_name: "",
+    second_name: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
+  });
+
+  function handleAddAddress() {}
   return (
     <div className="modal phone-width">
       <Close className="m-4" onClick={props.onClose} />
@@ -149,6 +161,11 @@ const AddNewAddress = (props: { onClose: any }) => {
             type={"text"}
             regular={name_regular}
             errorMsg={"input length 3-30"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setAddress({ ...address, first_name: value });
+              }
+            }}
           />
           <CustomInput
             locationStyle={"w-1/2  mt-4 ml-2"}
@@ -156,6 +173,11 @@ const AddNewAddress = (props: { onClose: any }) => {
             type={"text"}
             regular={name_regular}
             errorMsg={"input length 3-30"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setAddress({ ...address, second_name: value });
+              }
+            }}
           />
         </div>
 
@@ -165,6 +187,11 @@ const AddNewAddress = (props: { onClose: any }) => {
           type={"text"}
           regular={address_regular}
           errorMsg={"please input address,length is 3-60 "}
+          setValue={(value) => {
+            if (value != undefined) {
+              setAddress({ ...address, address: value });
+            }
+          }}
         />
         <CustomInput
           locationStyle={"mt-4 "}
@@ -172,6 +199,11 @@ const AddNewAddress = (props: { onClose: any }) => {
           type={"text"}
           regular={city_state_regular}
           errorMsg={"please input city,max length is 20"}
+          setValue={(value) => {
+            if (value != undefined) {
+              setAddress({ ...address, city: value });
+            }
+          }}
         />
 
         <div className="flex">
@@ -181,6 +213,11 @@ const AddNewAddress = (props: { onClose: any }) => {
             type={"text"}
             regular={city_state_regular}
             errorMsg={"max length is 20"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setAddress({ ...address, state: value });
+              }
+            }}
           />
           <CustomInput
             locationStyle={"w-1/2  mt-4 ml-2"}
@@ -188,6 +225,11 @@ const AddNewAddress = (props: { onClose: any }) => {
             type={"text"}
             regular={zip_regular}
             errorMsg={"max length is 20"}
+            setValue={(value) => {
+              if (value != undefined) {
+                setAddress({ ...address, zip: value });
+              }
+            }}
           />
         </div>
         <CustomInput
@@ -196,10 +238,18 @@ const AddNewAddress = (props: { onClose: any }) => {
           type={"text"}
           regular={phone_regular}
           errorMsg={"please input cellphone number"}
+          setValue={(value) => {
+            if (value != undefined) {
+              setAddress({ ...address, phone: value });
+            }
+          }}
         />
       </div>
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
-        <div className="flex  text-center  place-content-center">
+        <div
+          className="flex  text-center  place-content-center"
+          onClick={handleAddAddress}
+        >
           <div>ADD NOW</div>
         </div>
       </div>

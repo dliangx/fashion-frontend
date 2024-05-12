@@ -4,22 +4,22 @@ export type User = {
 };
 
 export type Address = {
-  username: number;
-  first_name: String;
-  second_name: String;
-  address: String;
-  city: String;
-  state: String;
-  zip: String;
-  phone: String;
+  username: string;
+  first_name: string;
+  second_name: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
 };
 
 export type PaymentCard = {
-  username: number;
+  username: string;
   card_type: number;
-  card_name: String;
-  card_num: String;
-  exp_mon: String;
-  exp_date: String;
-  cvv: String;
+  card_name: string;
+  card_num: string;
+  exp_mon: string;
+  exp_date: string;
+  cvv: string;
 };
