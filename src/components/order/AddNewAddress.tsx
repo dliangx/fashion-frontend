@@ -52,7 +52,7 @@ export const ShippingMethod = (props: {
 
 export const AddressView = (props: { address: Address }) => {
   return (
-    <div className="flex  pt-4 pb-4 border-b">
+    <div className="flex  pt-4 pb-4 ">
       <div>
         <div className="font-serif">
           {props.address.first_name}&nbsp;
@@ -84,7 +84,10 @@ export const ShippingAddress = (props: {
   return (
     <div>
       <div>SHIPPING ADDRESS</div>
-      {index >= 0 && <AddressView address={props.shippingAddress[index]} />}
+      <div className="ml-4 mr-4">
+        {index >= 0 && <AddressView address={props.shippingAddress[index]} />}
+      </div>
+
       <button
         className="w-full  rounded-3xl p-3 mt-2"
         onClick={() => {
@@ -101,11 +104,21 @@ export const ShippingAddress = (props: {
       {isCollapse &&
         props.shippingAddress != undefined &&
         props.shippingAddress.map((address, index) => {
-          setIndex(index);
-          props.setSelectShippingAddressIndex(index);
-          return <AddressView address={address} key={index} />;
+          return (
+            <div
+              className="ml-8"
+              key={index}
+              onClick={() => {
+                setIndex(index);
+                setIsCollapse(false);
+                props.setSelectShippingAddressIndex(index);
+              }}
+            >
+              <AddressView address={address} />
+            </div>
+          );
         })}
-      {isCollapse && props.shippingAddress.length == 0 && (
+      {isCollapse && (
         <div
           className="ml-8 h-10 place-content-end "
           onClick={() => {

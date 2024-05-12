@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../common/Header";
 import { ShoppingBag } from "../common/Icon";
 import { CartContext } from "../cart/CartContext";
@@ -50,6 +50,57 @@ const PlaceOrder = () => {
     useState<number>(0);
   const [selectPaymentMethodIndex, setSelectPaymentMethodIndex] =
     useState<number>(0);
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (username != undefined) {
+      const url = import.meta.env.VITE_API_URL + "/api/get_shipping_address";
+      const bodyStr = JSON.stringify({ username: username });
+      const token = localStorage.getItem("user_token");
+      fetch(url, {
+        method: "POST",
+        body: bodyStr,
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setShippingAddress(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (username != undefined) {
+      const url = import.meta.env.VITE_API_URL + "/api/get_payment_method";
+      const bodyStr = JSON.stringify({ username: username });
+      const token = localStorage.getItem("user_token");
+      fetch(url, {
+        method: "POST",
+        body: bodyStr,
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setPaymentMethod(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, []);
+
   return (
     <div>
       <Header />
@@ -57,8 +108,6 @@ const PlaceOrder = () => {
         <div className="mt-4">
           <OrderItems />
         </div>
-
-        <div>{shippingAddress[selectShippingAddressIndex]?.address}</div>
 
         <ShippingAddress
           shippingAddress={shippingAddress}
@@ -69,8 +118,6 @@ const PlaceOrder = () => {
           setShippingMethod={setShippingMethod}
           shippingMethod={shippingMethod}
         />
-
-        <div>{paymentMethod[selectPaymentMethodIndex]?.username}</div>
 
         <PaymentMethod
           paymentMethod={paymentMethod}

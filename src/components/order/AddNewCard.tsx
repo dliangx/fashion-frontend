@@ -7,25 +7,25 @@ import AlertModal from "../product/AlertModal";
 
 export const CardView = (props: { card: PaymentCard }) => {
   function card_name(index: number) {
-    if (index == 1) {
+    if (index == 2) {
       return "Master Card";
-    } else if (index == 2) {
+    } else if (index == 1) {
       return "VISA";
-    } else if (index == 3) {
+    } else if (index == 7) {
       return "Union Pay";
     }
   }
   function card_icon(index: number) {
-    if (index == 1) {
+    if (index == 2) {
       return <img src="/icon/Master-Card.svg" className="h-10" />;
-    } else if (index == 2) {
-      return <img src="/icon/VISA.svg" />;
-    } else if (index == 3) {
-      return <img src="/icon/Union-Pay.svg" />;
+    } else if (index == 1) {
+      return <img src="/icon/VISA.svg" className="h-10" />;
+    } else if (index == 7) {
+      return <img src="/icon/Union-Pay.svg" className="h-10" />;
     }
   }
   return (
-    <div className="flex pt-4 pb-4 place-items-center border-b">
+    <div className="flex pt-4  place-items-center ">
       {card_icon(props.card.card_type)}
       {card_name(props.card.card_type)}&nbsp;
       {props.card.card_num.slice(-4)}
@@ -48,7 +48,10 @@ export const PaymentMethod = (props: {
   return (
     <div className="mt-4">
       <div>PAYMENT METHOD</div>
-      {index >= 0 && <CardView card={props.paymentMethod[index]} />}
+      <div className="ml-4 mr-4">
+        {index >= 0 && <CardView card={props.paymentMethod[index]} />}
+      </div>
+
       <button
         className="w-full  rounded-3xl p-3 mt-2"
         onClick={() => {
@@ -64,12 +67,22 @@ export const PaymentMethod = (props: {
       </button>
       {isCollapse &&
         props.paymentMethod != undefined &&
-        props.paymentMethod.map((card, index) => {
-          setIndex(index);
-          props.setSelectPaymentMethodIndex(index);
-          return <CardView card={card} key={index} />;
+        props.paymentMethod.map((payment, index) => {
+          return (
+            <div
+              className="ml-8"
+              key={index}
+              onClick={() => {
+                setIndex(index);
+                setIsCollapse(false);
+                props.setSelectPaymentMethodIndex(index);
+              }}
+            >
+              <CardView card={payment} />
+            </div>
+          );
         })}
-      {isCollapse && props.paymentMethod.length == 0 && (
+      {isCollapse && (
         <div
           className="ml-8 h-10 place-content-end "
           onClick={() => {
