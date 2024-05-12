@@ -5,6 +5,8 @@ import { CartContext } from "../cart/CartContext";
 import { ShippingAddress, ShippingMethod } from "./AddNewAddress";
 import { PaymentMethod } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
+import { createPortal } from "react-dom";
+import AlertModal from "../product/AlertModal";
 
 export const OrderItems = () => {
   const { state } = useContext(CartContext);
@@ -47,9 +49,27 @@ const PlaceOrder = () => {
   const [paymentMethod, setPaymentMethod] = useState<PaymentCard[]>([]);
 
   const [selectShippingAddressIndex, setSelectShippingAddressIndex] =
-    useState<number>(0);
+    useState<number>(-1);
   const [selectPaymentMethodIndex, setSelectPaymentMethodIndex] =
-    useState<number>(0);
+    useState<number>(-1);
+  const [isShowAlert, setIsShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
+
+  const handlePlaceOrder = () => {
+    if (selectPaymentMethodIndex < 0) {
+      setAlertMsg("please select payment method!");
+      setIsShowAlert(true);
+    }
+    if (selectShippingAddressIndex < 0) {
+      setAlertMsg("please select shipping address!");
+      setIsShowAlert(true);
+    }
+    if (shippingMethod == "") {
+      setAlertMsg("please select shipping method!");
+      setIsShowAlert(true);
+    }
+    //place order
+  };
 
   useEffect(() => {
     const username = localStorage.getItem("username");
@@ -125,13 +145,20 @@ const PlaceOrder = () => {
           setSelectPaymentMethodIndex={setSelectPaymentMethodIndex}
         />
       </div>
+      {isShowAlert &&
+        createPortal(
+          <AlertModal
+            content={alertMsg}
+            onClose={() => {
+              setIsShowAlert(false);
+            }}
+          />,
+          document.body
+        )}
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center">
         <div
           className="flex  text-center  place-content-center"
-          onClick={() => {
-            console.log(selectShippingAddressIndex);
-            console.log(selectPaymentMethodIndex);
-          }}
+          onClick={handlePlaceOrder}
         >
           <ShoppingBag className="mr-4" color="white" />
           <div>PLACE ORDER</div>
