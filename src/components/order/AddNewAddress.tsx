@@ -50,10 +50,10 @@ export const ShippingMethod = (props: {
   );
 };
 
-export const AddressView = (props: { address: Address }) => {
+export const AddressView = (props: { address: Address; onclick: any }) => {
   return (
     <div className="flex  pt-4 pb-4 ">
-      <div>
+      <div onClick={props.onclick}>
         <div className="font-serif">
           {props.address.first_name}&nbsp;
           {props.address.second_name}
@@ -66,7 +66,12 @@ export const AddressView = (props: { address: Address }) => {
         <div>{props.address.phone}</div>
       </div>
       <div className="m-auto"></div>
-      <div className="ml-8 place-content-center">
+      <div
+        className="ml-8 place-content-center"
+        onClick={() => {
+          console.log("go to edit address");
+        }}
+      >
         <Forward />
       </div>
     </div>
@@ -85,7 +90,12 @@ export const ShippingAddress = (props: {
     <div>
       <div>SHIPPING ADDRESS</div>
       <div className="ml-4 mr-4">
-        {index >= 0 && <AddressView address={props.shippingAddress[index]} />}
+        {index >= 0 && (
+          <AddressView
+            address={props.shippingAddress[index]}
+            onclick={() => {}}
+          />
+        )}
       </div>
 
       <button
@@ -105,16 +115,15 @@ export const ShippingAddress = (props: {
         props.shippingAddress != undefined &&
         props.shippingAddress.map((address, index) => {
           return (
-            <div
-              className="ml-8"
-              key={index}
-              onClick={() => {
-                setIndex(index);
-                setIsCollapse(false);
-                props.setSelectShippingAddressIndex(index);
-              }}
-            >
-              <AddressView address={address} />
+            <div className="ml-8" key={index}>
+              <AddressView
+                address={address}
+                onclick={() => {
+                  setIndex(index);
+                  setIsCollapse(false);
+                  props.setSelectShippingAddressIndex(index);
+                }}
+              />
             </div>
           );
         })}
@@ -190,6 +199,7 @@ const AddNewAddress = (props: { onClose: any }) => {
           .then((response) => response.text())
           .then((data) => {
             console.log(data);
+            location.reload();
           })
           .catch((error) => {
             console.error("Error:", error);

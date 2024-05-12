@@ -35,8 +35,8 @@ const Checkout = () => {
         <div className="mt-4">
           <OrderItems />
         </div>
-        <AddressView address={shippingAddress} />
-        <CardView card={paymentCard} />
+        <AddressView address={shippingAddress} onclick={() => {}} />
+        <CardView card={paymentCard} onclick={() => {}} />
       </div>
 
       {isSuccess && (

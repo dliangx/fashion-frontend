@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import CustomInput from "./CustomInput";
 import AlertModal from "../product/AlertModal";
 
-export const CardView = (props: { card: PaymentCard }) => {
+export const CardView = (props: { card: PaymentCard; onclick: any }) => {
   function card_name(index: number) {
     if (index == 2) {
       return "Master Card";
@@ -26,11 +26,19 @@ export const CardView = (props: { card: PaymentCard }) => {
   }
   return (
     <div className="flex pt-4  place-items-center ">
-      {card_icon(props.card.card_type)}
-      {card_name(props.card.card_type)}&nbsp;
-      {props.card.card_num.slice(-4)}
+      <div onClick={props.onclick} className="flex place-items-center">
+        {card_icon(props.card.card_type)}
+        {card_name(props.card.card_type)}&nbsp;
+        {props.card.card_num.slice(-4)}
+      </div>
+
       <div className="m-auto"></div>
-      <div className="ml-8 place-content-center">
+      <div
+        className="ml-8 place-content-center"
+        onClick={() => {
+          console.log("go to edit payment");
+        }}
+      >
         <Forward />
       </div>
     </div>
@@ -49,7 +57,9 @@ export const PaymentMethod = (props: {
     <div className="mt-4">
       <div>PAYMENT METHOD</div>
       <div className="ml-4 mr-4">
-        {index >= 0 && <CardView card={props.paymentMethod[index]} />}
+        {index >= 0 && (
+          <CardView card={props.paymentMethod[index]} onclick={() => {}} />
+        )}
       </div>
 
       <button
@@ -69,16 +79,15 @@ export const PaymentMethod = (props: {
         props.paymentMethod != undefined &&
         props.paymentMethod.map((payment, index) => {
           return (
-            <div
-              className="ml-8"
-              key={index}
-              onClick={() => {
-                setIndex(index);
-                setIsCollapse(false);
-                props.setSelectPaymentMethodIndex(index);
-              }}
-            >
-              <CardView card={payment} />
+            <div className="ml-8" key={index}>
+              <CardView
+                card={payment}
+                onclick={() => {
+                  setIndex(index);
+                  setIsCollapse(false);
+                  props.setSelectPaymentMethodIndex(index);
+                }}
+              />
             </div>
           );
         })}
@@ -193,6 +202,7 @@ const AddNewCard = (props: { onClose: any }) => {
           .then((response) => response.text())
           .then((data) => {
             console.log(data);
+            location.reload();
           })
           .catch((error) => {
             console.error("Error:", error);
