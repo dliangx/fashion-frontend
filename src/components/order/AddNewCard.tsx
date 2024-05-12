@@ -93,8 +93,16 @@ export const PaymentMethod = (props: {
 };
 const AddNewCard = (props: { onClose: any }) => {
   const name_regular = "^.{3,30}$";
+
+  // const visa_card_regular = "^4[0-9]{12}(?:[0-9]{3})?$"; // Visa
+  // const master_card_regular = "^5[1-5][0-9]{14}$"; // MasterCard
+  // const american_card_regular = "^3[47][0-9]{13}$"; // American Express
+  // const diners_club_regular = "^3(?:0[0-5]|[68][0-9])[0-9]{11}$ "; // Diners Club
+  // const discover_club_regular = "^6(?:011|5[0-9]{2})[0-9]{12}$"; // Discover
+  // const jcb_club_regular = "^(?:2131|1800|35d{3})d{11}$"; // JCB";
+  // const union_pay_regular = "^62[0-9]{14,17}$"; //UnionPay
   const card_regular =
-    "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$";
+    "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11}|62[0-9]{14,17})$";
   const month_regular = "^[0-9]{2}$";
   const year_regular = "^[0-9]{4}$";
   const cvv_regular = "^[0-9]{3,4}$";
