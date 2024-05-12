@@ -133,31 +133,31 @@ const AddNewCard = (props: { onClose: any }) => {
       cardDate.cvv !== ""
     ) {
       function get_card_type() {
-        if (cardDate.card_name.match(visa_card_regular)) {
+        if (cardDate.card_num.match(visa_card_regular)) {
           cardDate.card_type = 1;
           return;
         }
-        if (cardDate.card_name.match(master_card_regular)) {
+        if (cardDate.card_num.match(master_card_regular)) {
           cardDate.card_type = 2;
           return;
         }
-        if (cardDate.card_name.match(american_card_regular)) {
+        if (cardDate.card_num.match(american_card_regular)) {
           cardDate.card_type = 3;
           return;
         }
-        if (cardDate.card_name.match(diners_club_regular)) {
+        if (cardDate.card_num.match(diners_club_regular)) {
           cardDate.card_type = 4;
           return;
         }
-        if (cardDate.card_name.match(discover_club_regular)) {
+        if (cardDate.card_num.match(discover_club_regular)) {
           cardDate.card_type = 5;
           return;
         }
-        if (cardDate.card_name.match(jcb_club_regular)) {
+        if (cardDate.card_num.match(jcb_club_regular)) {
           cardDate.card_type = 6;
           return;
         }
-        if (cardDate.card_name.match(union_pay_regular)) {
+        if (cardDate.card_num.match(union_pay_regular)) {
           cardDate.card_type = 7;
           return;
         }
