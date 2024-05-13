@@ -8,6 +8,14 @@ import FavoriteItemView from "./FavoriteItemView";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../data/Cart";
 
+export const calcItemPrice = (items: CartItem[]) => {
+  let price = 0;
+  for (let index = 0; index < items.length; index++) {
+    price += items[index].price * items[index].num;
+  }
+  return price;
+};
+
 const Cart = () => {
   const { theme } = useContext(AppContext);
   const { cartIndex, setCartIndex } = useContext(CartContext);
@@ -15,14 +23,6 @@ const Cart = () => {
   const favoriteContext = useContext(FavoriteContext);
   const favoriteState = favoriteContext.state;
   const navigate = useNavigate();
-
-  function calcItemPrice(items: CartItem[]) {
-    let price = 0;
-    for (let index = 0; index < items.length; index++) {
-      price += items[index].price * items[index].num;
-    }
-    return price;
-  }
 
   return (
     <div className="h-full">
