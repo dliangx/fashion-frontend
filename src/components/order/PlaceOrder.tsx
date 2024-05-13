@@ -7,6 +7,8 @@ import { PaymentMethod } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
 import { createPortal } from "react-dom";
 import AlertModal from "../product/AlertModal";
+import { Order, OrderItem } from "../data/Order";
+import { calcItemPrice } from "../cart/Cart";
 
 export const OrderItems = () => {
   const { state } = useContext(CartContext);
@@ -47,6 +49,8 @@ const PlaceOrder = () => {
   const [shippingAddress, setShippingAddress] = useState<Address[]>([]);
   const [shippingMethod, setShippingMethod] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<PaymentCard[]>([]);
+  const { state } = useContext(CartContext);
+  const cartItems = state.items;
 
   const [selectShippingAddressIndex, setSelectShippingAddressIndex] =
     useState<number>(-1);
@@ -75,6 +79,69 @@ const PlaceOrder = () => {
       return;
     }
     //place order
+    const username = localStorage.getItem("username");
+    if (username != undefined) {
+      let orderItems: OrderItem[] = [];
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        let orderItem: OrderItem = {
+          order_id: 0,
+          order_sn: "",
+          product_id: item.id,
+          product_pic: item.pic,
+          product_name: item.name,
+          product_sn: "",
+          product_price: item.price,
+          product_quantity: item.num,
+          product_sku_id: 0,
+          product_category_id: 0,
+          product_attr: JSON.stringify(item.attr),
+        };
+        orderItems.push(orderItem);
+      }
+
+      let order: Order = {
+        user_id: 0,
+        order_sn: "",
+        user_name: username,
+        total_amount: calcItemPrice(state.items),
+        pay_amount: 0,
+        freight_amount: 0,
+        pay_type: paymentMethod[selectPaymentMethodIndex].card_type,
+        source_type: shippingMethod,
+        delivery_sn: "",
+        receiver_name:
+          shippingAddress[selectShippingAddressIndex].first_name +
+          shippingAddress[selectShippingAddressIndex].second_name,
+        receiver_zip_code: shippingAddress[selectShippingAddressIndex].zip,
+        receiver_city: shippingAddress[selectShippingAddressIndex].city,
+        receiver_state: shippingAddress[selectShippingAddressIndex].state,
+        receiver_address: shippingAddress[selectShippingAddressIndex].address,
+        receiver_phone: shippingAddress[selectShippingAddressIndex].phone,
+        items: orderItems,
+      };
+
+      const bodyStr = JSON.stringify(order);
+      const url = import.meta.env.VITE_API_URL + "/api/create_order";
+      const token = localStorage.getItem("user_token");
+      if (token != undefined) {
+        fetch(url, {
+          method: "POST",
+          body: bodyStr,
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    }
   };
 
   useEffect(() => {
