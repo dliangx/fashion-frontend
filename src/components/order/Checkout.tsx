@@ -7,7 +7,7 @@ import { AddressView } from "./AddNewAddress";
 import { CardView } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
 
-const Checkout = () => {
+const Checkout = (props: { order_sn: string }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   let shippingAddress: Address = {
     username: "",
@@ -50,6 +50,28 @@ const Checkout = () => {
         <div
           className="flex  text-center  place-content-center"
           onClick={() => {
+            const username = localStorage.getItem("username");
+            const bodyStr = JSON.stringify({
+              user_name: username,
+              order_sn: "ordersn",
+            });
+            const url = import.meta.env.VITE_API_URL + "/api/checkout";
+            const token = localStorage.getItem("user_token");
+            fetch(url, {
+              method: "POST",
+              body: bodyStr,
+              headers: {
+                "content-type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
             setIsSuccess(true);
           }}
         >
