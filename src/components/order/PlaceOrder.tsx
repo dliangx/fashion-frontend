@@ -57,18 +57,21 @@ const PlaceOrder = () => {
 
   const handlePlaceOrder = () => {
     if (selectShippingAddressIndex < 0) {
-      setAlertMsg("please select shipping address!");
       setIsShowAlert(true);
+      setAlertMsg("please select shipping address!");
+
       return;
     }
     if (shippingMethod == "") {
-      setAlertMsg("please select shipping method!");
       setIsShowAlert(true);
+      setAlertMsg("please select shipping method!");
+
       return;
     }
     if (selectPaymentMethodIndex < 0) {
-      setAlertMsg("please select payment method!");
       setIsShowAlert(true);
+      setAlertMsg("please select payment method!");
+
       return;
     }
     //place order
