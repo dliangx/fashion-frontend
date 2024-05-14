@@ -5,7 +5,7 @@ type CartState = {
   items: CartItem[];
 };
 type CartAction = {
-  type: "ADD" | "MINUS" | "REMOVE";
+  type: "ADD" | "MINUS" | "REMOVE" | "REMOVE_ALL";
   payload: CartItem;
 };
 
@@ -78,6 +78,10 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
       };
       localStorage.setItem("cart", JSON.stringify(cart_res));
       return cart_res;
+    case "REMOVE_ALL":
+      const cart_empty = { items: [] };
+      localStorage.setItem("cart", JSON.stringify(cart_empty));
+      return cart_empty;
     default:
       throw new Error();
   }

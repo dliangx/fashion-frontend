@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import AlertModal from "../product/AlertModal";
 import { Order, OrderItem } from "../data/Order";
 import { calcItemPrice } from "../cart/Cart";
+import { useNavigate } from "react-router-dom";
 
 export const OrderItems = () => {
   const { state } = useContext(CartContext);
@@ -49,7 +50,7 @@ const PlaceOrder = () => {
   const [shippingAddress, setShippingAddress] = useState<Address[]>([]);
   const [shippingMethod, setShippingMethod] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<PaymentCard[]>([]);
-  const { state } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
   const cartItems = state.items;
 
   const [selectShippingAddressIndex, setSelectShippingAddressIndex] =
@@ -58,6 +59,7 @@ const PlaceOrder = () => {
     useState<number>(-1);
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
+  const navigate = useNavigate();
 
   const handlePlaceOrder = () => {
     if (selectShippingAddressIndex < 0) {
@@ -119,7 +121,6 @@ const PlaceOrder = () => {
         receiver_phone: shippingAddress[selectShippingAddressIndex].phone,
         items: orderItems,
       };
-
       const bodyStr = JSON.stringify(order);
       const url = import.meta.env.VITE_API_URL + "/api/create_order";
       const token = localStorage.getItem("user_token");
@@ -132,9 +133,25 @@ const PlaceOrder = () => {
             Authorization: "Bearer " + token,
           },
         })
-          .then((response) => response.text())
+          .then((response) => response.json())
           .then((data) => {
             console.log(data);
+            dispatch != null &&
+              dispatch({
+                type: "REMOVE_ALL",
+                payload: {
+                  id: 0,
+                  pic: "",
+                  brand: "",
+                  name: "",
+                  price: 0,
+                  num: 0,
+                  attr: [],
+                },
+              });
+            navigate("/checkout", {
+              state: { order_id: data.order_id, order_sn: data.order_sn },
+            });
           })
           .catch((error) => {
             console.error("Error:", error);
