@@ -132,6 +132,7 @@ const AddNewCard = (props: { onClose: any }) => {
 
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [cardDate, setCardDate] = useState<PaymentCard>({
+    id: 0,
     username: "",
     card_type: 0,
     card_name: "",

@@ -15,6 +15,7 @@ export type Address = {
 };
 
 export type PaymentCard = {
+  id: number;
   username: string;
   card_type: number;
   card_name: string;

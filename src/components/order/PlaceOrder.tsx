@@ -108,7 +108,7 @@ const PlaceOrder = () => {
         total_amount: calcItemPrice(state.items),
         pay_amount: 0,
         freight_amount: 0,
-        pay_type: paymentMethod[selectPaymentMethodIndex].card_type,
+        pay_type: paymentMethod[selectPaymentMethodIndex].id,
         source_type: shippingMethod,
         delivery_sn: "",
         receiver_name:

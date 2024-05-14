@@ -20,6 +20,7 @@ const Checkout = (props: { order_sn: string }) => {
     phone: "13111111111",
   };
   let paymentCard: PaymentCard = {
+    id: 0,
     username: "",
     card_type: 1,
     card_name: "name",
