@@ -1,5 +1,4 @@
 export type Order = {
-  user_id: number;
   order_sn: String;
   user_name: String;
   total_amount: number;

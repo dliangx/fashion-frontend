@@ -101,7 +101,6 @@ const PlaceOrder = () => {
       }
 
       let order: Order = {
-        user_id: 0,
         order_sn: "",
         user_name: username,
         total_amount: calcItemPrice(state.items),
