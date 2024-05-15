@@ -119,6 +119,7 @@ const PlaceOrder = () => {
         receiver_state: shippingAddress[selectShippingAddressIndex].state,
         receiver_address: shippingAddress[selectShippingAddressIndex].address,
         receiver_phone: shippingAddress[selectShippingAddressIndex].phone,
+        order_status: 1,
         items: orderItems,
       };
       const bodyStr = JSON.stringify(order);

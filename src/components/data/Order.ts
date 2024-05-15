@@ -13,6 +13,7 @@ export type Order = {
   receiver_state: string;
   receiver_address: string;
   receiver_phone: string;
+  order_status: number;
   items: Array<OrderItem>;
 };
 

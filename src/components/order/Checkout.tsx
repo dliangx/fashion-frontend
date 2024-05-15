@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Header from "../common/Header";
 import { ShoppingBag } from "../common/Icon";
 import PaymentSuccess from "./PaymentSuccess";
-import { OrderItems } from "./PlaceOrder";
 import { AddressView } from "./AddNewAddress";
 import { CardView } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
@@ -16,6 +15,7 @@ const Checkout = () => {
   const [shippingAddress, setShippingAddress] = useState<Address>();
   const [paymentCard, setPaymentCard] = useState<PaymentCard>();
   const [items, setItems] = useState<OrderItem[]>([]);
+  const [orderStatus, setOrderStatus] = useState(0);
 
   useEffect(() => {
     const username = localStorage.getItem("username");
@@ -56,6 +56,7 @@ const Checkout = () => {
             cvv: "",
           });
           setItems(data.items);
+          setOrderStatus(data.order_status);
         })
 
         .catch((error) => {
@@ -82,43 +83,46 @@ const Checkout = () => {
       {isSuccess && (
         <PaymentSuccess
           onclick={() => {
+            setOrderStatus(2);
             setIsSuccess(false);
           }}
         />
       )}
-      <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center z-50">
-        <div
-          className="flex  text-center  place-content-center"
-          onClick={() => {
-            const username = localStorage.getItem("username");
-            const bodyStr = JSON.stringify({
-              user_name: username,
-              order_sn: order_sn,
-            });
-            const url = import.meta.env.VITE_API_URL + "/api/checkout";
-            const token = localStorage.getItem("user_token");
-            fetch(url, {
-              method: "POST",
-              body: bodyStr,
-              headers: {
-                "content-type": "application/json",
-                Authorization: "Bearer " + token,
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data);
-              })
-              .catch((error) => {
-                console.error("Error:", error);
+      {orderStatus < 2 && (
+        <div className="fixed bottom-0 left-0 right-0 h-14 bg-black text-white border-none phone-width   place-content-center z-50">
+          <div
+            className="flex  text-center  place-content-center"
+            onClick={() => {
+              const username = localStorage.getItem("username");
+              const bodyStr = JSON.stringify({
+                user_name: username,
+                order_sn: order_sn,
               });
-            setIsSuccess(true);
-          }}
-        >
-          <ShoppingBag className="mr-4" color="white" />
-          <div>CHECKOUT</div>
+              const url = import.meta.env.VITE_API_URL + "/api/checkout";
+              const token = localStorage.getItem("user_token");
+              fetch(url, {
+                method: "POST",
+                body: bodyStr,
+                headers: {
+                  "content-type": "application/json",
+                  Authorization: "Bearer " + token,
+                },
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data);
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+              setIsSuccess(true);
+            }}
+          >
+            <ShoppingBag className="mr-4" color="white" />
+            <div>CHECKOUT</div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
