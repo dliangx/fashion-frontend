@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../common/Header";
 import { ShoppingBag } from "../common/Icon";
 import PaymentSuccess from "./PaymentSuccess";
@@ -6,38 +6,77 @@ import { OrderItems } from "./PlaceOrder";
 import { AddressView } from "./AddNewAddress";
 import { CardView } from "./AddNewCard";
 import { Address, PaymentCard } from "../data/User";
+import { useParams } from "react-router-dom";
+import { OrderItem } from "../data/Order";
 
-const Checkout = (props: { order_sn: string }) => {
+const Checkout = () => {
   const [isSuccess, setIsSuccess] = useState(false);
-  let shippingAddress: Address = {
-    username: "",
-    first_name: "Name",
-    second_name: "Second_name",
-    address: "Address",
-    city: "city",
-    state: "state",
-    zip: "1000",
-    phone: "13111111111",
-  };
-  let paymentCard: PaymentCard = {
-    id: 0,
-    username: "",
-    card_type: 1,
-    card_name: "name",
-    card_num: "1222333444556",
-    exp_mon: "3",
-    exp_year: "2025",
-    cvv: "003",
-  };
+  const order_sn = useParams().order_sn;
+
+  const [shippingAddress, setShippingAddress] = useState<Address>();
+  const [paymentCard, setPaymentCard] = useState<PaymentCard>();
+  const [items, setItems] = useState<OrderItem[]>([]);
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const bodyStr = JSON.stringify({ order_sn: order_sn, user_name: username });
+    const url = import.meta.env.VITE_API_URL + "/api/get_order_detail";
+
+    const token = localStorage.getItem("user_token");
+    if (token != undefined && username != null) {
+      fetch(url, {
+        method: "POST",
+        body: bodyStr,
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setShippingAddress({
+            username: username,
+            first_name: data.receiver_name,
+            second_name: "",
+            address: data.receiver_address,
+            city: data.receiver_city,
+            state: data.receiver_state,
+            zip: data.receiver_zip_code,
+            phone: data.receiver_phone,
+          });
+          setPaymentCard({
+            id: data.pay_type,
+            username: username,
+            card_type: data.pay_type,
+            card_name: "",
+            card_num: "",
+            exp_mon: "",
+            exp_year: "",
+            cvv: "",
+          });
+          setItems(data.items);
+        })
+
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  }, []);
+
   return (
     <div>
       <Header />
       <div className="m-4 mb-16">
         <div className="mt-4">
-          <OrderItems />
+          <OrderItemsRemote items={items} />
         </div>
-        <AddressView address={shippingAddress} onclick={() => {}} />
-        <CardView card={paymentCard} onclick={() => {}} />
+        {shippingAddress != null && (
+          <AddressView address={shippingAddress} onclick={() => {}} />
+        )}
+        {paymentCard != null && (
+          <CardView card={paymentCard} onclick={() => {}} />
+        )}
       </div>
 
       {isSuccess && (
@@ -54,7 +93,7 @@ const Checkout = (props: { order_sn: string }) => {
             const username = localStorage.getItem("username");
             const bodyStr = JSON.stringify({
               user_name: username,
-              order_sn: "ordersn",
+              order_sn: order_sn,
             });
             const url = import.meta.env.VITE_API_URL + "/api/checkout";
             const token = localStorage.getItem("user_token");
@@ -80,6 +119,29 @@ const Checkout = (props: { order_sn: string }) => {
           <div>CHECKOUT</div>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const OrderItemsRemote = (props: { items: OrderItem[] }) => {
+  return (
+    <div>
+      {props.items.map((item, index) => {
+        return (
+          <div className="flex w-full mt-4 mb-4" key={index}>
+            <div className="h32 w-1/4">
+              <img src={item.product_pic} alt={item.product_name} />
+            </div>
+            <div className="h32 w-3/4 ml-2  space-y-2">
+              <div className="font-sans">{item.product_name}</div>
+
+              <div className="font-sans text-orange-500">
+                ${item.product_price} * {item.product_quantity}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

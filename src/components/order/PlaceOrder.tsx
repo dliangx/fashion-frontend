@@ -149,9 +149,7 @@ const PlaceOrder = () => {
                   attr: [],
                 },
               });
-            navigate("/checkout", {
-              state: { order_id: data.order_id, order_sn: data.order_sn },
-            });
+            navigate("/checkout/" + data.order_sn);
           })
           .catch((error) => {
             console.error("Error:", error);

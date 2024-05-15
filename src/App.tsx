@@ -217,7 +217,7 @@ function App() {
                 }
               />
               <Route
-                path="/checkout"
+                path="/checkout/:order_sn"
                 element={
                   <RequireAuth>
                     <Checkout />
