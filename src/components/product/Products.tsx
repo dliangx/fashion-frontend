@@ -20,23 +20,24 @@ const Products = (props: productsProps) => {
             );
           })}
       </div>
-
-      <div className="w-full p-2">
-        {props.option == 2 &&
-          props.products.map((product, index) => {
+      {props.option == 2 && (
+        <div className="w-full p-2">
+          {props.products.map((product, index) => {
             return <ProductList {...product} key={index} />;
           })}
-      </div>
-      <div className="grid w-full p-2">
-        {props.option == 3 &&
-          props.products.map((product, index) => {
+        </div>
+      )}
+      {props.option == 3 && (
+        <div className="grid w-full p-2">
+          {props.products.map((product, index) => {
             return (
               <div key={index}>
                 <ProductGrid {...product} key={index} />
               </div>
             );
           })}
-      </div>
+        </div>
+      )}
     </>
   );
 };

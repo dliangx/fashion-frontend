@@ -7,6 +7,7 @@ import Footer from "../common/Footer";
 import { AppContext } from "../../App";
 import { Page } from "../data/Product";
 import { CategoryResp } from "../data/Category";
+import PageView from "./PageView";
 
 export type CategorySearchParam = {
   category: CategoryResp;
@@ -20,10 +21,13 @@ const CategoryView = () => {
     useContext(AppContext);
   const [viewOption, setViewOption] = useState<number>(1);
   const [newOption, setNewOption] = useState<boolean>(true);
+  const [page, setPage] = useState<Page>({ start: 0, num: 10 });
   const location = useLocation();
   const category = location.state?.category;
   const search = location.state?.search;
-  const page: Page = location.state?.page;
+  if (location.state != undefined && location.state.page != undefined) {
+    setPage(location.state.page);
+  }
 
   useEffect(() => {
     let bodyStr = "";
@@ -52,7 +56,7 @@ const CategoryView = () => {
         setCategorySearchParam({ search: search });
       }
     } else if (page != undefined) {
-      bodyStr = JSON.stringify({ start: 0, num: 10 });
+      bodyStr = JSON.stringify(page);
       url = "/get_product_by_page";
       if (
         products.length > 0 &&
@@ -96,45 +100,53 @@ const CategoryView = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [category]);
+  }, [category, page]);
 
   return (
     <>
       <Header />
-      <div className="flex m-4 mt-8 h-8">
-        <div>{products.length} APPAREL</div>
-        <div className="m-auto"></div>
-        <button
-          className="mr-4 rounded-full  w-20 flex   items-center justify-center"
-          onClick={() => {
-            setNewOption(newOption ? false : true);
-            setProducts(products.reverse());
+      <div className="mb-16">
+        <div className="flex m-4 mt-8 h-8">
+          <div>{products.length} APPAREL</div>
+          <div className="m-auto"></div>
+          <button
+            className="mr-4 rounded-full  w-20 flex   items-center justify-center"
+            onClick={() => {
+              setNewOption(newOption ? false : true);
+              setProducts(products.reverse());
+            }}
+          >
+            <div>New</div>
+            {newOption && <Down></Down>}
+            {!newOption && <Up></Up>}
+          </button>
+          <button
+            className="mr-4 rounded-full  w-8 flex items-center justify-center"
+            onClick={() => {
+              if (viewOption == 3) {
+                setViewOption(1);
+              } else {
+                setViewOption(viewOption + 1);
+              }
+            }}
+          >
+            {viewOption == 1 && <GridView />}
+            {viewOption == 2 && <ListView />}
+            {viewOption == 3 && <Gallery />}
+          </button>
+          <button className="rounded-full  w-8 flex items-center justify-center ">
+            <Filter />
+          </button>
+        </div>
+        <Products products={products} option={viewOption}></Products>
+        <PageView
+          total={30} //todo(query form backend)
+          pageSize={10}
+          onclick={(page: Page) => {
+            setPage(page);
           }}
-        >
-          <div>New</div>
-          {newOption && <Down></Down>}
-          {!newOption && <Up></Up>}
-        </button>
-        <button
-          className="mr-4 rounded-full  w-8 flex items-center justify-center"
-          onClick={() => {
-            if (viewOption == 3) {
-              setViewOption(1);
-            } else {
-              setViewOption(viewOption + 1);
-            }
-          }}
-        >
-          {viewOption == 1 && <GridView />}
-          {viewOption == 2 && <ListView />}
-          {viewOption == 3 && <Gallery />}
-        </button>
-        <button className="rounded-full  w-8 flex items-center justify-center ">
-          <Filter />
-        </button>
+        />
       </div>
-      <Products products={products} option={viewOption}></Products>
-      <div className="h-16" />
       <Footer></Footer>
     </>
   );
