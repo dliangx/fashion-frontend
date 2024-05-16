@@ -21,6 +21,7 @@ const CategoryView = () => {
     useContext(AppContext);
   const [viewOption, setViewOption] = useState<number>(1);
   const [newOption, setNewOption] = useState<boolean>(true);
+  const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<Page>({ start: 0, num: 10 });
   const location = useLocation();
   const category = location.state?.category;
@@ -28,6 +29,20 @@ const CategoryView = () => {
   if (location.state != undefined && location.state.page != undefined) {
     setPage(location.state.page);
   }
+  useEffect(() => {
+    let url = import.meta.env.VITE_API_URL + "/get_product_count";
+    fetch(url, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setTotal(data.num);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   useEffect(() => {
     let bodyStr = "";
@@ -140,7 +155,7 @@ const CategoryView = () => {
         </div>
         <Products products={products} option={viewOption}></Products>
         <PageView
-          total={30} //todo(query form backend)
+          total={total}
           pageSize={10}
           onclick={(page: Page) => {
             setPage(page);
