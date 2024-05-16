@@ -4,15 +4,19 @@ import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
+  const { searchHis } = useContext(AppContext);
   return (
     <div>
       <SearchInput />
-      <div className="ml-4">content</div>
+      {searchHis.map((param) => {
+        return <div className="ml-4">{param}</div>;
+      })}
     </div>
   );
 };
 
 export const SearchInput = () => {
+  const { searchHis, setSearchHis } = useContext(AppContext);
   const { setTabIndex } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
@@ -31,6 +35,8 @@ export const SearchInput = () => {
         className="absolute top-6 left-4 z-10"
         onClick={() => {
           setTabIndex(3);
+          searchHis.push(searchValue);
+          setSearchHis(searchHis);
           navigate("/product", {
             state: {
               search: searchValue,

@@ -63,12 +63,14 @@ const CategoryView = () => {
         setCategorySearchParam({ category: category });
       }
     } else if (search != undefined) {
-      bodyStr = JSON.stringify(search);
+      let searchParam = { search: search, page: { start: 0, num: 10 } };
+      bodyStr = JSON.stringify(searchParam);
+
       url = "/get_product_by_search";
       if (products.length > 0 && categorySearchParam?.search === search) {
         return;
       } else {
-        setCategorySearchParam({ search: search });
+        setCategorySearchParam(searchParam);
       }
     } else if (page != undefined) {
       bodyStr = JSON.stringify(page);

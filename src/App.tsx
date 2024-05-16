@@ -42,6 +42,8 @@ type AppContextType = {
   setProducts: any;
   categorySearchParam: CategorySearchParam | null;
   setCategorySearchParam: any;
+  searchHis: string[];
+  setSearchHis: any;
 };
 
 const AppContext = createContext<AppContextType>({
@@ -61,6 +63,8 @@ const AppContext = createContext<AppContextType>({
   setProducts: null,
   categorySearchParam: null,
   setCategorySearchParam: null,
+  searchHis: [],
+  setSearchHis: null,
 });
 
 function App() {
@@ -75,6 +79,7 @@ function App() {
   const [tabIndex, setTabIndex] = useState<number>(1);
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [categorySearchParam, setCategorySearchParam] = useState(null);
+  const [searchHis, setSearchHis] = useState([]);
 
   function buildTree(items: CategoryResp[], treeRoot: Category) {
     const map = new Map();
@@ -190,6 +195,8 @@ function App() {
         setProducts,
         categorySearchParam,
         setCategorySearchParam,
+        searchHis,
+        setSearchHis,
       }}
     >
       <CartProvider>
