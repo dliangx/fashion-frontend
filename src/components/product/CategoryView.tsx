@@ -29,20 +29,6 @@ const CategoryView = () => {
   if (location.state != undefined && location.state.page != undefined) {
     setPage(location.state.page);
   }
-  useEffect(() => {
-    let url = import.meta.env.VITE_API_URL + "/get_product_count";
-    fetch(url, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setTotal(data.num);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
 
   useEffect(() => {
     let bodyStr = "";
@@ -75,6 +61,7 @@ const CategoryView = () => {
     } else if (page != undefined) {
       bodyStr = JSON.stringify(page);
       url = "/get_product_by_page";
+
       if (
         products.length > 0 &&
         categorySearchParam?.page != undefined &&
@@ -83,6 +70,18 @@ const CategoryView = () => {
       ) {
         return;
       } else {
+        let url = import.meta.env.VITE_API_URL + "/get_product_count";
+        fetch(url, {
+          method: "GET",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setTotal(data.num);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
         setCategorySearchParam({ page: page });
       }
     } else {
