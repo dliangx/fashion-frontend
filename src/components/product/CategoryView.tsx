@@ -123,7 +123,7 @@ const CategoryView = () => {
       <Header />
       <div className="mb-16">
         <div className="flex m-4 mt-8 h-8">
-          <div>{products.length} APPAREL</div>
+          <div>{total !== 0 ? total : products.length} APPAREL</div>
           <div className="m-auto"></div>
           <button
             className="mr-4 rounded-full  w-20 flex   items-center justify-center"
